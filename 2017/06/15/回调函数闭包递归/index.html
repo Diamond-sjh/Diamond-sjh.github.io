@@ -254,8 +254,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义函数A</span></span><br><span class="line"><span class="comment">// v是形参</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">    v(<span class="number">11</span>,<span class="number">22</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line">A(</span><br><span class="line">  <span class="comment">//	函数B</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a + b);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>图解：</p>
-<p><img src="//diamond-sjh.github.io/2017/06/15/回调函数闭包递归/01.png" alt="01"></p>
-<p><img src="//diamond-sjh.github.io/2017/06/15/回调函数闭包递归/02.bmp" alt="02"></p>
+<img src="/2017/06/15/回调函数闭包递归/01.png" width="01">
+
+<img src="/2017/06/15/回调函数闭包递归/02.bmp" width="02">
+
 </li>
 </ul>
 <h3 id="1-2-函数作为函数的返回值"><a href="#1-2-函数作为函数的返回值" class="headerlink" title="1.2 函数作为函数的返回值"></a>1.2 函数作为函数的返回值</h3><ul>
@@ -267,7 +269,8 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 【返回值是函数时】</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">'我是内部的的函数'</span>);</span><br><span class="line">          &#125;;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 调用函数</span></span><br><span class="line"> <span class="keyword">var</span> r = fn();</span><br><span class="line"> r();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>图解：</p>
-<p><img src="//diamond-sjh.github.io/2017/06/15/回调函数闭包递归/03.png" alt="03"></p>
+<img src="/2017/06/15/回调函数闭包递归/03.png" width="03">
+
 </li>
 </ul>
 <h3 id="3、闭包"><a href="#3、闭包" class="headerlink" title="3、闭包"></a>3、闭包</h3><ul>
@@ -313,8 +316,9 @@
 </ul>
 <ul>
 <li><p>图解：</p>
-<p><img src="//diamond-sjh.github.io/2017/06/15/回调函数闭包递归/04.png" alt="04"></p>
-<p><img src="//diamond-sjh.github.io/2017/06/15/回调函数闭包递归/05.bmp" alt="05"></p>
+<img src="/2017/06/15/回调函数闭包递归/04.png">
+
+<img src="/2017/06/15/回调函数闭包递归/05.bmp">
 </li>
 <li><p>如何检测一个程序是否存在闭包</p>
 <ol>
@@ -510,15 +514,15 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 10.33364168575197px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 18.647173941514385px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/javascript/" style="font-size: 18.23448202797523px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 12.384076303796562px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/git/" style="font-size: 15.115638445460355px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 18.228794133669844px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/正则表达式/" style="font-size: 15.045775206638645px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/正则表达式/" style="font-size: 9.577340829737697px;" class="tag-cloud-link">正则表达式</a>
     
-    <a href="/tags/vue/" style="font-size: 14.48426487972166px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 16.077126035157377px;" class="tag-cloud-link">vue</a>
     
 </div>
                 
