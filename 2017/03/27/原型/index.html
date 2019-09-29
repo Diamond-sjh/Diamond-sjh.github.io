@@ -261,10 +261,8 @@
 </blockquote>
 </li>
 <li><p>图解：</p>
-<p><img src="//diamond-sjh.github.io/2017/03/27/原型/01.png" alt="01"></p>
+<img src="/2017/03/27/原型/01.png" title="原型">
 </li>
-</ul>
-<ul>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生类→ 构造函数</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name,age,gender</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 属性</span></span><br><span class="line">   <span class="keyword">this</span>.name = name;</span><br><span class="line">   <span class="keyword">this</span>.age = age;</span><br><span class="line">   <span class="keyword">this</span>.gender = gender;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 获取原型</span></span><br><span class="line"> <span class="comment">// 每一个函数都有一个对应的原型</span></span><br><span class="line"> <span class="keyword">var</span> yx = Student.prototype;</span><br><span class="line"> <span class="built_in">console</span>.log(yx);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 原型是一个对象</span></span><br><span class="line"> <span class="comment">// 自带了一个成员：constructor → 构造函数</span></span><br><span class="line"> <span class="built_in">console</span>.log(yx.constructor === Student);</span><br></pre></td></tr></table></figure>
 
@@ -298,7 +296,7 @@
 </ul>
 </li>
 <li><p>图解：</p>
-<p><img src="//diamond-sjh.github.io/2017/03/27/原型/02.png" alt="02"></p>
+<img src="/2017/03/27/原型/02.png" title="原型">
 </li>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生类→ 构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 属性</span></span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">  <span class="keyword">this</span>.gender = gender;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 获取原型 ，每一个函数都有一个对应的原型</span></span><br><span class="line"><span class="keyword">var</span> yx = Student.prototype;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 向原型中添加方法：对象.key = value</span></span><br><span class="line"><span class="comment">// 方法1</span></span><br><span class="line">yx.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 方法内部：this 代表的是调用方法的对象</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'我叫什么'</span> + <span class="keyword">this</span>.name)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 方法2</span></span><br><span class="line">yx.writeCode = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'我会写code'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 属性</span></span><br><span class="line">yx.type = <span class="string">'学生'</span>;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> zs = <span class="keyword">new</span> Student(<span class="string">'张三'</span>, <span class="number">10</span>, <span class="string">'男'</span>);</span><br><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> ls = <span class="keyword">new</span> Student(<span class="string">'李四'</span>, <span class="number">11</span>, <span class="string">'男'</span>);</span><br><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> ww = <span class="keyword">new</span> Student(<span class="string">'王五'</span>, <span class="number">17</span>, <span class="string">'女'</span>);</span><br></pre></td></tr></table></figure>
@@ -321,7 +319,8 @@
 </blockquote>
 </li>
 <li><p>图解：</p>
-<p><img src="//diamond-sjh.github.io/2017/03/27/原型/03.png" alt="03"></p>
+<img src="/2017/03/27/原型/03.png" title="原型">
+
 </li>
 </ul>
 
@@ -385,18 +384,6 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2019/09/29/test/">test</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2019/09/29/hello-world/">Hello World</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2018/12/15/Vue-Router/">Vue Router</a>
                 </span>
             </li>
@@ -443,6 +430,18 @@
                 </span>
             </li>
             
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/01/28/FormData对象/">FormData对象</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/12/28/正则表达式/">正则表达式</a>
+                </span>
+            </li>
+            
         </ul>
     </div>
 </aside>
@@ -473,15 +472,15 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 12.746922639781687px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 19.423207499644022px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/javascript/" style="font-size: 9.633310471806045px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 18.587048448774013px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/git/" style="font-size: 16.755358264962286px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 11.06964005100335px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/正则表达式/" style="font-size: 14.861423388922741px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/正则表达式/" style="font-size: 12.667334046857562px;" class="tag-cloud-link">正则表达式</a>
     
-    <a href="/tags/vue/" style="font-size: 16.073914163132677px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 9.38469929375815px;" class="tag-cloud-link">vue</a>
     
 </div>
                 

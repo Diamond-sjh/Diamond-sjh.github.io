@@ -290,7 +290,7 @@
 <li><p>图解：</p>
 </li>
 </ul>
-<p>　<img src="//diamond-sjh.github.io/2017/04/15/JS中简单的几种继承方法/%E7%BB%A7%E6%89%BF.png" alt="继承"></p>
+<p>　<img src="/2017/04/15/JS中简单的几种继承方法/继承.png"></p>
 <ul>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 人类 → 父类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.name = <span class="string">'名字'</span>;</span><br><span class="line">   <span class="keyword">this</span>.age = <span class="number">10</span>;</span><br><span class="line">   <span class="keyword">this</span>.gender = <span class="string">'男'</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> Person.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'你好'</span>); &#125;;</span><br><span class="line"> Person.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'我会吃。。。'</span>); &#125;;</span><br><span class="line"> Person.prototype.play = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'我会玩'</span>); &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 学生类 → 子类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.stuId = <span class="number">1000</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 子类的原型prototyp指向父类的一个实例对象</span></span><br><span class="line"> Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 添加一个constructor成员</span></span><br><span class="line"> Student.prototype.constructor = Student;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 如何实现原型继承：</span></span><br><span class="line"> <span class="comment">// 给子类的原型prototype重新赋值为父类的一个实例对象。</span></span><br><span class="line"> <span class="comment">// 利用了原型链上属性或方法的查找规则。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 创建一个学生对象</span></span><br><span class="line"> <span class="keyword">var</span> stu1 = <span class="keyword">new</span> Student();</span><br><span class="line"> <span class="built_in">console</span>.log(stu1.constructor)</span><br></pre></td></tr></table></figure>
@@ -326,7 +326,7 @@
 </li>
 <li>图解：</li>
 </ul>
-<p>　<img src="//diamond-sjh.github.io/2017/04/15/JS中简单的几种继承方法/call.png" alt="call"></p>
+<p>　<img src="/2017/04/15/JS中简单的几种继承方法/call.png"></p>
 <ul>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 人类 → 父类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age,gender</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.name = name;</span><br><span class="line">   <span class="keyword">this</span>.age = age;</span><br><span class="line">   <span class="keyword">this</span>.gender = gender;</span><br><span class="line"> &#125;</span><br><span class="line"> Person.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'hello'</span>); &#125;;</span><br><span class="line"> Person.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'eat。。。'</span>); &#125;;</span><br><span class="line"> Person.prototype.play = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'play'</span>); &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 学生类 → 子类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name,age,gender,stuId</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// this关键字代表谁,代表的是一个学生对象，当前创建的对象 stu1 ,stu2</span></span><br><span class="line">   <span class="comment">// var obj = this;</span></span><br><span class="line">   <span class="comment">//【借用继承】</span></span><br><span class="line">   <span class="comment">// Person.call(obj,name,age,gender);</span></span><br><span class="line">   Person.call(<span class="keyword">this</span>,name,age,gender);</span><br><span class="line">   <span class="keyword">this</span>.stuId = stuId;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 创建第一个学生对象</span></span><br><span class="line"> <span class="keyword">var</span> stu1 = <span class="keyword">new</span> Student(<span class="string">'张三'</span>,<span class="number">15</span>,<span class="string">'男'</span>,<span class="number">1006</span>);</span><br><span class="line"> <span class="comment">// 创建第二个学生对象</span></span><br><span class="line"> <span class="keyword">var</span> stu2 = <span class="keyword">new</span> Student(<span class="string">'李四'</span>,<span class="number">16</span>,<span class="string">'女'</span>,<span class="number">1005</span>);</span><br></pre></td></tr></table></figure>
@@ -408,18 +408,6 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2019/09/29/test/">test</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2019/09/29/hello-world/">Hello World</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2018/12/15/Vue-Router/">Vue Router</a>
                 </span>
             </li>
@@ -466,6 +454,18 @@
                 </span>
             </li>
             
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/01/28/FormData对象/">FormData对象</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/12/28/正则表达式/">正则表达式</a>
+                </span>
+            </li>
+            
         </ul>
     </div>
 </aside>
@@ -496,15 +496,15 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 11.405827511711092px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 18.815466009814905px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/javascript/" style="font-size: 18.791874334023035px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 8.630572299674565px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/git/" style="font-size: 15.657995714137432px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 14.26062293131115px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/正则表达式/" style="font-size: 10.157351918260343px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/正则表达式/" style="font-size: 17.524545487451718px;" class="tag-cloud-link">正则表达式</a>
     
-    <a href="/tags/vue/" style="font-size: 19.950646546541673px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 18.217952360330436px;" class="tag-cloud-link">vue</a>
     
 </div>
                 

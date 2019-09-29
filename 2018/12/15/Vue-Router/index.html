@@ -241,8 +241,12 @@
     <div class="content-article">
         <h1 id="路由router"><a href="#路由router" class="headerlink" title="路由router"></a>路由router</h1><h2 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由"></a>什么是路由</h2><p>组件切换是通过变换url地址的锚点信息而显示不同的组件，路由也是如此，也是 浏览器地址信息 与 组件 的映射关系体现，但<strong>路由</strong>是组件切换SPA的<strong>封装版本</strong>，使用起来要更加方便、高效</p>
 <p><a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">官网参考</a></p>
-<p><img src="//diamond-sjh.github.io/2018/12/15/Vue-Router/01.png" alt="01"></p>
-<p><img src="//diamond-sjh.github.io/2018/12/15/Vue-Router/02.png" alt="02"></p>
+<img src="/2018/12/15/Vue-Router/01.png">
+
+
+
+<img src="/2018/12/15/Vue-Router/02.png">
+
 <p>上图</p>
 <ul>
 <li>浏览器锚点发生变化，会被onhashchange感知</li>
@@ -293,17 +297,17 @@
 <li>router-link标签：用以创建 路由的 hash锚点 超链接</li>
 <li>to 属性，表示 点击此链接，要跳转到哪个 hash锚点 请求地址</li>
 </ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/home"</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/user"</span>&gt;</span>会员<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/movie"</span>&gt;</span>电影<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/home"</span>&gt;</span> 首页 <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/user"</span>&gt;</span> 会员 <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/movie"</span>&gt;</span> 电影 <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>to 属性中，不需要以 # 开头</p>
 </blockquote>
 <p>router-link编译后会变成具体的html标签效果：</p>
-<p><img src="//diamond-sjh.github.io/2018/12/15/Vue-Router/03.png" alt="03"></p>
+<img src="/2018/12/15/Vue-Router/03.png">
 </li>
 <li><p>设置容器(App.vue)</p>
 <p>在App.vue根组件中通过<strong>router-view</strong>标签设置显示组件的容器</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-view</span>&gt;</span> <span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>router-view的作用类似于component标签，设定占位符，用以显示各个业务子组件</p>
@@ -325,7 +329,10 @@
 <p>当访问”/根目录”时，就重定向到”/mv锚点”，进而显示Movie组件</p>
 </blockquote>
 <h2 id="路由按钮高亮"><a href="#路由按钮高亮" class="headerlink" title="路由按钮高亮"></a>路由按钮高亮</h2><p><a href="https://router.vuejs.org/zh/api/#router-link" target="_blank" rel="noopener">官网参考</a></p>
-<p><img src="//diamond-sjh.github.io/2018/12/15/Vue-Router/04.png" alt="04"></p>
+<img src="/2018/12/15/Vue-Router/04.png">
+
+
+
 <p>在App.vue主页面中(router-link超链标签使用页面)通过<code>router-link-active</code>选择器设置如下样式：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.router-link-active</span> &#123;<span class="attribute">background-color</span>: lightgreen;&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -333,7 +340,10 @@
 <p>当前超链按钮被单击选中会有<font style="background-color:lightgreen">浅绿</font>背景颜色高亮显示</p>
 </blockquote>
 <p>被点击激活的按钮，本身有class属性值，直接进行css样式设定即可：</p>
-<p><img src="//diamond-sjh.github.io/2018/12/15/Vue-Router/05.png" alt="05"></p>
+<img src="/2018/12/15/Vue-Router/05.png">
+
+
+
 <h2 id="嵌套路由（子路由）"><a href="#嵌套路由（子路由）" class="headerlink" title="嵌套路由（子路由）"></a>嵌套路由（子路由）</h2><p>路由的应用是在<code>App.vue根组件</code>中通过单击超链按钮切换显示不同<code>子组件</code>，具体表现就是父、子组件嵌套关系</p>
 <p>有的应用比较复杂，子组件内部还有子组件，形成了   1级App.vue组件–&gt;2级业务组件–&gt;3级业务组件  的效果，现在学习如何在  2级组件  中切换显示  3级组件</p>
 <p>使用步骤：</p>
@@ -404,9 +414,12 @@
 <p>window.history.forward()</p>
 </blockquote>
 <p><a href="https://router.vuejs.org/zh/guide/essentials/navigation.html" target="_blank" rel="noopener">官网参考</a></p>
-<p><img src="//diamond-sjh.github.io/2018/12/15/Vue-Router/06.png" alt="06"></p>
+<img src="/2018/12/15/Vue-Router/06.png">
+
+
+
 <h2 id="路由守卫"><a href="#路由守卫" class="headerlink" title="路由守卫"></a>路由守卫</h2><p>路由对象有一个名称为<strong>beforeEach</strong>的方法，每个路由在加载组件之前都要调用它，在这个方法中可以做逻辑判断，限制要做什么或不做什么，这个过程称为<code>路由守卫</code>，有着一夫当关万夫莫开的效果</p>
-<p>​    <img src="//diamond-sjh.github.io/2018/12/15/Vue-Router/07.png" alt="07"></p>
+<p>​    <img src="/2018/12/15/Vue-Router/07.png"></p>
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123; <span class="comment">/* 导航守卫 处理逻辑 */</span> &#125;)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -486,18 +499,6 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2019/09/29/test/">test</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2019/09/29/hello-world/">Hello World</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2018/12/15/Vue-Router/">Vue Router</a>
                 </span>
             </li>
@@ -544,6 +545,18 @@
                 </span>
             </li>
             
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/01/28/FormData对象/">FormData对象</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/12/28/正则表达式/">正则表达式</a>
+                </span>
+            </li>
+            
         </ul>
     </div>
 </aside>
@@ -574,15 +587,15 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 12.262649996025818px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 16.606064815996355px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/javascript/" style="font-size: 11.181109814721935px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 16.02525699524629px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/git/" style="font-size: 16.049358990666935px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 10.773297309081773px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/正则表达式/" style="font-size: 8.944822483146748px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/正则表达式/" style="font-size: 18.213845037344015px;" class="tag-cloud-link">正则表达式</a>
     
-    <a href="/tags/vue/" style="font-size: 19.770747504113054px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 8.28956318758243px;" class="tag-cloud-link">vue</a>
     
 </div>
                 
