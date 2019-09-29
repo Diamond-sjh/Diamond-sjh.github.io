@@ -104,20 +104,68 @@
                 
                 
                 
-                <li class="">
-                    <a href="/categories">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-list"></i>分类
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/笔记总结/">笔记总结</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/错误解决/">错误解决</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/工具使用/">工具使用</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
                 
                 
                 
-                <li class="">
-                    <a href="/tags">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-tags"></i>标签
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/H5/">H5</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/javascript/">javascript</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/git/">git</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/正则表达式/">正则表达式</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/vue/">vue</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
@@ -194,7 +242,7 @@
       	var [month, day] = article.date.split('-')
         ''
         ''
-        var defaultPreview = '/imgs/preview/preview1.jpg'
+        var defaultPreview = '/imgs/preview/preview7.jpg'
         var preview = article.preview ? article.preview : defaultPreview
         var path = '/' + article.path
         resultList.append(`<div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
@@ -414,6 +462,54 @@
                 </span>
             </li>
             
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/28/vue生命周期/">vue生命周期</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/15/回调函数闭包递归/">回调函数闭包递归</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/28/浅拷贝和深拷贝/">浅拷贝和深拷贝</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/20/函数内this指向以及改变this指向/">函数内this指向以及改变this指向</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/04/15/JS中简单的几种继承方法/">JS中简单的几种继承方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/原型/">原型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/20/JS中的类和对象/">JS中的类和对象,new关键字</a>
+                </span>
+            </li>
+            
         </ul>
     </div>
 </aside>
@@ -443,6 +539,16 @@
             <div class="tab-content">
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/H5/" style="font-size: 15.40498824160408px;" class="tag-cloud-link">H5</a>
+    
+    <a href="/tags/javascript/" style="font-size: 8.665508860437455px;" class="tag-cloud-link">javascript</a>
+    
+    <a href="/tags/git/" style="font-size: 15.854101871205838px;" class="tag-cloud-link">git</a>
+    
+    <a href="/tags/正则表达式/" style="font-size: 8.334048102509772px;" class="tag-cloud-link">正则表达式</a>
+    
+    <a href="/tags/vue/" style="font-size: 18.069660095621124px;" class="tag-cloud-link">vue</a>
     
 </div>
                 
