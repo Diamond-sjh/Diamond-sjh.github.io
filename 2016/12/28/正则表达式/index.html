@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Mr.sun">
+    
+    
+    
+    
+    
+    
+    <title>正则表达式 | Diamond</title>
+    <link href="”http://diamond-sjh.github.io“" rel="”prefetch”">
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/Diamond.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg,preview5.jpg,preview6.jpg,preview7.jpg,preview8.jpg,preview9.jpg,preview10.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="http://diamond-sjh.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">Diamond</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/笔记总结/">笔记总结</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/错误解决/">错误解决</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/工具使用/">工具使用</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/H5/">H5</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/javascript/">javascript</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/git/">git</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/正则表达式/">正则表达式</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/vue/">vue</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="http://diamond-sjh.github.io">Diamond</a>
+        >
+        <span>正则表达式</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2016/12/28/正则表达式/">正则表达式</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/正则表达式/">正则表达式</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2016-12-28
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2016/12/28/正则表达式/">正则表达式</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2016-12-28
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/正则表达式/">正则表达式</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h2 id="1、正则表达式"><a href="#1、正则表达式" class="headerlink" title="1、正则表达式"></a>1、正则表达式</h2><ul>
+<li>特点：<ul>
+<li>灵活性、逻辑性和功能性非常的强</li>
+<li>可以迅速地用极简单的方式达到字符串的复杂控制</li>
+</ul>
+</li>
+<li>特点：<ul>
+<li>给定的字符串是否符合正则表达式的过滤逻辑(<strong>匹配</strong>)</li>
+<li>可以通过正则表达式，从字符串中获取我们想要的特定部分(<strong>提取</strong>)</li>
+<li>强大的字符串替换能力(<strong>替换</strong>)</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-1-什么是正则表达式"><a href="#1-1-什么是正则表达式" class="headerlink" title="1.1 什么是正则表达式"></a>1.1 什么是正则表达式</h3><p>​        正则表达式Regular Expression：正则表达式是对<strong>字符串操作</strong>的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“<strong>规则字符串</strong>”，这个“<strong>规则字符串</strong>”用来表达对字符串的一种过滤逻辑。</p>
+<p>​    正则表达式在其他语言中也广泛应用。</p>
+<blockquote>
+<p>正则表达式，就是定义好一个<strong>字符串规则</strong> ，然后根据规则实现对象字符串的<strong>匹配、提取、替换</strong>等</p>
+</blockquote>
+<h3 id="1-2-正则表达式语法"><a href="#1-2-正则表达式语法" class="headerlink" title="1.2 正则表达式语法"></a>1.2 正则表达式语法</h3><h4 id="1-2-1-正则表达式的组成"><a href="#1-2-1-正则表达式的组成" class="headerlink" title="1.2.1 正则表达式的组成"></a>1.2.1 正则表达式的组成</h4><ul>
+<li>普通字符abc  123  我爱你</li>
+<li>特殊字符(元字符、限定符、中括号)：正则表达式中有特殊意义的字符</li>
+</ul>
+<h4 id="1-2-2-元字符"><a href="#1-2-2-元字符" class="headerlink" title="1.2.2 元字符"></a>1.2.2 元字符</h4><p>​    元字符就是，在正则表达式中具有特殊含义的字符。</p>
+<table>
+<thead>
+<tr>
+<th><strong>元字符</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\d</td>
+<td>匹配数字</td>
+</tr>
+<tr>
+<td>\D</td>
+<td>匹配非数字</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>匹配字母或数字或下划线_</td>
+</tr>
+<tr>
+<td>\W</td>
+<td>匹配非字母、数字、下划线_</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配空白符（空格）</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配非空白符</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配任意除了回车换行符之外的单个字符</td>
+</tr>
+</tbody></table>
+<h4 id="1-2-3-限定符"><a href="#1-2-3-限定符" class="headerlink" title="1.2.3 限定符"></a>1.2.3 限定符</h4><p>控制字符出现的个数。</p>
+<table>
+<thead>
+<tr>
+<th><strong>限定符</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n*</td>
+<td>匹配任何包含零个或多个 n 的字符串。n{0,}。 若找到最后，字符串后面没有任何东西也算符合。 若有符合正则值，按照最多的匹配。</td>
+</tr>
+<tr>
+<td><strong>n+</strong></td>
+<td>匹配任何包含至少一个 n 的字符串。{1,} 。</td>
+</tr>
+<tr>
+<td>n?</td>
+<td>匹配任何包含零个或一个 n 的字符串。{0,1}       若找到最后，字符串后面没有任何东西也算符合。若有符合正则值，按照1个匹配</td>
+</tr>
+<tr>
+<td><strong>n{x}</strong></td>
+<td>匹配包含 x 个 n 的序列的字符串</td>
+</tr>
+<tr>
+<td><strong>n{x,}</strong></td>
+<td>匹配包含至少 x 个 n 的序列的字符串。</td>
+</tr>
+<tr>
+<td><strong>n{x,y}</strong></td>
+<td>匹配包含 至少x个 至多 y 个 n 的序列的字符串。</td>
+</tr>
+<tr>
+<td>n$</td>
+<td>匹配任何结尾为 n 的字符串</td>
+</tr>
+<tr>
+<td>^n</td>
+<td>匹配任何开头为 n 的字符串</td>
+</tr>
+</tbody></table>
+<ul>
+<li>注意：<ul>
+<li>==<strong>^正则表达式$</strong>==   使用时，会对字符串整体校验，完全符合才能够匹配。否则，不匹配。</li>
+<li>在使用花括号限制字符个数时，将来在去匹配时，首先从前向后匹配，先按照至多的要求匹配，至多不满足时，再降低要求匹配，若将至最少时还不匹配→ 最终是不匹配。</li>
+<li>关于次数至少是0时，表示的有没有都符合。  没有符合，内容不是也符合</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-4-中括号"><a href="#1-2-4-中括号" class="headerlink" title="1.2.4 中括号"></a>1.2.4 中括号</h4><p>一个中括号就代表一个字符，中括号的目的就是控制了一个字符的<strong>范围</strong>。 </p>
+<p>对象字符种类限制</p>
+<table>
+<thead>
+<tr>
+<th>中括号</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>[abc]</td>
+<td>查找一个方括号之间的任何字符。</td>
+</tr>
+<tr>
+<td>[ ^abc]</td>
+<td>查找一个任何不在方括号之间的字符。^在中括号中有取反的意思</td>
+</tr>
+<tr>
+<td>[0-9]</td>
+<td>查找一个任何从 0 至 9 的数字。</td>
+</tr>
+<tr>
+<td>[a-z]</td>
+<td>查找一个任何从小写 a 到小写 z 的字符。</td>
+</tr>
+<tr>
+<td>[A-Z]</td>
+<td>查找一个任何从大写 A 到大写 Z 的字符。</td>
+</tr>
+<tr>
+<td>[A-z]</td>
+<td>查找一个字母（包含大小写和下划线）</td>
+</tr>
+<tr>
+<td>[\u4e00-\u9fa5]</td>
+<td>查找一个汉字</td>
+</tr>
+</tbody></table>
+<p>​        在匹配时，从前向后按照【规则】去找，若是全局匹配，前面若有满足项时，后面再匹配时，从满足项下一个开始匹配。</p>
+<h4 id="1-2-5-或模式"><a href="#1-2-5-或模式" class="headerlink" title="1.2.5 或模式"></a>1.2.5 或模式</h4><p>特殊符号：<strong>正则1|正则2</strong>, 或者。 符合或两边其中一个就可以匹配。</p>
+<p>如：google，baidu，bing;  // 匹配三种其中一种字符串</p>
+<p>正则：google|baidu|bing</p>
+<h4 id="1-2-6-分组模式"><a href="#1-2-6-分组模式" class="headerlink" title="1.2.6 分组模式"></a>1.2.6 分组模式</h4><p>特殊符号：<strong>(正则)</strong>;</p>
+<p>组指的是一个小集体，分组就是将一个大集体可以分成几个小集体。</p>
+<p>如：控制bruce连续出现的次数，最少1次，最多3次</p>
+<p>正则：^(bruce){1,3}$</p>
+<h4 id="1-2-7-修饰符"><a href="#1-2-7-修饰符" class="headerlink" title="1.2.7 修饰符"></a>1.2.7 修饰符</h4><p>→ <strong>g</strong><br>    g，全称global，有 全局 的意思，表示全局匹配。<br>    如： var reg = /hello/g;<br>→ <strong>i</strong><br>    i，全称ignore，有 忽视、忽略 的意思，表示匹配字母时，可以忽略字母的大小写。<br>​    如： var reg = /hello/i;</p>
+<p>→ <strong>gi</strong>    ig<br>    gi，全局匹配和忽略大小写一起使用。<br>    如： var reg = /hello/gi; </p>
+<h4 id="1-2-8-正则转义符"><a href="#1-2-8-正则转义符" class="headerlink" title="1.2.8 正则转义符"></a>1.2.8 正则转义符</h4><p>“.”在正则中表示特殊符号。去除.的特殊意义，需要转义： \ .</p>
+<h3 id="1-3-js中使用正则表达式"><a href="#1-3-js中使用正则表达式" class="headerlink" title="1.3  js中使用正则表达式"></a>1.3  js中使用正则表达式</h3><h4 id="1-3-1-正则表达式对象"><a href="#1-3-1-正则表达式对象" class="headerlink" title="1.3.1 正则表达式对象"></a>1.3.1 正则表达式对象</h4><ul>
+<li><p>创建正则表达式对象</p>
+<ul>
+<li><p>方式1：</p>
+<ul>
+<li><p>语法：<br><strong>var 变量 = new RegExp(“规则”,”修饰符”);</strong> </p>
+</li>
+<li><p>代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\d'</span>,<span class="string">'g'</span>);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>方式2：字面量或直接量</p>
+<ul>
+<li><p>语法：<br><strong>var 变量 = /正则表达式/;</strong></p>
+</li>
+<li><p>代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/\d/g</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>检测匹配</p>
+<ul>
+<li><strong>正则对象.test(字符串)</strong>  ;  用于检测字符串是否<strong>匹配</strong>某个规则。返回true和false。 </li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-2-字符串对象方法相关正则使用"><a href="#1-3-2-字符串对象方法相关正则使用" class="headerlink" title="1.3.2 字符串对象方法相关正则使用"></a>1.3.2 字符串对象方法相关正则使用</h4><ul>
+<li><strong>字符串.match(正则对象);</strong>   提取所有匹配的内容<br>获取匹配正则的子字符串，返回一个<strong>数组</strong>。 </li>
+<li><strong>字符串.replace(正则对象,替换后的内容);</strong><br>​        替换所匹配正则的子字符串。返回替换后的<strong>字符串</strong>。</li>
+</ul>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Mr.sun
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/Diamond.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/28/vue生命周期/">vue生命周期</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/15/回调函数闭包递归/">回调函数闭包递归</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/28/浅拷贝和深拷贝/">浅拷贝和深拷贝</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/20/函数内this指向以及改变this指向/">函数内this指向以及改变this指向</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/04/15/JS中简单的几种继承方法/">JS中简单的几种继承方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/原型/">原型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/20/JS中的类和对象/">JS中的类和对象,new关键字</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/01/28/FormData对象/">FormData对象</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/12/28/正则表达式/">正则表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2016/12/28/正则表达式/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href="/2016/12/28/正则表达式/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/H5/" style="font-size: 9.471086091008724px;" class="tag-cloud-link">H5</a>
+    
+    <a href="/tags/javascript/" style="font-size: 16.946993418527818px;" class="tag-cloud-link">javascript</a>
+    
+    <a href="/tags/git/" style="font-size: 10.578205662326003px;" class="tag-cloud-link">git</a>
+    
+    <a href="/tags/正则表达式/" style="font-size: 13.033111531964085px;" class="tag-cloud-link">正则表达式</a>
+    
+    <a href="/tags/vue/" style="font-size: 17.62538034855431px;" class="tag-cloud-link">vue</a>
+    
+</div>
+                
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/Diamond-sjh" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://www.cnblogs.com/Diamond-sjh/" target="_blank">博客园</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Mr.sun Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '12'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>

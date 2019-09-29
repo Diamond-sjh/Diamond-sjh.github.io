@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Mr.sun">
+    
+    
+    
+    
+    
+    
+    <title>Vue Router | Diamond</title>
+    <link href="”http://diamond-sjh.github.io“" rel="”prefetch”">
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/aos.js"></script>
+    <script src="/js/highslide/highslide-full.min.js"></script>
+    <link rel="stylesheet" href="/js/highslide/highslide.css">
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/Diamond.jpg'
+        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg,preview5.jpg,preview6.jpg,preview7.jpg,preview8.jpg,preview9.jpg,preview10.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+</head></html>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="http://diamond-sjh.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">Diamond</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/笔记总结/">笔记总结</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/错误解决/">错误解决</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/工具使用/">工具使用</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/H5/">H5</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/javascript/">javascript</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/git/">git</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/正则表达式/">正则表达式</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/vue/">vue</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="http://diamond-sjh.github.io">Diamond</a>
+        >
+        <span>Vue Router</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/vue/">vue</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2018-12-15
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2018-12-15
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/vue/">vue</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h1 id="路由router"><a href="#路由router" class="headerlink" title="路由router"></a>路由router</h1><h2 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由"></a>什么是路由</h2><p>组件切换是通过变换url地址的锚点信息而显示不同的组件，路由也是如此，也是 浏览器地址信息 与 组件 的映射关系体现，但<strong>路由</strong>是组件切换SPA的<strong>封装版本</strong>，使用起来要更加方便、高效</p>
+<p><a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">官网参考</a></p>
+<img src="/2018/12/15/Vue-Router/01.png">
+
+
+
+<img src="/2018/12/15/Vue-Router/02.png">
+
+<p>上图</p>
+<ul>
+<li>浏览器锚点发生变化，会被onhashchange感知</li>
+<li>然后window.location.hash获得变换后的锚点信息</li>
+<li>通过锚点获得用于显示组件的标签名称</li>
+<li>标签名称赋予给component标签的is属性</li>
+<li>组件就呈现</li>
+</ul>
+<p>以上锚点找到对应组件的过程就是<font color="red">路由</font></p>
+<p>路由对 component标签、onhashchange、window.location.hash、<a href="#/锚点">等原始内容做了<font color="red">封装</font>，是更高级组件切换的体现</a></p>
+<h2 id="在-vue-中使用-vue-router"><a href="#在-vue-中使用-vue-router" class="headerlink" title="在 vue 中使用 vue-router"></a>在 vue 中使用 vue-router</h2><h3 id="安装路由"><a href="#安装路由" class="headerlink" title="安装路由"></a>安装路由</h3><p><code>vue-router路由</code>是一个js功能模块，在使用的时候需要先安装</p>
+<p>运行指令</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add vue-router</span><br></pre></td></tr></table></figure>
+
+<h3 id="应用路由"><a href="#应用路由" class="headerlink" title="应用路由"></a>应用路由</h3><ol>
+<li><p>在入口文件处导入路由模块(index.js)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>注册路由模块(index.js)</p>
+<p>把导入的路由模块注册给Vue</p>
+<p>Vue.use(xxx)就是要把某个功能模块注册给Vue，</p>
+<p>该操作类似通过Vue.component()方式给Vue注册组件，</p>
+<p>注册多个组件需要多次执行Vue.component()，而Vue.use()可以一次性注册全部的组件，使用更给力，其本身也有其他功能，后续会介绍。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vue.use(VueRouter)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导入要显示组件(index.js)</p>
+<p>把要显示的子级组件导入进来</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./home.vue'</span>;</span><br><span class="line"><span class="keyword">import</span> About <span class="keyword">from</span> <span class="string">'./about.vue'</span>;</span><br><span class="line"><span class="keyword">import</span> Movie <span class="keyword">from</span> <span class="string">'./movie.vue'</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>事先把对应的 home.vue、about.vue、movie.vue子组件和内容创建好</p>
+</blockquote>
+</li>
+<li><p>创建路由对象(index.js)<br>创建路由对象，并把hash和组件的对应关系设置好</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123; <span class="comment">// 配置对象中，要提供 hash 地址 到 组件之间的 对应关系</span></span><br><span class="line">  routes: [ <span class="comment">// 这个 routes 就是 路由 规则 的数组，里面要放很多的对应关系</span></span><br><span class="line">    <span class="comment">// &#123; path: 'hash地址', component: 组件对象 &#125;</span></span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/home'</span>, <span class="attr">component</span>: Home &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/user'</span>, <span class="attr">component</span>: Movie &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/about'</span>, <span class="attr">component</span>: About &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>挂载路由(index.js)<br>把创建好的 router 对象，挂载到 主vm 对象上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  render: <span class="function"><span class="params">c</span> =&gt;</span> c(App),</span><br><span class="line">  router <span class="comment">// 把 创建的路由对象挂载到 VM 实例上，与 router:router 效果一致</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建路由链接(App.vue)</p>
+<p>在主vue组件中，通过router-link方式应用超链接</p>
+<ul>
+<li>router-link标签：用以创建 路由的 hash锚点 超链接</li>
+<li>to 属性，表示 点击此链接，要跳转到哪个 hash锚点 请求地址</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/home"</span>&gt;</span> 首页 <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/user"</span>&gt;</span> 会员 <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">"/movie"</span>&gt;</span> 电影 <span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>to 属性中，不需要以 # 开头</p>
+</blockquote>
+<p>router-link编译后会变成具体的html标签效果：</p>
+<img src="/2018/12/15/Vue-Router/03.png">
+</li>
+<li><p>设置容器(App.vue)</p>
+<p>在App.vue根组件中通过<strong>router-view</strong>标签设置显示组件的容器</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-view</span>&gt;</span> <span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>router-view的作用类似于component标签，设定占位符，用以显示各个业务子组件</p>
+</blockquote>
+</li>
+</ol>
+<p>路由规则的匹配过程：</p>
+<ul>
+<li>用户点击 页面的 路由链接router-link，点击的一瞬间，就会修改 浏览器 地址栏 中的 Hash 锚点地址信息，</li>
+<li>当 hash 信息被修改以后，会立即被  路由 监听到   (路由有封装onhashchange事件)</li>
+<li>在onhashchange事件里边感知变化后的hash锚点信息(window.location.hash)，然后与对应的组件进行联系</li>
+<li>组件被显示，具体是通过路由占位符rouer-view进行显示</li>
+</ul>
+<h2 id="redirect重定向"><a href="#redirect重定向" class="headerlink" title="redirect重定向"></a>redirect重定向</h2><p>用户第一次访问网站页面(“/根目录”首页)时，地址栏里边没有“hash锚点”的信息，<br>也就没有对应的组件用于显示，明显项目体验不好，现在可以通过<font color="red">redirect</font>实现重定向效果<br>即 设定“/根目录”与一个<strong>具体路由</strong>联系起来，这样即使浏览器地址栏没有任何锚点信息，也有<strong>默认</strong>的组件进行显示</p>
+<p>使用示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">'/'</span>, <span class="attr">redirect</span>: <span class="string">'/mv'</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">'/mv'</span>, <span class="attr">component</span>: Movie&#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当访问”/根目录”时，就重定向到”/mv锚点”，进而显示Movie组件</p>
+</blockquote>
+<h2 id="路由按钮高亮"><a href="#路由按钮高亮" class="headerlink" title="路由按钮高亮"></a>路由按钮高亮</h2><p><a href="https://router.vuejs.org/zh/api/#router-link" target="_blank" rel="noopener">官网参考</a></p>
+<img src="/2018/12/15/Vue-Router/04.png">
+
+
+
+<p>在App.vue主页面中(router-link超链标签使用页面)通过<code>router-link-active</code>选择器设置如下样式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"less"</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.router-link-active</span> &#123;<span class="attribute">background-color</span>: lightgreen;&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当前超链按钮被单击选中会有<font style="background-color:lightgreen">浅绿</font>背景颜色高亮显示</p>
+</blockquote>
+<p>被点击激活的按钮，本身有class属性值，直接进行css样式设定即可：</p>
+<img src="/2018/12/15/Vue-Router/05.png">
+
+
+
+<h2 id="嵌套路由（子路由）"><a href="#嵌套路由（子路由）" class="headerlink" title="嵌套路由（子路由）"></a>嵌套路由（子路由）</h2><p>路由的应用是在<code>App.vue根组件</code>中通过单击超链按钮切换显示不同<code>子组件</code>，具体表现就是父、子组件嵌套关系</p>
+<p>有的应用比较复杂，子组件内部还有子组件，形成了   1级App.vue组件–&gt;2级业务组件–&gt;3级业务组件  的效果，现在学习如何在  2级组件  中切换显示  3级组件</p>
+<p>使用步骤：</p>
+<ol>
+<li><p>在2级组件中设置  切换标签 和 显示的组件容器</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">'/music/hongkong'</span>&gt;</span>香港<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">'/music/taiwan'</span>&gt;</span>台湾<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>router-link：设置超链按钮</p>
+<p>router-view：第3级组件显示的容器</p>
+</blockquote>
+</li>
+<li><p>在对应的路由规则中，通过 <font color="red">children 属性</font>，定义子路由规则：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">redirect</span>: <span class="string">'/user'</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/home'</span>, <span class="attr">component</span>: Home &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">'/user'</span>, <span class="attr">component</span>: User &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/movie'</span>,</span><br><span class="line">      component: Movie,</span><br><span class="line">      children: [</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">'/movie/hongkong'</span>, <span class="attr">component</span>: Hongkong &#125;,</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">'/movie/taiwan'</span>, <span class="attr">component</span>: Taiwan &#125;,</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">'/movie/dalu'</span>, <span class="attr">component</span>: Dalu &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>重定向</p>
+<p>如果需要<font color="red">redirect</font>重定向效果可以像如下<strong>两种</strong>方式设置，<strong>任选一个</strong>即可：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line"> routes: [</span><br><span class="line">   &#123; <span class="attr">path</span>: <span class="string">'/'</span>, <span class="attr">redirect</span>: <span class="string">'/user'</span> &#125;,</span><br><span class="line">   &#123; <span class="attr">path</span>: <span class="string">'/home'</span>, <span class="attr">component</span>: Home &#125;,</span><br><span class="line">   &#123; <span class="attr">path</span>: <span class="string">'/user'</span>, <span class="attr">component</span>: User &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">     path: <span class="string">'/movie'</span>,</span><br><span class="line">     component: Movie,</span><br><span class="line">     redirect: <span class="string">'/movie/hongkong'</span>, 				<span class="comment">// 1) 方式重定向</span></span><br><span class="line">     children: [</span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">''</span>, <span class="attr">redirect</span>:<span class="string">'/movie/hongkong'</span> &#125;,	<span class="comment">// 2) 方式重定向</span></span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">'/movie/hongkong'</span>, <span class="attr">component</span>: Hongkong &#125;,</span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">'/movie/taiwan'</span>, <span class="attr">component</span>: Taiwan &#125;,</span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">'/movie/dalu'</span>, <span class="attr">component</span>: Dalu &#125;</span><br><span class="line">     ]</span><br><span class="line">   &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>重定向注意：</p>
+<p>方式1  设置<strong>redirect</strong>成员的同时也需要<strong>component</strong>成员</p>
+</blockquote>
+<h2 id="路由传参"><a href="#路由传参" class="headerlink" title="路由传参"></a>路由传参</h2><p>使用步骤：</p>
+<ol>
+<li><p>在路由中设定参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/music,</span></span><br><span class="line"><span class="string">      component: Music,</span></span><br><span class="line"><span class="string">      children: [</span></span><br><span class="line"><span class="string">        &#123;path:'</span>/dt/:mid<span class="string">', component: Detail, props:true&#125;</span></span><br><span class="line"><span class="string">      ]</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  ]</span></span><br><span class="line"><span class="string">&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>:mid       表示当前路由有一个参数，名称为mid,  :冒号    是必须的(需要时可以通过相同的方式声明多个参数)<br>props:true      表示当前路由有参数需要传递</p>
+</blockquote>
+</li>
+<li><p>在router-link超链地方把需要的参数设置好</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">"/dt/1001"</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>通过to属性对“参数”一并进行设置</p>
+</blockquote>
+<p>router-link默认生成<code>a标签</code>，如果想生成其他标签，可以通过如下方式实现</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">tag</span>=<span class="string">"li"</span> <span class="attr">:to</span>=<span class="string">"/dt/1001"</span>&gt;</span>XXX<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>tag=”li” 表示生成li标签，并且超链效果仍然有效，可以<a href="https://router.vuejs.org/zh/api/#tag" target="_blank" rel="noopener">参考</a></p>
+</blockquote>
+</li>
+<li><p>参数的接收和使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>电影详情展示---&#123;&#123; mid &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 通过props接收的路由参数信息，名称为mid</span></span></span><br><span class="line"><span class="actionscript">  props:[<span class="string">'mid'</span>]</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>要通过props对路由参数进行接收</p>
+<p>props对两种数据都可以接收：</p>
+<p>1) 路由参数</p>
+<p>2) 父组件给传递过来的数据</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>导航：一个路由切换到另外一个路由去(/mv     /dt/102)</p>
+<h3 id="什么是"><a href="#什么是" class="headerlink" title="什么是"></a>什么是</h3><p>router-link是通过静态超链接按钮的方式把各个用于显示的组件给声明好，单击哪个按钮就显示哪个组件，其被称为<font color="red">声明式导航</font></p>
+<p>有时并不能通过单击<strong>超链按钮</strong>来显示一个组件，例如判断用户是登录状态就显示业务组件页面，否则显示登录组件页面，这时需要通过<code>程序代码</code>实现组件的判断显示，通过编写程序代码的方式实现组件显示就称为<font color="red">编程式导航</font></p>
+<h3 id="使用语法"><a href="#使用语法" class="headerlink" title="使用语法"></a>使用语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.$router.push(路由地址)   <span class="comment">// 根据路由信息显示组件,可以是router-link标签的to属性值</span></span><br><span class="line"><span class="keyword">this</span>.$router.go(n)			<span class="comment">// n可以是 负数、0、正数，表示页面要 回退、刷新、前进 </span></span><br><span class="line"><span class="keyword">this</span>.$router.forward()		<span class="comment">// 前进</span></span><br><span class="line"><span class="keyword">this</span>.$router.back()			<span class="comment">// 后退</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>灵感来自bom浏览器对象模型</p>
+<p>window.history.go()</p>
+<p>window.history.back()</p>
+<p>window.history.forward()</p>
+</blockquote>
+<p><a href="https://router.vuejs.org/zh/guide/essentials/navigation.html" target="_blank" rel="noopener">官网参考</a></p>
+<img src="/2018/12/15/Vue-Router/06.png">
+
+
+
+<h2 id="路由守卫"><a href="#路由守卫" class="headerlink" title="路由守卫"></a>路由守卫</h2><p>路由对象有一个名称为<strong>beforeEach</strong>的方法，每个路由在加载组件之前都要调用它，在这个方法中可以做逻辑判断，限制要做什么或不做什么，这个过程称为<code>路由守卫</code>，有着一夫当关万夫莫开的效果</p>
+<p>​    <img src="/2018/12/15/Vue-Router/07.png"></p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123; <span class="comment">/* 导航守卫 处理逻辑 */</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里的 router 就是 new VueRouter 得到的 路由对象</p>
+<p>beforeEach()是路由在显示组件<strong>之前</strong>要执行的代码</p>
+</blockquote>
+<p>参数1</p>
+<ul>
+<li><p>to:是一个对象，保存着将要访问路由相关的参数</p>
+</li>
+<li><p>from:是一个对象，保存着离开的那个页面的相关路由参数</p>
+</li>
+<li><p>next:是一个函数，对后续的执行起着 拦截 或 放行 的作用</p>
+<p>如果没有问题请<strong>一定</strong>执行next()方法，以进行后续操作，</p>
+<p>next()方法也可以通过传递路由信息实现其他组件的显示</p>
+<p>例如：next(‘/login’)   显示登录组件</p>
+</li>
+</ul>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Mr.sun
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/Diamond.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/28/vue生命周期/">vue生命周期</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/15/回调函数闭包递归/">回调函数闭包递归</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/28/浅拷贝和深拷贝/">浅拷贝和深拷贝</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/20/函数内this指向以及改变this指向/">函数内this指向以及改变this指向</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/04/15/JS中简单的几种继承方法/">JS中简单的几种继承方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/原型/">原型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/20/JS中的类和对象/">JS中的类和对象,new关键字</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/01/28/FormData对象/">FormData对象</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2016/12/28/正则表达式/">正则表达式</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2018/12/15/Vue-Router/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href="/2018/12/15/Vue-Router/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/H5/" style="font-size: 9.026464182216976px;" class="tag-cloud-link">H5</a>
+    
+    <a href="/tags/javascript/" style="font-size: 14.630978115753496px;" class="tag-cloud-link">javascript</a>
+    
+    <a href="/tags/git/" style="font-size: 12.866727263660906px;" class="tag-cloud-link">git</a>
+    
+    <a href="/tags/正则表达式/" style="font-size: 16.69769773494947px;" class="tag-cloud-link">正则表达式</a>
+    
+    <a href="/tags/vue/" style="font-size: 12.134387056710196px;" class="tag-cloud-link">vue</a>
+    
+</div>
+                
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/Diamond-sjh" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://www.cnblogs.com/Diamond-sjh/" target="_blank">博客园</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Mr.sun Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+<script src="/js/activate-power-mode.js"></script>
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '12'
+    }
+</script>
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+</html>
