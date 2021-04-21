@@ -259,7 +259,9 @@
         </center>
     </div>
     <div class="content-article">
-        <h2 id="1、继承介绍"><a href="#1、继承介绍" class="headerlink" title="1、继承介绍"></a>1、继承介绍</h2><blockquote>
+        <meta name="referrer" content="no-referrer">
+
+<h2 id="1、继承介绍"><a href="#1、继承介绍" class="headerlink" title="1、继承介绍"></a>1、继承介绍</h2><blockquote>
 <p>ES6之前没有方法直接实现继承，这里的继承是利用技巧方法来模拟实现；</p>
 <p>作用：减少代码或简化代码</p>
 </blockquote>
@@ -310,7 +312,7 @@
 <li><p>图解：</p>
 </li>
 </ul>
-<p>　</p>
+<p>　<img src="/2017/04/15/JS%E4%B8%AD%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E6%B3%95/%E7%BB%A7%E6%89%BF.png" alt="继承"></p>
 <ul>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 人类 → 父类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="built_in">this</span>.name = <span class="string">&#x27;名字&#x27;</span>;</span><br><span class="line">   <span class="built_in">this</span>.age = <span class="number">10</span>;</span><br><span class="line">   <span class="built_in">this</span>.gender = <span class="string">&#x27;男&#x27;</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> Person.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">&#x27;你好&#x27;</span>); &#125;;</span><br><span class="line"> Person.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">&#x27;我会吃。。。&#x27;</span>); &#125;;</span><br><span class="line"> Person.prototype.play = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">&#x27;我会玩&#x27;</span>); &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 学生类 → 子类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="built_in">this</span>.stuId = <span class="number">1000</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 子类的原型prototyp指向父类的一个实例对象</span></span><br><span class="line"> Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 添加一个constructor成员</span></span><br><span class="line"> Student.prototype.constructor = Student;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 如何实现原型继承：</span></span><br><span class="line"> <span class="comment">// 给子类的原型prototype重新赋值为父类的一个实例对象。</span></span><br><span class="line"> <span class="comment">// 利用了原型链上属性或方法的查找规则。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 创建一个学生对象</span></span><br><span class="line"> <span class="keyword">var</span> stu1 = <span class="keyword">new</span> Student();</span><br><span class="line"> <span class="built_in">console</span>.log(stu1.constructor)</span><br></pre></td></tr></table></figure></li>
@@ -342,7 +344,7 @@
 </li>
 <li>图解：</li>
 </ul>
-<p>　</p>
+<p>　<img src="/2017/04/15/JS%E4%B8%AD%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E6%B3%95/call.png" alt="call"></p>
 <ul>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 人类 → 父类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age,gender</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">this</span>.name = name;</span><br><span class="line">   <span class="built_in">this</span>.age = age;</span><br><span class="line">   <span class="built_in">this</span>.gender = gender;</span><br><span class="line"> &#125;</span><br><span class="line"> Person.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>); &#125;;</span><br><span class="line"> Person.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">&#x27;eat。。。&#x27;</span>); &#125;;</span><br><span class="line"> Person.prototype.play = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">&#x27;play&#x27;</span>); &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 学生类 → 子类</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name,age,gender,stuId</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// this关键字代表谁,代表的是一个学生对象，当前创建的对象 stu1 ,stu2</span></span><br><span class="line">   <span class="comment">// var obj = this;</span></span><br><span class="line">   <span class="comment">//【借用继承】</span></span><br><span class="line">   <span class="comment">// Person.call(obj,name,age,gender);</span></span><br><span class="line">   Person.call(<span class="built_in">this</span>,name,age,gender);</span><br><span class="line">   <span class="built_in">this</span>.stuId = stuId;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="comment">// 创建第一个学生对象</span></span><br><span class="line"> <span class="keyword">var</span> stu1 = <span class="keyword">new</span> Student(<span class="string">&#x27;张三&#x27;</span>,<span class="number">15</span>,<span class="string">&#x27;男&#x27;</span>,<span class="number">1006</span>);</span><br><span class="line"> <span class="comment">// 创建第二个学生对象</span></span><br><span class="line"> <span class="keyword">var</span> stu2 = <span class="keyword">new</span> Student(<span class="string">&#x27;李四&#x27;</span>,<span class="number">16</span>,<span class="string">&#x27;女&#x27;</span>,<span class="number">1005</span>);</span><br></pre></td></tr></table></figure></li>
@@ -506,17 +508,17 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 10.958822140225966px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 11.116688387925647px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/git/" style="font-size: 19.023052769709228px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 17.51155313634041px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/javascript/" style="font-size: 19.239272929434524px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 8.24883683315917px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/vue/" style="font-size: 8.45366246952587px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 9.821784847285016px;" class="tag-cloud-link">vue</a>
     
-    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 10.164176152636184px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 12.294537738278333px;" class="tag-cloud-link">正则表达式</a>
     
-    <a href="/tags/app/" style="font-size: 17.970883774699953px;" class="tag-cloud-link">app</a>
+    <a href="/tags/app/" style="font-size: 16.214487298359884px;" class="tag-cloud-link">app</a>
     
 </div>
                 

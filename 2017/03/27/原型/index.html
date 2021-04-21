@@ -259,7 +259,9 @@
         </center>
     </div>
     <div class="content-article">
-        <h3 id="1、了解学习原型的目的"><a href="#1、了解学习原型的目的" class="headerlink" title="1、了解学习原型的目的"></a>1、了解学习原型的目的</h3><ul>
+        <meta name="referrer" content="no-referrer">
+
+<h3 id="1、了解学习原型的目的"><a href="#1、了解学习原型的目的" class="headerlink" title="1、了解学习原型的目的"></a>1、了解学习原型的目的</h3><ul>
 <li>问题：若不用原型，则会产生<strong>内存浪费</strong>问题。</li>
 <li>原因：方法放在构造函数中，每次new时，都会向对象中添加方法。</li>
 <li>解决方案：把方法放到原型中，就可以让同类型的对象共享 。</li>
@@ -281,6 +283,7 @@
 </blockquote>
 </li>
 <li><p>图解：</p>
+<p><img src="/2017/03/27/%E5%8E%9F%E5%9E%8B/01.png" alt="01"></p>
 </li>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生类→ 构造函数</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name,age,gender</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 属性</span></span><br><span class="line">   <span class="built_in">this</span>.name = name;</span><br><span class="line">   <span class="built_in">this</span>.age = age;</span><br><span class="line">   <span class="built_in">this</span>.gender = gender;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 获取原型</span></span><br><span class="line"> <span class="comment">// 每一个函数都有一个对应的原型</span></span><br><span class="line"> <span class="keyword">var</span> yx = Student.prototype;</span><br><span class="line"> <span class="built_in">console</span>.log(yx);</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 原型是一个对象</span></span><br><span class="line"> <span class="comment">// 自带了一个成员：constructor → 构造函数</span></span><br><span class="line"> <span class="built_in">console</span>.log(yx.constructor === Student);</span><br></pre></td></tr></table></figure></li>
@@ -311,6 +314,7 @@
 </ul>
 </li>
 <li><p>图解：</p>
+<p><img src="/2017/03/27/%E5%8E%9F%E5%9E%8B/02.png" alt="02"></p>
 </li>
 <li><p>代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 学生类→ 构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, gender</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 属性</span></span><br><span class="line">  <span class="built_in">this</span>.name = name;</span><br><span class="line">  <span class="built_in">this</span>.age = age;</span><br><span class="line">  <span class="built_in">this</span>.gender = gender;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 获取原型 ，每一个函数都有一个对应的原型</span></span><br><span class="line"><span class="keyword">var</span> yx = Student.prototype;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 向原型中添加方法：对象.key = value</span></span><br><span class="line"><span class="comment">// 方法1</span></span><br><span class="line">yx.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 方法内部：this 代表的是调用方法的对象</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;我叫什么&#x27;</span> + <span class="built_in">this</span>.name)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 方法2</span></span><br><span class="line">yx.writeCode = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;我会写code&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 属性</span></span><br><span class="line">yx.type = <span class="string">&#x27;学生&#x27;</span>;</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> zs = <span class="keyword">new</span> Student(<span class="string">&#x27;张三&#x27;</span>, <span class="number">10</span>, <span class="string">&#x27;男&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> ls = <span class="keyword">new</span> Student(<span class="string">&#x27;李四&#x27;</span>, <span class="number">11</span>, <span class="string">&#x27;男&#x27;</span>);</span><br><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> ww = <span class="keyword">new</span> Student(<span class="string">&#x27;王五&#x27;</span>, <span class="number">17</span>, <span class="string">&#x27;女&#x27;</span>);</span><br></pre></td></tr></table></figure></li>
@@ -329,6 +333,7 @@
 </blockquote>
 </li>
 <li><p>图解：</p>
+<p><img src="/2017/03/27/%E5%8E%9F%E5%9E%8B/03.png" alt="03"></p>
 </li>
 </ul>
 
@@ -476,17 +481,17 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 13.757058383700215px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 14.07246607443799px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/git/" style="font-size: 15.01205144042817px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 12.706901014931812px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/javascript/" style="font-size: 8.633221462929884px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 16.243797717071516px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/vue/" style="font-size: 17.459356288525022px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 12.072678491486453px;" class="tag-cloud-link">vue</a>
     
-    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 9.783607316717225px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 16.295278961551986px;" class="tag-cloud-link">正则表达式</a>
     
-    <a href="/tags/app/" style="font-size: 11.948158360890826px;" class="tag-cloud-link">app</a>
+    <a href="/tags/app/" style="font-size: 12.573760789986821px;" class="tag-cloud-link">app</a>
     
 </div>
                 
