@@ -259,11 +259,11 @@
         </center>
     </div>
     <div class="content-article">
-        <h1 id="vue生命周期"><a href="#vue生命周期" class="headerlink" title="vue生命周期"></a>vue生命周期</h1><h2 id="什么是生命周期"><a href="#什么是生命周期" class="headerlink" title="什么是生命周期"></a>什么是生命周期</h2>
+        <meta name="referrer" content="no-referrer">
 
-<p>定义：生命周期是指vue实例(或者组件)从诞生到消亡所经历的各个阶段的总和</p>
+<h1 id="vue生命周期"><a href="#vue生命周期" class="headerlink" title="vue生命周期"></a>vue生命周期</h1><h2 id="什么是生命周期"><a href="#什么是生命周期" class="headerlink" title="什么是生命周期"></a>什么是生命周期<img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/669bc78d-9174-4315-bbc3-b0c0839a8a39.png" alt="vue生命周期00"></h2><p>定义：生命周期是指vue实例(或者组件)从诞生到消亡所经历的各个阶段的总和</p>
 <p>生命周期：</p>
-<p>vue在使用的过程中，分为多个阶段，具体有<a href="">创建</a>、<a href="">运行</a>、<a href="">销毁</a>，并且可以通过成员方法感知到</p>
+<p>vue在使用的过程中，分为多个阶段，具体有<a href>创建</a>、<a href>运行</a>、<a href>销毁</a>，并且可以通过成员方法感知到</p>
 <ul>
 <li>创建阶段由空白期、data初始化、methods初始化、模板渲染等组成</li>
 <li>运行阶段分为 更新前 和 更新后 两部分</li>
@@ -279,17 +279,17 @@
 <h2 id="生命周期函数分类"><a href="#生命周期函数分类" class="headerlink" title="生命周期函数分类"></a>生命周期函数分类</h2><h3 id="创建阶段"><a href="#创建阶段" class="headerlink" title="创建阶段"></a>创建阶段</h3><ul>
 <li><p>创建期间的生命周期函数：(特点：每个实例一辈子只执行一次，并且是自动的)</p>
 <ul>
-<li><p><a href="">beforeCreate</a>：创建之前，此时 data 和 methods 尚未初始化</p>
+<li><p><a href>beforeCreate</a>：创建之前，此时 data 和 methods 尚未初始化</p>
 </li>
-<li><p><strong><a href="">created</a></strong> : <font color=red>第一个重要</font>的函数，此时，data 和 methods 已经创建好了，可以被访问，在此处非常适合做<code>data</code>数据初始化操作</p>
+<li><p><strong><a href>created</a></strong> : <font color="red">第一个重要</font>的函数，此时，data 和 methods 已经创建好了，可以被访问，在此处非常适合做<code>data</code>数据初始化操作</p>
 </li>
-<li><p><a href="">beforeMount</a>：挂载容器模板结构之前，此时，容器的内容已经被Vue获取到了(容器本身还是未解析的原始内容)；</p>
+<li><p><a href>beforeMount</a>：挂载容器模板结构之前，此时，容器的内容已经被Vue获取到了(容器本身还是未解析的原始内容)；</p>
 <p>现在Vue实例就被称为 <strong>Virtual DOM(虚拟DOM)</strong></p>
+<p><img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/d41d7ac3-f77b-4d50-94ed-9f4e9dd38550.png" alt="vue生命周期01"></p>
 </li>
-<li><p><strong><a href="">mounted</a></strong> <font color=red>第二个重要</font>的函数，此时，容器被vue渲染解析完毕；是操作初始<strong>DOM</strong>元素的最好时机</p>
-
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">beforeCreate</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.group(<span class="string">&#x27;---------beforeCreate调用--------&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el)   <span class="comment">// undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;data现在的样子：&#x27;</span> + <span class="built_in">this</span>.$data)  <span class="comment">// undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;methods方法现在的样子：&#x27;</span> + <span class="built_in">this</span>.getInfo) <span class="comment">// undefined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<li><p><strong><a href>mounted</a></strong> <font color="red">第二个重要</font>的函数，此时，容器被vue渲染解析完毕；是操作初始<strong>DOM</strong>元素的最好时机</p>
+<p><img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/8891f4fd-9098-47c7-afee-b31848dca4b7.png" alt="vue生命周期02"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">beforeCreate</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.group(<span class="string">&#x27;---------beforeCreate调用--------&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el)   <span class="comment">// undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;data现在的样子：&#x27;</span> + <span class="built_in">this</span>.$data)  <span class="comment">// undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;methods方法现在的样子：&#x27;</span> + <span class="built_in">this</span>.getInfo) <span class="comment">// undefined</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>console.group() 按照组别对调试信息进行划分</p>
@@ -299,14 +299,14 @@
 <p>this.$data: 获得data全部的成员，以对象形式返回</p>
 <p>this.getInfo: 把methods成员方法当做普通变量获取输出</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.group(<span class="string">&#x27;---------created调用--------&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el)    <span class="comment">// undefined</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;data现在的样子：&#x27;</span> + <span class="built_in">this</span>.$data)  <span class="comment">// 实体</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;methods方法：&#x27;</span> + <span class="built_in">this</span>.getDate) 	<span class="comment">// 实体</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.group(<span class="string">&#x27;---------created调用--------&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el)    <span class="comment">// undefined</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;data现在的样子：&#x27;</span> + <span class="built_in">this</span>.$data)  <span class="comment">// 实体</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;methods方法：&#x27;</span> + <span class="built_in">this</span>.getDate) 	<span class="comment">// 实体</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>在此函数中适合进行Vue数据初始化(获取首屏数据)操作</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">beforeMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.group(<span class="string">&#x27;---------beforeMount调用--------&#x27;</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el) <span class="comment">// 实体</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.$el) <span class="comment">// 编译【前】的实体内容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">beforeMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.group(<span class="string">&#x27;---------beforeMount调用--------&#x27;</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el) <span class="comment">// 实体</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.$el) <span class="comment">// 编译【前】的实体内容</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.group(<span class="string">&#x27;---------mounted调用--------&#x27;</span>)   </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el) <span class="comment">// 实体</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="built_in">this</span>.$el) <span class="comment">// 编译【后】的实体内容</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.group(<span class="string">&#x27;---------mounted调用--------&#x27;</span>)   </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;%c%s&#x27;</span>, <span class="string">&#x27;color:red&#x27;</span>, <span class="string">&#x27;el现在的样子：&#x27;</span> + <span class="built_in">this</span>.$el) <span class="comment">// 实体</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.$el) <span class="comment">// 编译【后】的实体内容</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>此时适合对页面dom元素做初始化操作</p>
@@ -325,9 +325,8 @@
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">updated() &#123;</span><br><span class="line">  console.group(&#39;---------updated调用--------&#39;)</span><br><span class="line">  console.log(</span><br><span class="line">    &#39;%c%s&#39;,</span><br><span class="line">    &#39;color:red&#39;,</span><br><span class="line">    &#39;h2数据更新之后的效果：&#39; + document.querySelector(&#39;h2&#39;).innerHTML</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-
-
-<p>有 <font color=red>“Virtual DOM(虚拟DOM)”</font>，其是Vue实例获取到的div容器，是虚拟的(不是页面实实在在看到的)，该VirtualDOM 在Vue的生命周期运行阶段始终存在，随时感知数据变化，随时同步给页面</p>
+<p><img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/f055d26b-9061-4030-8503-f04385874dbb.png" alt="vue生命周期03"></p>
+<p>有 <font color="red">“Virtual DOM(虚拟DOM)”</font>，其是Vue实例获取到的div容器，是虚拟的(不是页面实实在在看到的)，该VirtualDOM 在Vue的生命周期运行阶段始终存在，随时感知数据变化，随时同步给页面</p>
 </li>
 </ul>
 </li>
@@ -499,17 +498,17 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 8.979248072754508px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 9.789844015287187px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/git/" style="font-size: 10.021580003814524px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 10.687430044743287px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/javascript/" style="font-size: 18.547817521301106px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 11.902538725531816px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/vue/" style="font-size: 14.55960644317312px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 8.217052124659645px;" class="tag-cloud-link">vue</a>
     
-    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 15.371040775206172px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 18.397631940563368px;" class="tag-cloud-link">正则表达式</a>
     
-    <a href="/tags/app/" style="font-size: 18.468976193655894px;" class="tag-cloud-link">app</a>
+    <a href="/tags/app/" style="font-size: 12.711470711693739px;" class="tag-cloud-link">app</a>
     
 </div>
                 
