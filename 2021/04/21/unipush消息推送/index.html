@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Mr.sun">
+    
+    
+    
+    
+    
+    
+    <title>unipush的消息推送 | Diamond</title>
+    <link href="https://diamond-sjh.github.io" rel="prefetch" />
+    <link href="/favicon.ico" rel="icon" type="image/x-ico">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/Diamond.jpg'
+        var previews = 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/b85ccb79-f84d-4a23-af8d-a6563b5a1763.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/97d86e2d-16ce-44cd-b6a8-a026289760f7.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/6bd3d16b-54eb-4015-a80b-a0c9322c8407.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/d747a105-a552-4f95-a032-0c9660036317.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/530195d0-a84d-4176-a6c9-bea786ee65eb.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/77893ba4-83b4-48a0-a350-516ce50389e2.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/6717a878-7ef4-49c1-b0d4-9eb7bf3a6b96.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/3f1fbc6c-3a66-432d-b487-257ae23bf7a9.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/8846bb34-6028-48e2-b7ff-546bc98e886d.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/90c44d77-22d1-4357-b806-7d1a67c72bcf.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://diamond-sjh.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">Diamond</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/">笔记总结</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/">错误解决</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E8%B8%A9%E5%9D%91%E7%BB%8F%E9%AA%8C/">踩坑经验</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/H5/">H5</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/git/">git</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/javascript/">javascript</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/vue/">vue</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/tags">...</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://diamond-sjh.github.io">Diamond</a>
+        >
+        <span>unipush的消息推送</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">unipush的消息推送</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/app/">app</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2021-04-21
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">unipush的消息推送</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2021-04-21
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/app/">app</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <h1 id="unipush的消息推送"><a href="#unipush的消息推送" class="headerlink" title="unipush的消息推送"></a>unipush的消息推送</h1><h2 id="一、创建项目并开通unipush"><a href="#一、创建项目并开通unipush" class="headerlink" title="一、创建项目并开通unipush"></a>一、创建项目并开通unipush</h2><ol>
+<li><p>申请开发者账号</p>
+<ul>
+<li>方法一：在<a target="_blank" rel="noopener" href="https://dev.dcloud.net.cn/app/index?type=0">https://dev.dcloud.net.cn/app/index?type=0</a> 网址申请DCloud开发者账号</li>
+<li>方法二：在Hbuderx左下角点击未登录，然后注册账号</li>
+</ul>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/000.png" alt="000"></p>
+</li>
+<li><p>登录注册的开发者账号，创建h5或者是uniapp项目，进行开发。</p>
+</li>
+<li><p>配置manifest.json文件添加推送服务，先进行<em>基础配置</em>（AppId、应用名称等）。点击<em>App模块配置</em>，勾选Push(消息推送)–&gt;uniPush。点击配置跳转如下界面</p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/001.png" alt="001"></p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/002.png" alt="002"></p>
+</li>
+<li><p>编辑应用信息，如果想单独打包android可以不选中ios，然后点击开通推送服务就开启了。</p>
+<p>注意：这里的android包名要与后面的厂商应用保持一致，应用签名要与华为平台上的签名文件使用同一个(SHA256)</p>
+<p>至此，个推渠道已经配置完毕，app打包之后在线情况可以收到推送消息</p>
+</li>
+</ol>
+<h2 id="二、注册手机厂商账号（华为为例）"><a href="#二、注册手机厂商账号（华为为例）" class="headerlink" title="二、注册手机厂商账号（华为为例）"></a>二、注册手机厂商账号（华为为例）</h2><ol>
+<li><p>直接到<a target="_blank" rel="noopener" href="https://developer.huawei.com/consumer/cn/%E5%8D%8E%E4%B8%BA%E5%BC%80%E5%8F%91%E8%80%85%E8%81%94%E7%9B%9F%E5%8E%BB%E6%B3%A8%E5%86%8C%E8%B4%A6%E5%8F%B7%EF%BC%8C%E8%B7%9F%E7%9D%80%E6%8F%90%E7%A4%BA%E4%B8%80%E6%AD%A5%E6%AD%A5%E8%B5%B0">https://developer.huawei.com/consumer/cn/华为开发者联盟去注册账号，跟着提示一步步走</a></p>
+</li>
+<li><p>账号注册完后登录。到管理中心–&gt;上架及推送服务–&gt;我的项目–&gt;新建项目–&gt;添加应用</p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/01.png" alt="01"></p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/02.png" alt="02"></p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/03.png" alt="03"></p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/04.png" alt="04"></p>
+</li>
+<li><p>新建完成后，进入如下页面</p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/05.png" alt="05"></p>
+</li>
+<li><p>项目创建完成后需要生成指纹证书文件（Android平台签名证书(.keystore)）</p>
+<p>如果配置了java环境变量就可以直接往下走，如果没有就需要执行cd命令进入keytool.exe所在的目录（java安装目录的bin下）。</p>
+<p>​        （1）在命令行输入命令   </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -alias testalias -keyalg RSA -keysize <span class="number">2048</span> -validity <span class="number">36500</span> -keystore test.keystore</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>testalias是证书别名，可修改为自己想设置的字符，建议使用英文字母和数字</p>
+</li>
+<li><p>test.keystore是证书文件名称，可修改为自己想设置的文件名称，也可以指定完整文件路径</p>
+<p>(2)  然后跟据命令行提示操作生成keystore文件  </p>
+</li>
+</ul>
+<p>​                 <strong>testalias是证书别名  ，还有证书文件密码和位置都需要记住打包的时候必须要。</strong></p>
+<p>​    （3）查看keystore文件。输入以下命令</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keytool -<span class="built_in">list</span> -v -keystore test.keystore  </span><br><span class="line">Enter keystore password: <span class="comment">//输入密码，回车</span></span><br></pre></td></tr></table></figure>
+
+<p>​    输出以下格式信息</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Keystore type: PKCS12    </span><br><span class="line">Keystore provider: SUN    </span><br><span class="line"></span><br><span class="line">Your keystore contains <span class="number">1</span> entry    </span><br><span class="line"></span><br><span class="line">Alias name: test    </span><br><span class="line">Creation date: <span class="number">2019</span><span class="number">-10</span><span class="number">-28</span>    </span><br><span class="line">Entry type: PrivateKeyEntry    </span><br><span class="line">Certificate chain length: <span class="number">1</span>    </span><br><span class="line">Certificate[<span class="number">1</span>]:    </span><br><span class="line">Owner: CN=Tester, OU=Test, O=Test, L=HD, ST=BJ, C=CN    </span><br><span class="line">Issuer: CN=Tester, OU=Test, O=Test, L=HD, ST=BJ, C=CN    </span><br><span class="line">Serial number: <span class="number">7</span>dd12840    </span><br><span class="line">Valid from: Fri Jul <span class="number">26</span> <span class="number">20</span>:<span class="number">52</span>:<span class="number">56</span> CST <span class="number">2019</span> until: Sun Jul <span class="number">02</span> <span class="number">20</span>:<span class="number">52</span>:<span class="number">56</span> CST <span class="number">2119</span>    </span><br><span class="line">Certificate fingerprints:    </span><br><span class="line">         MD5:  F9:F6:C8:<span class="number">1F</span>:DB:AB:<span class="number">50</span>:<span class="number">14</span>:<span class="number">7</span>D:<span class="number">6F</span>:<span class="number">2</span>C:<span class="number">4F</span>:CE:E6:<span class="number">0</span>A:A5    </span><br><span class="line">         SHA1: BB:AC:E2:<span class="number">2F</span>:<span class="number">97</span>:<span class="number">3B</span>:<span class="number">18</span>:<span class="number">02</span>:E7:D6:<span class="number">69</span>:A3:<span class="number">7</span>A:<span class="number">28</span>:EF:D2:<span class="number">3F</span>:A3:<span class="number">68</span>:E7    </span><br><span class="line">         SHA256: <span class="number">24</span>:<span class="number">11</span>:<span class="number">7</span>D:E7:<span class="number">36</span>:<span class="number">12</span>:BC:FE:AF:<span class="number">2</span>A:<span class="number">6</span>A:<span class="number">24</span>:BD:<span class="number">04</span>:<span class="number">4F</span>:<span class="number">2</span>E:<span class="number">33</span>:E5:<span class="number">2</span>D:<span class="number">41</span>:<span class="number">96</span>:<span class="number">5F</span>:<span class="number">50</span>:<span class="number">4</span>D:<span class="number">74</span>:<span class="number">17</span>:<span class="number">7F</span>:<span class="number">4F</span>:E2:<span class="number">55</span>:EB:<span class="number">26</span>    </span><br><span class="line">Signature algorithm name: SHA256withRSA    </span><br><span class="line">Subject Public Key Algorithm: <span class="number">2048</span>-bit RSA key    </span><br><span class="line">Version: <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>其中证书指纹信息（Certificate fingerprints）：</p>
+<ul>
+<li>MD5<br>证书的MD5指纹信息（安全码MD5）</li>
+<li>SHA1<br>证书的SHA1指纹信息（安全码SHA1）</li>
+<li>SHA256<br>证书的SHA256指纹信息（安全码SHA245）</li>
+</ul>
+</li>
+<li><p>将生成的SHA256填入如图标记部分。</p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/06.png" alt="06"></p>
+</li>
+<li><p>项目信息完成后，开通推送服务</p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/07.png" alt="07"></p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/08.png" alt="08"></p>
+</li>
+<li><p>将配置文件  agconnect-services.json文件下载保存，unipush配置厂商通道需要使用</p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/09.png" alt="09"></p>
+</li>
+</ol>
+<h2 id="三、配置unipush的厂商推送设置"><a href="#三、配置unipush的厂商推送设置" class="headerlink" title="三、配置unipush的厂商推送设置"></a>三、配置unipush的厂商推送设置</h2><ol>
+<li><p>厂商账号以及推送服务开通之后，回到unipush后台配置界面<a target="_blank" rel="noopener" href="https://dev.dcloud.net.cn/app/index?type=0">https://dev.dcloud.net.cn/app/index?type=0</a></p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/10.png" alt="10"></p>
+</li>
+<li><p>点击自己需要配置的应用进入到unipush页面，点击厂商推送设置，将各个厂商的应用信息填入对应项中，保存。</p>
+<p><img src="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/12.png" alt="12"></p>
+</li>
+<li><p>将项目进行云打包，使用自有证书，上面生成的证书。填入证书别名，填入证书密码，填入证书路径，选择打正式包，然后点击打包，等待打包完成手机安装即可。</p>
+</li>
+</ol>
+<h2 id="四、服务端代码"><a href="#四、服务端代码" class="headerlink" title="四、服务端代码"></a>四、服务端代码</h2><h4 id="准备：pom-xml文件"><a href="#准备：pom-xml文件" class="headerlink" title="准备：pom.xml文件"></a>准备：pom.xml文件</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.gexin.platform<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gexin-rp-sdk-http<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.1.1.4<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">repositories</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span>&gt;</span>getui-nexus<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://mvn.gt.getui.com/nexus/content/repositories/releases/<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">repositories</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="后端Java："><a href="#后端Java：" class="headerlink" title="后端Java："></a>后端Java：</h4><p>服务端集成时首先需要获取AppId、AppKey、MasterSecret参数，登录<a target="_blank" rel="noopener" href="https://dev.dcloud.net.cn/">DCloud开发者中心</a>，在“Uni Push”下的“应用配置”页面中获取，如下图所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.IPushResult;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.impl.AppMessage;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.impl.SingleMessage;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.impl.Target;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.notify.Notify;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.payload.APNPayload;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.base.uitls.AppConditions;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.exceptions.RequestException;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.http.Constants;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.http.IGtPush;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.template.AbstractTemplate;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.template.LinkTemplate;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.template.NotificationTemplate;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.template.TransmissionTemplate;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.template.style.AbstractNotifyStyle;</span><br><span class="line"><span class="keyword">import</span> com.gexin.rp.sdk.template.style.Style0;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UninAppNews</span> </span>&#123;</span><br><span class="line">    <span class="comment">//参照上方链接获取</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String appId = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String appKey = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String masterSecret = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果需要使用HTTPS，直接修改url即可</span></span><br><span class="line">    <span class="comment">//private static String host = &quot;https://api.getui.com/apiex.htm&quot;;</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String host = <span class="string">&quot;http://api.getui.com/apiex.htm&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String CID = <span class="string">&quot;&quot;</span>;<span class="comment">//前端获取</span></span><br><span class="line">    <span class="comment">//指定用户推送</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendNews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 设置后，根据别名推送，会返回每个cid的推送结果</span></span><br><span class="line">        System.setProperty(Constants.GEXIN_PUSH_SINGLE_ALIAS_DETAIL, <span class="string">&quot;true&quot;</span>);</span><br><span class="line">        IGtPush push = <span class="keyword">new</span> IGtPush(host, appKey, masterSecret);</span><br><span class="line">        NotificationTemplate template = getNotificationTemplate(); </span><br><span class="line">        SingleMessage message = <span class="keyword">new</span> SingleMessage();</span><br><span class="line">        message.setOffline(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// 离线有效时间，单位为毫秒</span></span><br><span class="line">        message.setOfflineExpireTime(<span class="number">24</span> * <span class="number">3600</span> * <span class="number">1000</span>);</span><br><span class="line">        message.setData(template);</span><br><span class="line">        <span class="comment">// 可选，1为wifi，0为不限制网络环境。根据手机处于的网络情况，决定是否下发</span></span><br><span class="line">        message.setPushNetWorkType(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">// 厂商通道下发策略</span></span><br><span class="line">        message.setStrategyJson(<span class="string">&quot;&#123;\&quot;default\&quot;:4,\&quot;ios\&quot;:4,\&quot;st\&quot;:4&#125;&quot;</span>);</span><br><span class="line">        Target target = <span class="keyword">new</span> Target();</span><br><span class="line">        target.setAppId(appId);</span><br><span class="line">        target.setClientId(CID);</span><br><span class="line">        <span class="comment">//target.setAlias(Alias);</span></span><br><span class="line">        IPushResult ret = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ret = push.pushMessageToSingle(message, target);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RequestException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            ret = push.pushMessageToSingle(message, target, e.getRequestId());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (ret != <span class="keyword">null</span>) &#123;</span><br><span class="line">            System.out.println(ret.getResponse().toString());</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;服务器响应异常&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 打开应用的首页</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> NotificationTemplate <span class="title">getNotificationTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        NotificationTemplate template = <span class="keyword">new</span> NotificationTemplate();</span><br><span class="line">        <span class="comment">// 设置APPID与APPKEY</span></span><br><span class="line">        template.setAppId(appId);</span><br><span class="line">        template.setAppkey(appKey);</span><br><span class="line">        <span class="comment">//设置展示样式</span></span><br><span class="line">        Style0 style = <span class="keyword">new</span> Style0();</span><br><span class="line">        <span class="comment">// 设置通知栏标题与内容</span></span><br><span class="line">        style.setTitle(<span class="string">&quot;请输入通知栏标题&quot;</span>);</span><br><span class="line">        style.setText(<span class="string">&quot;请输入通知栏内容&quot;</span>);</span><br><span class="line">        <span class="comment">// 配置通知栏图标</span></span><br><span class="line">        style.setLogo(<span class="string">&quot;icon.png&quot;</span>); <span class="comment">//配置通知栏图标，需要在客户端开发时嵌入，默认为push.png</span></span><br><span class="line">        <span class="comment">// 配置通知栏网络图标</span></span><br><span class="line">        style.setLogoUrl(<span class="string">&quot;&quot;</span>);</span><br><span class="line">        <span class="comment">// 配置自定义铃声(文件名，不需要后缀名)，需要在客户端开发时嵌入后缀名为.ogg的铃声文件</span></span><br><span class="line">        style.setRingName(<span class="string">&quot;sound&quot;</span>);</span><br><span class="line">        <span class="comment">// 角标, 必须大于0, 个推通道下发有效; 此属性目前仅针对华为 EMUI 4.1 及以上设备有效</span></span><br><span class="line">        style.setBadgeAddNum(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置通知是否响铃，震动，或者可清除</span></span><br><span class="line">        style.setRing(<span class="keyword">true</span>);</span><br><span class="line">        style.setVibrate(<span class="keyword">true</span>);</span><br><span class="line">        style.setClearable(<span class="keyword">true</span>);</span><br><span class="line">        style.setChannel(<span class="string">&quot;通知渠道id&quot;</span>);</span><br><span class="line">        style.setChannelName(<span class="string">&quot;通知渠道名称&quot;</span>);</span><br><span class="line">        style.setChannelLevel(<span class="number">4</span>); <span class="comment">//设置通知渠道重要性</span></span><br><span class="line">        template.setStyle(style);</span><br><span class="line">        template.setTransmissionType(<span class="number">2</span>);  <span class="comment">// 透传消息设置，收到消息是否立即启动应用： 1为立即启动，2则广播等待客户端自启动</span></span><br><span class="line">        template.setTransmissionContent(<span class="string">&quot;请输入您要透传的内容&quot;</span>);</span><br><span class="line">		<span class="comment">// template.setSmsInfo(PushSmsInfo.getSmsInfo()); //短信补量推送</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">// template.setDuration(&quot;2019-07-09 11:40:00&quot;, &quot;2019-07-09 12:24:00&quot;);  // 设置定时展示时间，安卓机型可用</span></span><br><span class="line">        template.setNotifyid(<span class="number">123</span>); <span class="comment">// 在消息推送的时候设置notifyid。如果需要覆盖此条消息，则下次使用相同的notifyid发一条新的消息。客户端sdk会根据notifyid进行覆盖。</span></span><br><span class="line">        template.setAPNInfo(getAPNPayload()); <span class="comment">//ios消息推送</span></span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//ios样式模板</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> APNPayload <span class="title">getAPNPayload</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        APNPayload payload = <span class="keyword">new</span> APNPayload();</span><br><span class="line">        <span class="comment">//在已有数字基础上加1显示，设置为-1时，在已有数字上减1显示，设置为数字时，显示指定数字</span></span><br><span class="line">        payload.setAutoBadge(<span class="string">&quot;+1&quot;</span>);</span><br><span class="line">        payload.setContentAvailable(<span class="number">0</span>);</span><br><span class="line">        <span class="comment">//ios 12.0 以上可以使用 Dictionary 类型的 sound</span></span><br><span class="line">        payload.setSound(<span class="string">&quot;default&quot;</span>);</span><br><span class="line">        payload.setCategory(<span class="string">&quot;$由客户端定义&quot;</span>);</span><br><span class="line">        payload.addCustomMsg(<span class="string">&quot;由客户自定义消息key&quot;</span>, <span class="string">&quot;由客户自定义消息value&quot;</span>);</span><br><span class="line">        <span class="comment">//简单模式APNPayload.SimpleMsg</span></span><br><span class="line">		<span class="comment">// payload.setAlertMsg(new APNPayload.SimpleAlertMsg(&quot;给你发消息了&quot;));</span></span><br><span class="line">        payload.setAlertMsg(getDictionaryAlertMsg());  <span class="comment">//字典模式使用APNPayload.DictionaryAlertMsg</span></span><br><span class="line">        <span class="keyword">return</span> payload;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//ios消息体</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> APNPayload.<span class="function">DictionaryAlertMsg <span class="title">getDictionaryAlertMsg</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        APNPayload.DictionaryAlertMsg alertMsg = <span class="keyword">new</span> 					 APNPayload.DictionaryAlertMsg();</span><br><span class="line">        alertMsg.setBody(<span class="string">&quot;小何给你发消息了&quot;</span>);<span class="comment">//ios消息内容</span></span><br><span class="line">        alertMsg.setActionLocKey(<span class="string">&quot;显示关闭和查看两个按钮的消息&quot;</span>);</span><br><span class="line">        alertMsg.setLocKey(<span class="string">&quot;loc-key1&quot;</span>);</span><br><span class="line">        alertMsg.addLocArg(<span class="string">&quot;loc-ary1&quot;</span>);</span><br><span class="line"><span class="comment">//        alertMsg.setLaunchImage(&quot;调用已经在应用程序中绑定的图形文件名&quot;);</span></span><br><span class="line">        <span class="comment">// iOS8.2以上版本支持</span></span><br><span class="line">        alertMsg.setTitle(<span class="string">&quot;通知标题&quot;</span>);<span class="comment">//ios消息标题</span></span><br><span class="line"><span class="comment">//        alertMsg.setTitleLocKey(&quot;自定义通知标题&quot;);</span></span><br><span class="line"><span class="comment">//        alertMsg.addTitleLocArg(&quot;自定义通知标题组&quot;);</span></span><br><span class="line">        <span class="keyword">return</span> alertMsg;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、前端处理"><a href="#五、前端处理" class="headerlink" title="五、前端处理"></a>五、前端处理</h2><p> 代码需要放在app.vue中的<code>onLaunch</code>里面</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">onLaunch: function() &#123;</span><br><span class="line">	console.log(&#39;App Launch&#39;)</span><br><span class="line">	&#x2F;&#x2F;#ifdef APP-PLUS</span><br><span class="line">	let timer &#x3D; false;</span><br><span class="line">	plus.push.addEventListener(&quot;click&quot;,(msg)&#x3D;&gt;&#123;</span><br><span class="line">		clearTimeout(timer);</span><br><span class="line">		timer &#x3D; setTimeout(()&#x3D;&gt;&#123;</span><br><span class="line">			console.log(1111,msg);</span><br><span class="line">			if(msg.payload)&#123;</span><br><span class="line">				uni.navigateTo(&#123;</span><br><span class="line">					url:msg.payload</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,1500)</span><br><span class="line">	&#125;,false)</span><br><span class="line">	plus.push.addEventListener(&quot;receive&quot;,(msg)&#x3D;&gt;&#123;</span><br><span class="line">		if(&quot;LocalMSG&quot; &#x3D;&#x3D; msg.payload)&#123;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			if(msg.type&#x3D;&#x3D;&#39;receive&#39;)&#123;</span><br><span class="line">				var options &#x3D; &#123;cover:false,title:msg.title&#125;;</span><br><span class="line">				plus.push.createMessage(msg.content, msg.payload, options ); </span><br><span class="line">		 	&#125;  </span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,false)</span><br><span class="line">	&#x2F;&#x2F;#endif</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注：华为配置产商渠道可能有延迟，配置完成可能等等再测试</p>
+<p>消息推送模板：<a target="_blank" rel="noopener" href="https://docs.getui.com/getui/server/java/template/?id=doc-title-8">https://docs.getui.com/getui/server/java/template/?id=doc-title-8</a></p>
+<p>消息推送demo的git：<a target="_blank" rel="noopener" href="https://github.com/GetuiLaboratory/getui-pushapi-java-demo/tree/master/src/main/java/com/getui/platform/demo">https://github.com/GetuiLaboratory/getui-pushapi-java-demo/tree/master/src/main/java/com/getui/platform/demo</a></p>
+<p>unipush参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42678675/article/details/115470016">https://blog.csdn.net/weixin_42678675/article/details/115470016</a></p>
+<p>​                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/object_oriented/article/details/106695077">https://blog.csdn.net/object_oriented/article/details/106695077</a></p>
+<p>​                            <a target="_blank" rel="noopener" href="https://blog.csdn.net/z668899/article/details/109805595">https://blog.csdn.net/z668899/article/details/109805595</a></p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Mr.sun
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/Diamond.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">unipush的消息推送</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/28/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">vue生命周期</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/15/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E9%97%AD%E5%8C%85%E9%80%92%E5%BD%92/">回调函数闭包递归</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/28/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">浅拷贝和深拷贝</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/20/%E5%87%BD%E6%95%B0%E5%86%85this%E6%8C%87%E5%90%91%E4%BB%A5%E5%8F%8A%E6%94%B9%E5%8F%98this%E6%8C%87%E5%90%91/">函数内this指向以及改变this指向</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/04/15/JS%E4%B8%AD%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E6%B3%95/">JS中简单的几种继承方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/%E5%8E%9F%E5%9E%8B/">原型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/20/JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">JS中的类和对象,new关键字</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/01/28/FormData%E5%AF%B9%E8%B1%A1/">FormData对象</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/H5/" style="font-size: 18.425825822366694px;" class="tag-cloud-link">H5</a>
+    
+    <a href="/tags/git/" style="font-size: 14.762808364252558px;" class="tag-cloud-link">git</a>
+    
+    <a href="/tags/javascript/" style="font-size: 14.379447137284824px;" class="tag-cloud-link">javascript</a>
+    
+    <a href="/tags/vue/" style="font-size: 17.519133794906274px;" class="tag-cloud-link">vue</a>
+    
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 14.95703054619459px;" class="tag-cloud-link">正则表达式</a>
+    
+    <a href="/tags/app/" style="font-size: 14.35163809904277px;" class="tag-cloud-link">app</a>
+    
+</div>
+                
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/Diamond-sjh" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://www.cnblogs.com/Diamond-sjh/" target="_blank">博客园</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Mr.sun Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '12'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>

@@ -137,6 +137,10 @@
                             <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
                         </li>
                         
+                        <li>
+                            <a href="/categories/%E8%B8%A9%E5%9D%91%E7%BB%8F%E9%AA%8C/">踩坑经验</a>
+                        </li>
+                        
                         
                         
                     </ul>
@@ -175,6 +179,10 @@
                             <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
                         </li>
                         
+                        
+                        <li>
+                            <a href="/tags">...</a>
+                        </li>
                         
                         
                     </ul>
@@ -253,12 +261,8 @@
     <div class="content-article">
         <h1 id="路由router"><a href="#路由router" class="headerlink" title="路由router"></a>路由router</h1><h2 id="什么是路由"><a href="#什么是路由" class="headerlink" title="什么是路由"></a>什么是路由</h2><p>组件切换是通过变换url地址的锚点信息而显示不同的组件，路由也是如此，也是 浏览器地址信息 与 组件 的映射关系体现，但<strong>路由</strong>是组件切换SPA的<strong>封装版本</strong>，使用起来要更加方便、高效</p>
 <p><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/">官网参考</a></p>
-
-
-
-
-
-
+<p><img src="/2018/12/15/Vue-Router/01.png" alt="01"></p>
+<p><img src="/2018/12/15/Vue-Router/02.png" alt="02"></p>
 <p>上图</p>
 <ul>
 <li>浏览器锚点发生变化，会被onhashchange感知</li>
@@ -267,8 +271,8 @@
 <li>标签名称赋予给component标签的is属性</li>
 <li>组件就呈现</li>
 </ul>
-<p>以上锚点找到对应组件的过程就是<font color=red>路由</font></p>
-<p>路由对 component标签、onhashchange、window.location.hash、<a href="#/锚点">等原始内容做了<font color=red>封装</font>，是更高级组件切换的体现</p>
+<p>以上锚点找到对应组件的过程就是<font color="red">路由</font></p>
+<p>路由对 component标签、onhashchange、window.location.hash、<a href="#/锚点">等原始内容做了<font color="red">封装</font>，是更高级组件切换的体现</a></p>
 <h2 id="在-vue-中使用-vue-router"><a href="#在-vue-中使用-vue-router" class="headerlink" title="在 vue 中使用 vue-router"></a>在 vue 中使用 vue-router</h2><h3 id="安装路由"><a href="#安装路由" class="headerlink" title="安装路由"></a>安装路由</h3><p><code>vue-router路由</code>是一个js功能模块，在使用的时候需要先安装</p>
 <p>运行指令</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add vue-router</span><br></pre></td></tr></table></figure>
@@ -308,6 +312,7 @@
 <p>to 属性中，不需要以 # 开头</p>
 </blockquote>
 <p>router-link编译后会变成具体的html标签效果：</p>
+<p><img src="/2018/12/15/Vue-Router/03.png" alt="03"></p>
 </li>
 <li><p>设置容器(App.vue)</p>
 <p>在App.vue根组件中通过<strong>router-view</strong>标签设置显示组件的容器</p>
@@ -325,7 +330,7 @@
 <li>在onhashchange事件里边感知变化后的hash锚点信息(window.location.hash)，然后与对应的组件进行联系</li>
 <li>组件被显示，具体是通过路由占位符rouer-view进行显示</li>
 </ul>
-<h2 id="redirect重定向"><a href="#redirect重定向" class="headerlink" title="redirect重定向"></a>redirect重定向</h2><p>用户第一次访问网站页面(“/根目录”首页)时，地址栏里边没有“hash锚点”的信息，<br>也就没有对应的组件用于显示，明显项目体验不好，现在可以通过<font color=red>redirect</font>实现重定向效果<br>即 设定“/根目录”与一个<strong>具体路由</strong>联系起来，这样即使浏览器地址栏没有任何锚点信息，也有<strong>默认</strong>的组件进行显示</p>
+<h2 id="redirect重定向"><a href="#redirect重定向" class="headerlink" title="redirect重定向"></a>redirect重定向</h2><p>用户第一次访问网站页面(“/根目录”首页)时，地址栏里边没有“hash锚点”的信息，<br>也就没有对应的组件用于显示，明显项目体验不好，现在可以通过<font color="red">redirect</font>实现重定向效果<br>即 设定“/根目录”与一个<strong>具体路由</strong>联系起来，这样即使浏览器地址栏没有任何锚点信息，也有<strong>默认</strong>的组件进行显示</p>
 <p>使用示例：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes:[</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">&#x27;/&#x27;</span>, <span class="attr">redirect</span>: <span class="string">&#x27;/mv&#x27;</span>&#125;,</span><br><span class="line">    &#123;<span class="attr">path</span>:<span class="string">&#x27;/mv&#x27;</span>, <span class="attr">component</span>: Movie&#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -333,10 +338,7 @@
 <p>当访问”/根目录”时，就重定向到”/mv锚点”，进而显示Movie组件</p>
 </blockquote>
 <h2 id="路由按钮高亮"><a href="#路由按钮高亮" class="headerlink" title="路由按钮高亮"></a>路由按钮高亮</h2><p><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/api/#router-link">官网参考</a></p>
-
-
-
-
+<p><img src="/2018/12/15/Vue-Router/04.png" alt="04"></p>
 <p>在App.vue主页面中(router-link超链标签使用页面)通过<code>router-link-active</code>选择器设置如下样式：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;less&quot;</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.router-link-active</span> &#123;<span class="attribute">background-color</span>: lightgreen;&#125;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -344,10 +346,7 @@
 <p>当前超链按钮被单击选中会有<font style="background-color:lightgreen">浅绿</font>背景颜色高亮显示</p>
 </blockquote>
 <p>被点击激活的按钮，本身有class属性值，直接进行css样式设定即可：</p>
-
-
-
-
+<p><img src="/2018/12/15/Vue-Router/05.png" alt="05"></p>
 <h2 id="嵌套路由（子路由）"><a href="#嵌套路由（子路由）" class="headerlink" title="嵌套路由（子路由）"></a>嵌套路由（子路由）</h2><p>路由的应用是在<code>App.vue根组件</code>中通过单击超链按钮切换显示不同<code>子组件</code>，具体表现就是父、子组件嵌套关系</p>
 <p>有的应用比较复杂，子组件内部还有子组件，形成了   1级App.vue组件–&gt;2级业务组件–&gt;3级业务组件  的效果，现在学习如何在  2级组件  中切换显示  3级组件</p>
 <p>使用步骤：</p>
@@ -360,11 +359,11 @@
 <p>router-view：第3级组件显示的容器</p>
 </blockquote>
 </li>
-<li><p>在对应的路由规则中，通过 <font color=red>children 属性</font>，定义子路由规则：</p>
+<li><p>在对应的路由规则中，通过 <font color="red">children 属性</font>，定义子路由规则：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>, <span class="attr">redirect</span>: <span class="string">&#x27;/user&#x27;</span> &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">&#x27;/home&#x27;</span>, <span class="attr">component</span>: Home &#125;,</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">&#x27;/user&#x27;</span>, <span class="attr">component</span>: User &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&#x27;/movie&#x27;</span>,</span><br><span class="line">      component: Movie,</span><br><span class="line">      children: [</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">&#x27;/movie/hongkong&#x27;</span>, <span class="attr">component</span>: Hongkong &#125;,</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">&#x27;/movie/taiwan&#x27;</span>, <span class="attr">component</span>: Taiwan &#125;,</span><br><span class="line">        &#123; <span class="attr">path</span>: <span class="string">&#x27;/movie/dalu&#x27;</span>, <span class="attr">component</span>: Dalu &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>重定向</p>
-<p>如果需要<font color=red>redirect</font>重定向效果可以像如下<strong>两种</strong>方式设置，<strong>任选一个</strong>即可：</p>
+<p>如果需要<font color="red">redirect</font>重定向效果可以像如下<strong>两种</strong>方式设置，<strong>任选一个</strong>即可：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line"> routes: [</span><br><span class="line">   &#123; <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>, <span class="attr">redirect</span>: <span class="string">&#x27;/user&#x27;</span> &#125;,</span><br><span class="line">   &#123; <span class="attr">path</span>: <span class="string">&#x27;/home&#x27;</span>, <span class="attr">component</span>: Home &#125;,</span><br><span class="line">   &#123; <span class="attr">path</span>: <span class="string">&#x27;/user&#x27;</span>, <span class="attr">component</span>: User &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">     path: <span class="string">&#x27;/movie&#x27;</span>,</span><br><span class="line">     component: Movie,</span><br><span class="line">     redirect: <span class="string">&#x27;/movie/hongkong&#x27;</span>, 				<span class="comment">// 1) 方式重定向</span></span><br><span class="line">     children: [</span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">redirect</span>:<span class="string">&#x27;/movie/hongkong&#x27;</span> &#125;,	<span class="comment">// 2) 方式重定向</span></span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">&#x27;/movie/hongkong&#x27;</span>, <span class="attr">component</span>: Hongkong &#125;,</span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">&#x27;/movie/taiwan&#x27;</span>, <span class="attr">component</span>: Taiwan &#125;,</span><br><span class="line">       &#123; <span class="attr">path</span>: <span class="string">&#x27;/movie/dalu&#x27;</span>, <span class="attr">component</span>: Dalu &#125;</span><br><span class="line">     ]</span><br><span class="line">   &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -410,7 +409,7 @@
 </ol>
 <h2 id="编程式导航"><a href="#编程式导航" class="headerlink" title="编程式导航"></a>编程式导航</h2><p>导航：一个路由切换到另外一个路由去(/mv     /dt/102)</p>
 <h3 id="什么是"><a href="#什么是" class="headerlink" title="什么是"></a>什么是</h3><p>router-link是通过静态超链接按钮的方式把各个用于显示的组件给声明好，单击哪个按钮就显示哪个组件，其被称为<font color="red">声明式导航</font></p>
-<p>有时并不能通过单击<strong>超链按钮</strong>来显示一个组件，例如判断用户是登录状态就显示业务组件页面，否则显示登录组件页面，这时需要通过<code>程序代码</code>实现组件的判断显示，通过编写程序代码的方式实现组件显示就称为<font color=red>编程式导航</font></p>
+<p>有时并不能通过单击<strong>超链按钮</strong>来显示一个组件，例如判断用户是登录状态就显示业务组件页面，否则显示登录组件页面，这时需要通过<code>程序代码</code>实现组件的判断显示，通过编写程序代码的方式实现组件显示就称为<font color="red">编程式导航</font></p>
 <h3 id="使用语法"><a href="#使用语法" class="headerlink" title="使用语法"></a>使用语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.$router.push(路由地址)   <span class="comment">// 根据路由信息显示组件,可以是router-link标签的to属性值</span></span><br><span class="line"><span class="built_in">this</span>.$router.go(n)			<span class="comment">// n可以是 负数、0、正数，表示页面要 回退、刷新、前进 </span></span><br><span class="line"><span class="built_in">this</span>.$router.forward()		<span class="comment">// 前进</span></span><br><span class="line"><span class="built_in">this</span>.$router.back()			<span class="comment">// 后退</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -420,12 +419,9 @@
 <p>window.history.forward()</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/guide/essentials/navigation.html">官网参考</a></p>
-
-
-
-
+<p><img src="/2018/12/15/Vue-Router/06.png" alt="06"></p>
 <h2 id="路由守卫"><a href="#路由守卫" class="headerlink" title="路由守卫"></a>路由守卫</h2><p>路由对象有一个名称为<strong>beforeEach</strong>的方法，每个路由在加载组件之前都要调用它，在这个方法中可以做逻辑判断，限制要做什么或不做什么，这个过程称为<code>路由守卫</code>，有着一夫当关万夫莫开的效果</p>
-<p>​    </p>
+<p><img src="/2018/12/15/Vue-Router/07.png" alt="07"></p>
 <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123; <span class="comment">/* 导航守卫 处理逻辑 */</span> &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <blockquote>
@@ -505,6 +501,12 @@
             
             <li class="list-group-item">
                 <span class="post-title">
+                    <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">unipush的消息推送</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
                     <a href="/2018/12/15/Vue-Router/">Vue Router</a>
                 </span>
             </li>
@@ -557,12 +559,6 @@
                 </span>
             </li>
             
-            <li class="list-group-item">
-                <span class="post-title">
-                    <a href="/2016/12/28/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
-                </span>
-            </li>
-            
         </ul>
     </div>
 </aside>
@@ -589,15 +585,17 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 11.187068997649071px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 8.849946985728518px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/git/" style="font-size: 8.976738787101697px;" class="tag-cloud-link">git</a>
+    <a href="/tags/git/" style="font-size: 14.784525423022394px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/javascript/" style="font-size: 8.541047137021298px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/javascript/" style="font-size: 18.533321452289126px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/vue/" style="font-size: 18.85279985248762px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/vue/" style="font-size: 15.336503873805256px;" class="tag-cloud-link">vue</a>
     
-    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 19.979197611145082px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 19.575206101556105px;" class="tag-cloud-link">正则表达式</a>
+    
+    <a href="/tags/app/" style="font-size: 18.81450159536412px;" class="tag-cloud-link">app</a>
     
 </div>
                 
