@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Mr.sun">
+    
+    
+    
+    
+    
+    
+    <title>unipush的蓝牙模块 | Diamond</title>
+    <link href="https://diamond-sjh.github.io" rel="prefetch" />
+    <link href="/favicon.ico" rel="icon" type="image/x-ico">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/Diamond.jpg'
+        var previews = 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/b85ccb79-f84d-4a23-af8d-a6563b5a1763.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/97d86e2d-16ce-44cd-b6a8-a026289760f7.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/6bd3d16b-54eb-4015-a80b-a0c9322c8407.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/d747a105-a552-4f95-a032-0c9660036317.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/530195d0-a84d-4176-a6c9-bea786ee65eb.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/77893ba4-83b4-48a0-a350-516ce50389e2.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/6717a878-7ef4-49c1-b0d4-9eb7bf3a6b96.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/3f1fbc6c-3a66-432d-b487-257ae23bf7a9.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/8846bb34-6028-48e2-b7ff-546bc98e886d.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/90c44d77-22d1-4357-b806-7d1a67c72bcf.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://diamond-sjh.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">Diamond</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/">笔记总结</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/">错误解决</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E8%B8%A9%E5%9D%91%E7%BB%8F%E9%AA%8C/">踩坑经验</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/H5/">H5</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/git/">git</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/javascript/">javascript</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/vue/">vue</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/tags">...</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://diamond-sjh.github.io">Diamond</a>
+        >
+        <span>unipush的蓝牙模块</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2022/04/13/uniapp%E7%9A%84%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97/">unipush的蓝牙模块</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/app/">app</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2022-04-13
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2022/04/13/uniapp%E7%9A%84%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97/">unipush的蓝牙模块</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2022-04-13
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/app/">app</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="unipush的蓝牙模块"><a href="#unipush的蓝牙模块" class="headerlink" title="unipush的蓝牙模块"></a>unipush的蓝牙模块</h1><h2 id="一、蓝牙模块初始化"><a href="#一、蓝牙模块初始化" class="headerlink" title="一、蓝牙模块初始化"></a>一、蓝牙模块初始化</h2><p>这里主要目的就是检测一下手机蓝牙是否打开</p>
+<ul>
+<li><p>方法一</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 蓝牙初始化</span></span><br><span class="line"><span class="function"><span class="title">getBluetoot</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// HTML5+ API打开初始化蓝牙</span></span><br><span class="line">    plus.bluetooth.openBluetoothAdapter(&#123;</span><br><span class="line">		success:<span class="function">(<span class="params">res</span>)=&gt;</span> &#123; <span class="comment">//蓝牙已打开</span></span><br><span class="line">            uni.getBluetoothAdapterState(&#123;<span class="comment">//蓝牙的匹配状态</span></span><br><span class="line">                success:<span class="function">(<span class="params">res1</span>)=&gt;</span>&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(res1,<span class="string">&#x27;本机设备的蓝牙已打开&#x27;</span>)</span><br><span class="line">                    <span class="comment">// 获取已配对蓝牙列表</span></span><br><span class="line">                    <span class="built_in">this</span>.bluetooth_list()</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="function"><span class="title">fail</span>(<span class="params">error</span>)</span> &#123;</span><br><span class="line">                   uni.showToast(&#123;<span class="attr">icon</span>:<span class="string">&#x27;none&#x27;</span>,<span class="attr">title</span>: <span class="string">&#x27;查看手机蓝牙是否打开&#x27;</span>&#125;)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        fail:<span class="function"><span class="params">err</span>=&gt;</span>&#123; <span class="comment">// 蓝牙未打开 </span></span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">&#x27;open failed: &#x27;</span>+<span class="built_in">JSON</span>.stringify(e));</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+<li><p>方法二</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">uni.openBluetoothAdapter(&#123;</span><br><span class="line">	success:<span class="function">(<span class="params">res</span>)=&gt;</span> &#123; <span class="comment">//已打开</span></span><br><span class="line">		uni.getBluetoothAdapterState(&#123;<span class="comment">//蓝牙的匹配状态</span></span><br><span class="line">			success:<span class="function">(<span class="params">res1</span>)=&gt;</span>&#123;</span><br><span class="line">				<span class="built_in">console</span>.log(res1,<span class="string">&#x27;“本机设备的蓝牙已打开”&#x27;</span>)	</span><br><span class="line">				<span class="comment">// 开始搜索蓝牙设备</span></span><br><span class="line">				<span class="built_in">this</span>.startBluetoothDeviceDiscovery()</span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="function"><span class="title">fail</span>(<span class="params">error</span>)</span> &#123;</span><br><span class="line">				uni.showToast(&#123;<span class="attr">icon</span>:<span class="string">&#x27;none&#x27;</span>,<span class="attr">title</span>: <span class="string">&#x27;查看手机蓝牙是否打开&#x27;</span>	</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">	&#125;,</span><br><span class="line">	fail:<span class="function"><span class="params">err</span>=&gt;</span>&#123; <span class="comment">//未打开 </span></span><br><span class="line">		uni.showToast(&#123;<span class="attr">icon</span>:<span class="string">&#x27;none&#x27;</span>,<span class="attr">title</span>: <span class="string">&#x27;查看手机蓝牙是否打开&#x27;</span>&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="二、打开蓝牙"><a href="#二、打开蓝牙" class="headerlink" title="二、打开蓝牙"></a>二、打开蓝牙</h2><p>参考链接地址：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/0b2f01a576fa">https://www.jianshu.com/p/0b2f01a576fa</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">openPhoneBluetooth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">let</span> main, BluetoothAdapter, BAdapter;</span><br><span class="line">		<span class="keyword">switch</span>(uni.getSystemInfoSync().platform)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;android&#x27;</span>:</span><br><span class="line">				main  = plus.android.runtimeMainActivity();</span><br><span class="line">				BluetoothAdapter = plus.android.importClass(<span class="string">&quot;android.bluetooth.BluetoothAdapter&quot;</span>);</span><br><span class="line">				BAdapter = BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">				<span class="keyword">if</span>(!BAdapter.isEnabled()) &#123;  </span><br><span class="line">					BAdapter.enable();  </span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;ios&#x27;</span>:</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;运行在ios上&#x27;</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;运行在开发者工具上&#x27;</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、获取蓝牙列表"><a href="#三、获取蓝牙列表" class="headerlink" title="三、获取蓝牙列表"></a>三、获取蓝牙列表</h2><h5 id="重点就是获取到了-deviceId-这是连接蓝牙的重要ID，存起来后面我们会用到"><a href="#重点就是获取到了-deviceId-这是连接蓝牙的重要ID，存起来后面我们会用到" class="headerlink" title="重点就是获取到了 deviceId 这是连接蓝牙的重要ID，存起来后面我们会用到"></a>重点就是获取到了 <strong>deviceId</strong> 这是连接蓝牙的重要ID，存起来后面我们会用到</h5><h5 id="把获取到的蓝牙列表存起来，方便页面展示，选择蓝牙连接"><a href="#把获取到的蓝牙列表存起来，方便页面展示，选择蓝牙连接" class="headerlink" title="把获取到的蓝牙列表存起来，方便页面展示，选择蓝牙连接"></a>把获取到的蓝牙列表存起来，方便页面展示，选择蓝牙连接</h5><ol>
+<li><p>获取已经配对的蓝牙列表</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取已配对蓝牙列表</span></span><br><span class="line"><span class="function"><span class="title">bluetooth_list</span>(<span class="params"></span>)</span> &#123;  </span><br><span class="line">    <span class="keyword">var</span> main = plus.android.runtimeMainActivity();  </span><br><span class="line">    <span class="keyword">var</span> BluetoothAdapter = plus.android.importClass(<span class="string">&quot;android.bluetooth.BluetoothAdapter&quot;</span>);  </span><br><span class="line">    <span class="keyword">var</span> BAdapter = BluetoothAdapter.getDefaultAdapter();  </span><br><span class="line">    <span class="keyword">var</span> Context = plus.android.importClass(<span class="string">&quot;android.content.Context&quot;</span>);  </span><br><span class="line">    <span class="keyword">var</span> lists = BAdapter.getBondedDevices();  </span><br><span class="line">    plus.android.importClass(lists);  </span><br><span class="line">    <span class="keyword">var</span> len = lists.size();  </span><br><span class="line">    <span class="keyword">var</span> iterator = lists.iterator();  </span><br><span class="line">    plus.android.importClass(iterator);  </span><br><span class="line">    <span class="keyword">let</span> bluetoothList = []</span><br><span class="line">    <span class="keyword">while</span> (iterator.hasNext()) &#123;  </span><br><span class="line">        <span class="keyword">var</span> d = iterator.next();  </span><br><span class="line">        plus.android.importClass(d);</span><br><span class="line">        <span class="comment">// 获取的已配对蓝牙名称和地址 存起来</span></span><br><span class="line">        bluetoothList.push(&#123;<span class="attr">name</span>:d.getName(),<span class="attr">deviceId</span>:d.getAddress(),<span class="attr">connect</span>:<span class="literal">false</span>&#125;)</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+<li><p>获取附近蓝牙设备</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开始搜索蓝牙设备</span></span><br><span class="line"><span class="function"><span class="title">startBluetoothDeviceDiscovery</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	uni.startBluetoothDevicesDiscovery(&#123;</span><br><span class="line">		success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">&#x27;startBluetoothDevicesDiscovery success&#x27;</span>, res)</span><br><span class="line">			<span class="comment">// 发现外围设备</span></span><br><span class="line">            <span class="comment">// 监听搜索到新设备事件</span></span><br><span class="line">			uni.onBluetoothDeviceFound(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// [&quot;name&quot;, &quot;deviceId&quot;]</span></span><br><span class="line">                <span class="comment">// 把搜索到的设备存储起来，方便我们在页面上展示</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="built_in">this</span>.list.indexOf(res.devices[<span class="number">0</span>].deviceId)==-<span class="number">1</span>)&#123;</span><br><span class="line">                    <span class="built_in">this</span>.list.push(res.devices[<span class="number">0</span>].deviceId)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">		&#125;,<span class="attr">fail</span>:<span class="function"><span class="params">err</span>=&gt;</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(err,<span class="string">&#x27;错误信息&#x27;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="四、点击选择自己需要连接的蓝牙设备"><a href="#四、点击选择自己需要连接的蓝牙设备" class="headerlink" title="四、点击选择自己需要连接的蓝牙设备"></a>四、点击选择自己需要连接的蓝牙设备</h2><p><strong>把连接蓝牙的 deviceId 存起来后面我们会用到</strong></p>
+<ul>
+<li><p>方法一（连接已配对的蓝牙设备，不需要停止蓝牙搜索，因为不会一直搜索附近蓝牙）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 点击蓝牙连接(选择设备把deviceId传进来)</span></span><br><span class="line"><span class="function"><span class="title">connetBlue</span>(<span class="params">item</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> that = <span class="built_in">this</span></span><br><span class="line">    <span class="comment">//data里面建立一个deviceId，存储起来</span></span><br><span class="line">    <span class="built_in">this</span>.deviceId = item.deviceId</span><br><span class="line">    uni.createBLEConnection(&#123;</span><br><span class="line">        <span class="comment">// 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span></span><br><span class="line">        deviceId: item.deviceId, <span class="comment">//设备id</span></span><br><span class="line">        success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123; <span class="comment">// 蓝牙连接成功</span></span><br><span class="line">            uni.onBLEConnectionStateChange(<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">                <span class="comment">// 该方法回调中可以用于处理连接意外断开等异常情况</span></span><br><span class="line">                <span class="built_in">console</span>.log(res)</span><br><span class="line">            &#125;)</span><br><span class="line">            <span class="comment">//获取蓝牙设备的所有服务</span></span><br><span class="line">            <span class="comment">//注：这个地方使用了setTimeout等待一秒种再去获取，直接获取我们可能出现获取不到的情况。</span></span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">                that.getBLEDeviceServices(that.deviceId);</span><br><span class="line">            &#125;,<span class="number">1500</span>)</span><br><span class="line">        &#125;,</span><br><span class="line">        fail: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123; <span class="comment">// 蓝牙连接失败</span></span><br><span class="line">            <span class="built_in">console</span>.log(res)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+<li><p>方法二</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//选择设备连接吧deviceId传进来</span></span><br><span class="line"><span class="function"><span class="title">createBLEConnection</span>(<span class="params">deviceId</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">let</span> thit = <span class="built_in">this</span></span><br><span class="line">	<span class="comment">//data里面建立一个deviceId，存储起来</span></span><br><span class="line">	<span class="built_in">this</span>.deviceId = deviceId</span><br><span class="line">	<span class="comment">//连接蓝牙</span></span><br><span class="line">	uni.createBLEConnection(&#123;</span><br><span class="line">	<span class="comment">// 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span></span><br><span class="line">	  deviceId:<span class="built_in">this</span>.deviceId,</span><br><span class="line">	  <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span> &#123;</span><br><span class="line">	  	<span class="comment">// 蓝牙连接成功停止搜索</span></span><br><span class="line">		uni.stopBluetoothDevicesDiscovery(&#123; </span><br><span class="line">			success: <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">this</span>.loading = <span class="literal">false</span></span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;停止搜索蓝牙设备:&#x27;</span> + e.errMsg); </span><br><span class="line">			&#125;,</span><br><span class="line">			fail: <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;停止搜索蓝牙设备失败，错误码：&#x27;</span> + e.errCode);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);	</span><br><span class="line">        <span class="comment">// 获取已连接蓝牙的所有服务</span></span><br><span class="line">        that.getBLEDeviceServices();</span><br><span class="line">	  &#125;,<span class="function"><span class="title">fail</span>(<span class="params">res</span>)</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&quot;蓝牙连接失败&quot;</span>,res)</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="五、获取已连接蓝牙的所有服务"><a href="#五、获取已连接蓝牙的所有服务" class="headerlink" title="五、获取已连接蓝牙的所有服务"></a>五、获取已连接蓝牙的所有服务</h2><p><strong>把服务列表和需要用到的服务uuid（serviceId）存储起来，后面我们会用到</strong></p>
+<p><strong>注：这个地方使用了setTimeout等待一秒种再去获取，直接获取我们可能出现获取不到的情况</strong></p>
+<ul>
+<li><p>方法一(此方法在调用的时候做了延迟，故不需要再次加定时器)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取服务列表</span></span><br><span class="line"><span class="function"><span class="title">getBLEDeviceServices</span>(<span class="params">deviceId</span>)</span> &#123;</span><br><span class="line">	uni.getBLEDeviceServices(&#123;</span><br><span class="line">		<span class="comment">// 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span></span><br><span class="line">		deviceId: deviceId,</span><br><span class="line">		success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">			<span class="keyword">if</span>(res.services &amp;&amp; res.services.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">				<span class="built_in">this</span>.serverList = res.services  <span class="comment">// 所有的服务</span></span><br><span class="line">				<span class="built_in">this</span>.serviceId = res.services[<span class="number">3</span>].uuid  <span class="comment">// 存储所需求的服务对应的uuid</span></span><br><span class="line">				<span class="built_in">this</span>.getBLEDeviceCharacteristics() <span class="comment">//获取特征值</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;,</span><br><span class="line">		fail: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(res)</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+<li><p>方法二</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取蓝牙的所有服务</span></span><br><span class="line"><span class="function"><span class="title">getBLEDeviceServices</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 使用了setTimeout等待一秒种再去获取，直接获取我们可能出现获取不到的情况**</span></span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		uni.getBLEDeviceServices(&#123;</span><br><span class="line">		  	<span class="comment">// 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span></span><br><span class="line">		  	deviceId:<span class="built_in">this</span>.deviceId,</span><br><span class="line">            success:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">				<span class="comment">//这里会获取到好多个services  uuid  我们只存储我们需要用到的就行，这个uuid一般硬件厂家会给我们提供</span></span><br><span class="line">				<span class="keyword">if</span>(res.services &amp;&amp; res.services.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                    <span class="built_in">this</span>.serverList = res.services  <span class="comment">// 所有的服务</span></span><br><span class="line">                    <span class="built_in">this</span>.serviceId = res.services[<span class="number">3</span>].uuid  <span class="comment">// 存储所需求的服务对应的uuid</span></span><br><span class="line">                    <span class="built_in">this</span>.getBLEDeviceCharacteristics() <span class="comment">//获取特征值</span></span><br><span class="line">                &#125;</span><br><span class="line">		 	 &#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="六、获取蓝牙特征值"><a href="#六、获取蓝牙特征值" class="headerlink" title="六、获取蓝牙特征值"></a>六、获取蓝牙特征值</h2><p><strong>这里需要穿2个参数了，就是上面的两个id，分别是deviceId、services</strong><br><strong>这里获取的特征值的uuid才是我们真正需要操作的uuid</strong></p>
+<ul>
+<li><p>方法一</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取特征值</span></span><br><span class="line">			<span class="function"><span class="title">getBLEDeviceCharacteristics</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">				uni.getBLEDeviceCharacteristics(&#123;</span><br><span class="line">					<span class="comment">// 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span></span><br><span class="line">					deviceId: <span class="built_in">this</span>.deviceId,</span><br><span class="line">					<span class="comment">// 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取</span></span><br><span class="line">					serviceId: <span class="built_in">this</span>.serviceId,</span><br><span class="line">					success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">						<span class="built_in">console</span>.log(res)</span><br><span class="line">						<span class="keyword">if</span>(res.characteristics &amp;&amp; res.characteristics.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">							<span class="built_in">this</span>.characteristics = res.characteristics <span class="comment">//服务serviceId对应的所有特征值</span></span><br><span class="line">							<span class="built_in">this</span>.notifyUUid = res.characteristics[<span class="number">2</span>].uuid <span class="comment">//需要用到读取数据 特征值uuid（根据自己需求）</span></span><br><span class="line">							<span class="built_in">this</span>.writeUUid = res.characteristics[<span class="number">3</span>].uuid <span class="comment">//需要用到写入数据 特征值uuid（根据自己需求）</span></span><br><span class="line">                            <span class="built_in">this</span>.notifyBLECharacteristicValueChange()<span class="comment">// 启用蓝牙特征值变化时的 notify 功能</span></span><br><span class="line">						&#125;	</span><br><span class="line">					&#125;,</span><br><span class="line">					fail: <span class="function"><span class="keyword">function</span>(<span class="params">res</span>) </span>&#123;</span><br><span class="line">						<span class="built_in">console</span>.log(res)</span><br><span class="line">					&#125;,</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;,</span><br></pre></td></tr></table></figure></li>
+<li><p>方法二</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取蓝牙特征</span></span><br><span class="line"><span class="function"><span class="title">getBLEDeviceCharacteristics</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&quot;进入特征&quot;</span>);</span><br><span class="line">	<span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">		uni.getBLEDeviceCharacteristics(&#123;</span><br><span class="line">		  <span class="comment">// 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span></span><br><span class="line">		  deviceId:<span class="built_in">this</span>.deviceId,</span><br><span class="line">		  <span class="comment">// 这里的 serviceId 需要在 getBLEDeviceServices 接口中获取</span></span><br><span class="line">		  serviceId:<span class="built_in">this</span>.serviceId,</span><br><span class="line">		  success:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(res.characteristics &amp;&amp; res.characteristics.length &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="built_in">this</span>.characteristics = res.characteristics <span class="comment">//服务serviceId对应的所有特征值</span></span><br><span class="line">                <span class="built_in">this</span>.notifyUUid = res.characteristics[<span class="number">2</span>].uuid <span class="comment">//需要用到读取数据 特征值uuid（根据自己需求）</span></span><br><span class="line">                <span class="built_in">this</span>.writeUUid = res.characteristics[<span class="number">3</span>].uuid <span class="comment">//需要用到写入数据 特征值uuid（根据自己需求）</span></span><br><span class="line">                <span class="built_in">this</span>.notifyBLECharacteristicValueChange() <span class="comment">// 启用蓝牙特征值变化时的 notify 功能</span></span><br><span class="line">            &#125;</span><br><span class="line">			</span><br><span class="line">		  &#125;,</span><br><span class="line">		  fail:<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(res)</span><br><span class="line">		  &#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="七、启用蓝牙设备特征值变化时的-notify-功能"><a href="#七、启用蓝牙设备特征值变化时的-notify-功能" class="headerlink" title="七、启用蓝牙设备特征值变化时的 notify 功能"></a>七、启用蓝牙设备特征值变化时的 notify 功能</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">notifyBLECharacteristicValueChange</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		uni.notifyBLECharacteristicValueChange(&#123;</span><br><span class="line">			deviceId:<span class="built_in">this</span>.deviceId,<span class="comment">//设备uuid</span></span><br><span class="line">			serviceId:<span class="built_in">this</span>.serviceId,<span class="comment">//服务对应的uuid</span></span><br><span class="line">			characteristicId:<span class="built_in">this</span>.notifyUUid,<span class="comment">//监听的特征值uuid</span></span><br><span class="line">			state:<span class="literal">true</span>,</span><br><span class="line">			success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&quot;广播开启成功----&quot;</span> + bluetoothInfo.notifyUUid)</span><br><span class="line">                <span class="comment">//监听特征值的变化</span></span><br><span class="line">				<span class="built_in">this</span>.onBLECharacteristicValueChange();</span><br><span class="line">			&#125;,</span><br><span class="line">			fail: <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.error(err)</span><br><span class="line">				uni.showToast(&#123;</span><br><span class="line">				    title: <span class="string">&#x27;蓝牙连接异常&#x27;</span>,</span><br><span class="line">					icon: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">				    duration: <span class="number">2000</span></span><br><span class="line">				&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="八、监听蓝牙设备的特征值变化"><a href="#八、监听蓝牙设备的特征值变化" class="headerlink" title="八、监听蓝牙设备的特征值变化"></a>八、监听蓝牙设备的特征值变化</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监听低功耗蓝牙设备的特征值变化（callback是返回触发的方法，根据需求）</span></span><br><span class="line">	<span class="function"><span class="title">onBLECharacteristicValueChange</span>(<span class="params">callback</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> macValue = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">		uni.onBLECharacteristicValueChange(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">			macValue = macValue + <span class="built_in">this</span>.ab2str(res.value);<span class="comment">//处理得到的返回值</span></span><br><span class="line">            <span class="comment">//防抖处理，防止同一个数据多次返回（可不要）</span></span><br><span class="line">			<span class="keyword">if</span>(timer)&#123;</span><br><span class="line">				<span class="built_in">clearTimeout</span>(timer) </span><br><span class="line">				timer = <span class="literal">null</span></span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">					callback(macValue)</span><br><span class="line">					<span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">					timer = <span class="literal">null</span></span><br><span class="line">				&#125;,<span class="number">1000</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="九、写入数据"><a href="#九、写入数据" class="headerlink" title="九、写入数据"></a>九、写入数据</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">write</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="built_in">clearTimeout</span>(timer1)</span><br><span class="line">		timer1 = <span class="literal">null</span></span><br><span class="line">    	<span class="comment">// str2ab 处理字符串为设备可接受的ArrayBuffer对象</span></span><br><span class="line">		<span class="keyword">let</span> buffer = <span class="built_in">this</span>.str2ab(<span class="string">&#x27;Ed&#x27;</span>)</span><br><span class="line">		plus.bluetooth.writeBLECharacteristicValue(&#123;</span><br><span class="line">			deviceId: <span class="built_in">this</span>.deviceId,</span><br><span class="line">			serviceId: <span class="built_in">this</span>.serviceId,</span><br><span class="line">			characteristicId: <span class="built_in">this</span>.writeUUid, </span><br><span class="line">			writeType: <span class="string">&#x27;writeNoResponse&#x27;</span>,</span><br><span class="line">			value: buffer,</span><br><span class="line">			success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="comment">//此时设备已接收到你写入的数据</span></span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&quot;写入成功---&quot;</span> + bluetoothInfo.writeUUid)</span><br><span class="line">				macValue = <span class="string">&#x27;&#x27;</span></span><br><span class="line">			&#125;,</span><br><span class="line">			fail: <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.log(err)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="十、方法函数"><a href="#十、方法函数" class="headerlink" title="十、方法函数"></a>十、方法函数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//arraybuffer 转字符串 参数为ArrayBuffer对象</span></span><br><span class="line">	ab2str(str) &#123;</span><br><span class="line">		<span class="comment">// ArrayBuffer转16进度字符串示例</span></span><br><span class="line">		<span class="function">function <span class="title">ab2hex</span><span class="params">(buffer)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">const</span> hexArr = Array.prototype.map.call(</span><br><span class="line">				<span class="keyword">new</span> Uint8Array(buffer),</span><br><span class="line">				function(bit) &#123;</span><br><span class="line">					<span class="keyword">return</span> (<span class="string">&#x27;00&#x27;</span> + bit.toString(<span class="number">16</span>)).slice(-<span class="number">2</span>)</span><br><span class="line">				&#125;</span><br><span class="line">			)</span><br><span class="line">			<span class="keyword">return</span> hexArr.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//16进制</span></span><br><span class="line">		let systemStr = ab2hex(str)</span><br><span class="line">		<span class="function">function <span class="title">hexCharCodeToStr</span><span class="params">(hexCharCodeStr)</span> </span>&#123;</span><br><span class="line">			<span class="keyword">var</span> trimedStr = hexCharCodeStr.trim();</span><br><span class="line">			<span class="keyword">var</span> rawStr = trimedStr.substr(<span class="number">0</span>, <span class="number">2</span>).toLowerCase() === <span class="string">&quot;0x&quot;</span> ? trimedStr.substr(<span class="number">2</span>) : trimedStr;</span><br><span class="line">			<span class="keyword">var</span> len = rawStr.length;</span><br><span class="line">			<span class="keyword">if</span> (len % <span class="number">2</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">				alert(<span class="string">&quot;Illegal Format ASCII Code!&quot;</span>);</span><br><span class="line">				<span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">var</span> curCharCode;</span><br><span class="line">			<span class="keyword">var</span> resultStr = [];</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i = i + <span class="number">2</span>) &#123;</span><br><span class="line">				curCharCode = parseInt(rawStr.substr(i, <span class="number">2</span>), <span class="number">16</span>); <span class="comment">// ASCII Code Value</span></span><br><span class="line">				let str5 = String.fromCharCode(curCharCode)</span><br><span class="line">				<span class="keyword">if</span> (str5.startsWith(<span class="string">&#x27;\n&#x27;</span>) == <span class="keyword">false</span>) &#123;</span><br><span class="line">					resultStr.push(String.fromCharCode(curCharCode));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> resultStr.join(<span class="string">&quot;&quot;</span>);</span><br><span class="line">	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> hexCharCodeToStr(systemStr)</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 字符串转为ArrayBuffer对象，参数为字符串</span></span><br><span class="line">	str2ab(str) &#123;</span><br><span class="line">		<span class="comment">// 创建一个固定长度的二进制缓冲区  二进制ArrayBuffer对象</span></span><br><span class="line">	    let buffer = <span class="keyword">new</span> ArrayBuffer(str.length*<span class="number">2</span>); <span class="comment">// 在Unicode编码方案中，一个英文字符或一个汉字字符都占用两个字节的空间</span></span><br><span class="line">		<span class="comment">// 操作二进制ArrayBuffer对象</span></span><br><span class="line">		let dataView = <span class="keyword">new</span> DataView(buffer)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>, strLen = str.length; i&lt;strLen; i++) &#123;</span><br><span class="line">			<span class="comment">// 设置占8-bit的字节数组  一个字节  16进制数据</span></span><br><span class="line">			dataView.setUint8(i, parseInt((str.charCodeAt(i)).toString(<span class="number">16</span>),<span class="number">16</span>) )</span><br><span class="line">			<span class="comment">// dataView.setUint8(i, &#x27;0X&#x27; + value.substring(i * 2, i * 2 + 2)); 错误写法  ：需要16进制数字类型 不能字符串</span></span><br><span class="line">		&#125;</span><br><span class="line">	    <span class="keyword">return</span> buffer;</span><br><span class="line">	&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="十一、完整代码"><a href="#十一、完整代码" class="headerlink" title="十一、完整代码"></a>十一、完整代码</h2><p>vue页面代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">	&lt;view class&#x3D;&quot;wrap&quot;&gt;</span><br><span class="line">		&lt;u-cell-group&gt;</span><br><span class="line">			&lt;u-cell-item </span><br><span class="line">			v-for&#x3D;&quot;(item,index) in bluetoothList&quot; </span><br><span class="line">			:key&#x3D;&quot;index&quot;</span><br><span class="line">			:arrow&#x3D;&quot;false&quot;</span><br><span class="line">			:title&#x3D;&quot;item.name&quot;&gt;</span><br><span class="line">				&lt;u-button slot&#x3D;&quot;right-icon&quot; type&#x3D;&quot;warning&quot; @click&#x3D;&quot;connetBlue(item)&quot;&gt;&#123;&#123;item.connect?&#39;断开连接&#39;:&#39;连接&#39;&#125;&#125;&lt;&#x2F;u-button&gt;</span><br><span class="line">			&lt;&#x2F;u-cell-item&gt;</span><br><span class="line">		&lt;&#x2F;u-cell-group&gt;</span><br><span class="line">        &lt;u-button type&#x3D;&quot;success&quot; @click&#x3D;&quot;autoMeasure&quot;&gt;自动测量&lt;&#x2F;u-button&gt;</span><br><span class="line">		&lt;!-- 消息提示 --&gt;</span><br><span class="line">		&lt;u-toast ref&#x3D;&quot;uToast&quot; &#x2F;&gt;</span><br><span class="line">	&lt;&#x2F;view&gt;</span><br><span class="line">&lt;&#x2F;template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	import &#123; mapActions,mapGetters &#125; from &#39;vuex&#39;</span><br><span class="line">    import utils from &#39;.&#x2F;common&#x2F;utils.js&#39;</span><br><span class="line">	var that</span><br><span class="line">	export default&#123;</span><br><span class="line">		data() &#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				connectBluetooth:&#123;&#125;,</span><br><span class="line">				bluetoothList: [], &#x2F;&#x2F; 蓝牙设备列表</span><br><span class="line">				deviceId: &quot;&quot;, &#x2F;&#x2F; 要连接蓝牙设备id</span><br><span class="line">				bluetoothName:&#39;&#39;,&#x2F;&#x2F; 要连接蓝牙设备name</span><br><span class="line">				serverList: [], &#x2F;&#x2F; 连接蓝牙设备的服务数据</span><br><span class="line">				serviceId: &quot;&quot;, &#x2F;&#x2F; 连接蓝牙设备的服务id</span><br><span class="line">				characteristics: [], &#x2F;&#x2F; 连接蓝牙设备的特征值数据</span><br><span class="line">				notifyUUid:&#39;&#39;,</span><br><span class="line">				writeUUid:&#39;&#39;,</span><br><span class="line">			&#125;;</span><br><span class="line">		&#125;,</span><br><span class="line">		onLoad()&#123;</span><br><span class="line">			&#x2F;&#x2F; 获取eventChannel事件</span><br><span class="line">			const eventChannel &#x3D; this.getOpenerEventChannel()</span><br><span class="line">			eventChannel.on(&#39;toBluetooth&#39;, (val) &#x3D;&gt; &#123;</span><br><span class="line">				this.connectBluetooth &#x3D; Object.assign(this.connectBluetooth,val)</span><br><span class="line">				this.getBluetoot()</span><br><span class="line">			&#125;)</span><br><span class="line">			that &#x3D; this</span><br><span class="line">		&#125;,</span><br><span class="line">		computed: &#123;</span><br><span class="line">			...mapGetters([&#39;getBluetoothInfo&#39;]),</span><br><span class="line">		&#125;,</span><br><span class="line">		methods:&#123;</span><br><span class="line">			...mapActions([&#39;setBluetoothInfo&#39;]),</span><br><span class="line">			&#x2F;&#x2F; 蓝牙初始化</span><br><span class="line">			getBluetoot()&#123;</span><br><span class="line">				plus.bluetooth.openBluetoothAdapter(&#123;</span><br><span class="line">					success:(e) &#x3D;&gt; &#123;</span><br><span class="line">						console.log(&#39;初始化成功&#39;);</span><br><span class="line">						this.bluetooth_list()</span><br><span class="line">					&#125;,</span><br><span class="line">					fail:(e) &#x3D;&gt; &#123;</span><br><span class="line">						console.log(&#39;open failed: &#39;+JSON.stringify(e));</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;);</span><br><span class="line">			&#125;,</span><br><span class="line">			&#x2F;&#x2F; 获取已配对蓝牙列表</span><br><span class="line">			bluetooth_list() &#123;  </span><br><span class="line">			    var main &#x3D; plus.android.runtimeMainActivity();  </span><br><span class="line">			    var BluetoothAdapter &#x3D; plus.android.importClass(&quot;android.bluetooth.BluetoothAdapter&quot;);  </span><br><span class="line">			    var BAdapter &#x3D; BluetoothAdapter.getDefaultAdapter();  </span><br><span class="line">			    var Context &#x3D; plus.android.importClass(&quot;android.content.Context&quot;);  </span><br><span class="line">			    var lists &#x3D; BAdapter.getBondedDevices();  </span><br><span class="line">			    plus.android.importClass(lists);  </span><br><span class="line">			    var len &#x3D; lists.size();  </span><br><span class="line">			    var iterator &#x3D; lists.iterator();  </span><br><span class="line">			    plus.android.importClass(iterator);  </span><br><span class="line">				let bluetoothList &#x3D; []</span><br><span class="line">			    while (iterator.hasNext()) &#123;  </span><br><span class="line">			        var d &#x3D; iterator.next();  </span><br><span class="line">			        plus.android.importClass(d);</span><br><span class="line">					bluetoothList.push(&#123;name:d.getName(),deviceId:d.getAddress(),connect:false&#125;)</span><br><span class="line">			    &#125;  </span><br><span class="line">				bluetoothList.forEach((val) &#x3D;&gt; &#123;</span><br><span class="line">					if(val.name &#x3D;&#x3D; that.connectBluetooth.blueName &amp;&amp; val.deviceId &#x3D;&#x3D; that.connectBluetooth.deviceId)&#123;</span><br><span class="line">						val.connect &#x3D; true</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;)</span><br><span class="line">				that.bluetoothList &#x3D; bluetoothList</span><br><span class="line">			&#125;,</span><br><span class="line">			&#x2F;&#x2F; 点击蓝牙连接</span><br><span class="line">			connetBlue(item) &#123;</span><br><span class="line">				this.deviceId &#x3D; item.deviceId</span><br><span class="line">				this.bluetoothName &#x3D; item.name</span><br><span class="line">				if(this.connectBluetooth &amp;&amp; this.connectBluetooth.deviceId)&#123;</span><br><span class="line">					if(!item.connect)&#123;</span><br><span class="line">						that.$refs.uToast.show(&#123;</span><br><span class="line">							title: &#39;请先断开连接&#39;,</span><br><span class="line">							type: &#39;error&#39;,</span><br><span class="line">							duration: 800</span><br><span class="line">						&#125;)</span><br><span class="line">					&#125;else&#123;</span><br><span class="line">						this.stop(this.connectBluetooth.deviceId,item)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">					createBLEConnection(item.deviceId)</span><br><span class="line">				&#125;</span><br><span class="line">				function createBLEConnection(deviceId)&#123;</span><br><span class="line">					uni.createBLEConnection(&#123;</span><br><span class="line">						&#x2F;&#x2F; 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span><br><span class="line">						deviceId: deviceId, &#x2F;&#x2F;设备id</span><br><span class="line">						success: (res) &#x3D;&gt; &#123;</span><br><span class="line">							uni.onBLEConnectionStateChange(function (res) &#123;</span><br><span class="line">							  &#x2F;&#x2F; 该方法回调中可以用于处理连接意外断开等异常情况</span><br><span class="line">							  console.log(res)</span><br><span class="line">							&#125;)</span><br><span class="line">							item.connect &#x3D; true</span><br><span class="line">							&#x2F;&#x2F;获取蓝牙服务</span><br><span class="line">							setTimeout(()&#x3D;&gt;&#123;</span><br><span class="line">								that.getBLEDeviceServices(that.deviceId);</span><br><span class="line">							&#125;,1500)</span><br><span class="line">						&#125;,</span><br><span class="line">						fail: (res) &#x3D;&gt; &#123;</span><br><span class="line">							console.log(res)</span><br><span class="line">						&#125;,</span><br><span class="line">					&#125;)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,</span><br><span class="line">			&#x2F;&#x2F; 获取服务列表</span><br><span class="line">			getBLEDeviceServices(deviceId) &#123;</span><br><span class="line">				uni.getBLEDeviceServices(&#123;</span><br><span class="line">					&#x2F;&#x2F; 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span><br><span class="line">					deviceId: deviceId,</span><br><span class="line">					success: (res) &#x3D;&gt; &#123;</span><br><span class="line">						if(res.services &amp;&amp; res.services.length &gt; 0)&#123;</span><br><span class="line">							this.serverList &#x3D; res.services</span><br><span class="line">							this.serviceId &#x3D; res.services[3].uuid</span><br><span class="line">							this.getBLEDeviceCharacteristics() &#x2F;&#x2F;6.0</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">					&#125;,</span><br><span class="line">					fail: function(res) &#123;</span><br><span class="line">						console.log(res)</span><br><span class="line">					&#125;,</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;,</span><br><span class="line">			&#x2F;&#x2F; 获取特征值</span><br><span class="line">			getBLEDeviceCharacteristics() &#123;</span><br><span class="line">				uni.getBLEDeviceCharacteristics(&#123;</span><br><span class="line">					&#x2F;&#x2F; 这里的 deviceId 需要已经通过 createBLEConnection 与对应设备建立链接</span><br><span class="line">					deviceId: this.deviceId,</span><br><span class="line">					&#x2F;&#x2F; 这里的 serviceId 需要在上面的 getBLEDeviceServices 接口中获取</span><br><span class="line">					serviceId: this.serviceId,</span><br><span class="line">					success: (res) &#x3D;&gt; &#123;</span><br><span class="line">						console.log(res)</span><br><span class="line">						if(res.characteristics &amp;&amp; res.characteristics.length &gt; 0)&#123;</span><br><span class="line">							this.characteristics &#x3D; res.characteristics</span><br><span class="line">							this.notifyUUid &#x3D; res.characteristics[2].uuid</span><br><span class="line">							this.writeUUid &#x3D; res.characteristics[3].uuid</span><br><span class="line">							this.setBluetoothInfo(&#123;</span><br><span class="line">								data:&#123;</span><br><span class="line">									deviceId: this.deviceId,</span><br><span class="line">									bluetoothName: this.bluetoothName,</span><br><span class="line">									serviceId: this.serviceId,</span><br><span class="line">									characteristicId: this.characteristics,</span><br><span class="line">									notifyUUid:this.notifyUUid,</span><br><span class="line">									writeUUid:this.writeUUid</span><br><span class="line">								&#125;,</span><br><span class="line">								callback:this.backFunction</span><br><span class="line">							&#125;)</span><br><span class="line">						&#125;</span><br><span class="line">						</span><br><span class="line">					&#125;,</span><br><span class="line">					fail: function(res) &#123;</span><br><span class="line">						console.log(res)</span><br><span class="line">					&#125;,</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;,</span><br><span class="line">			&#x2F;&#x2F; 蓝牙数据保存成功的回调</span><br><span class="line">			backFunction()&#123;</span><br><span class="line">				let a &#x3D; this.getBluetoothInfo</span><br><span class="line">				console.log(a)</span><br><span class="line">				const eventChannel &#x3D; this.getOpenerEventChannel();</span><br><span class="line">				eventChannel.emit(&#39;bluetoothToIndex&#39;);</span><br><span class="line">				this.$refs.uToast.show(&#123;</span><br><span class="line">					title: &#39;蓝牙连接成功&#39;,</span><br><span class="line">					type: &#39;success&#39;,</span><br><span class="line">					back: true,</span><br><span class="line">					duration: 800</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;,</span><br><span class="line">            &#x2F;&#x2F; 点击测量按钮</span><br><span class="line">			autoMeasure()&#123;</span><br><span class="line">				utils.notifyBLECharacteristicValueChange(this.receiveData)</span><br><span class="line">			&#125;,</span><br><span class="line">			&#x2F;&#x2F; 接收测量数据</span><br><span class="line">			receiveData(res)&#123;</span><br><span class="line">				console.log(res.split(&#39;,&#39;))</span><br><span class="line">				let data &#x3D; (res.replace(&#x2F;[\r\n]&#x2F;g,&quot;&quot;)).split(&#39;,&#39;)</span><br><span class="line">			&#125;,</span><br><span class="line">			&#x2F;&#x2F; 断开连接</span><br><span class="line">			stop(deviceId,connectDevice)&#123;</span><br><span class="line">				uni.closeBLEConnection(&#123;</span><br><span class="line">				  deviceId:deviceId,</span><br><span class="line">				  success(res) &#123;</span><br><span class="line">				    that.$refs.uToast.show(&#123;</span><br><span class="line">				    	title: &#39;断开连接成功&#39;,</span><br><span class="line">				    	type: &#39;success&#39;,</span><br><span class="line">				    	duration: 800</span><br><span class="line">				    &#125;)</span><br><span class="line">					that.setBluetoothInfo(&#123;</span><br><span class="line">						data:&#123;</span><br><span class="line">							deviceId: &#39;&#39;,</span><br><span class="line">							bluetoothName: &#39;&#39;,</span><br><span class="line">							serviceId: &#39;&#39;,</span><br><span class="line">							characteristicId: &#39;&#39;,</span><br><span class="line">							notifyUUid:&#39;&#39;,</span><br><span class="line">							writeUUid:&#39;&#39;</span><br><span class="line">						&#125;,</span><br><span class="line">					&#125;)</span><br><span class="line">					connectDevice.connect &#x3D; false</span><br><span class="line">					that.connectBluetooth &#x3D; &#123;&#125;</span><br><span class="line">				  &#125;</span><br><span class="line">				&#125;)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">&lt;&#x2F;style&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>utils代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;../store/index.js&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> macValue;</span><br><span class="line"><span class="keyword">let</span> bluetoothInfo = store.state.bluetooth;</span><br><span class="line"><span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line"><span class="keyword">let</span> timer1 = <span class="literal">null</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="comment">// 打开蓝牙</span></span><br><span class="line">	<span class="function"><span class="title">openPhoneBluetooth</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">let</span> main, BluetoothAdapter, BAdapter;</span><br><span class="line">		<span class="keyword">switch</span>(uni.getSystemInfoSync().platform)&#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;android&#x27;</span>:</span><br><span class="line">				main  = plus.android.runtimeMainActivity();</span><br><span class="line">				BluetoothAdapter = plus.android.importClass(<span class="string">&quot;android.bluetooth.BluetoothAdapter&quot;</span>);</span><br><span class="line">				BAdapter = BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">				<span class="keyword">if</span>(!BAdapter.isEnabled()) &#123;  </span><br><span class="line">					BAdapter.enable();  </span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">&#x27;ios&#x27;</span>:</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;运行在ios上&#x27;</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">default</span>:</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&#x27;运行在开发者工具上&#x27;</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 启用 notify 功能</span></span><br><span class="line">	<span class="function"><span class="title">notifyBLECharacteristicValueChange</span>(<span class="params">callback</span>)</span> &#123;</span><br><span class="line">		uni.notifyBLECharacteristicValueChange(&#123;</span><br><span class="line">			deviceId:bluetoothInfo.deviceId,</span><br><span class="line">			serviceId:bluetoothInfo.serviceId,</span><br><span class="line">			characteristicId:bluetoothInfo.notifyUUid,</span><br><span class="line">			state:<span class="literal">true</span>,</span><br><span class="line">			success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&quot;广播开启成功----&quot;</span> + bluetoothInfo.notifyUUid)</span><br><span class="line">				<span class="built_in">this</span>.onBLECharacteristicValueChange(callback);</span><br><span class="line">			&#125;,</span><br><span class="line">			fail: <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.error(err)</span><br><span class="line">				uni.showToast(&#123;</span><br><span class="line">				    title: <span class="string">&#x27;蓝牙连接异常&#x27;</span>,</span><br><span class="line">					icon: <span class="string">&#x27;error&#x27;</span>,</span><br><span class="line">				    duration: <span class="number">2000</span></span><br><span class="line">				&#125;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 监听低功耗蓝牙设备的特征值变化</span></span><br><span class="line">	<span class="function"><span class="title">onBLECharacteristicValueChange</span>(<span class="params">callback</span>)</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;onBLECharacteristicValueChange&#x27;</span>)</span><br><span class="line">		uni.onBLECharacteristicValueChange(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">			macValue = macValue + <span class="built_in">this</span>.ab2str(res.value);</span><br><span class="line">			<span class="built_in">console</span>.log(macValue)</span><br><span class="line">			<span class="keyword">if</span>(timer)&#123;</span><br><span class="line">				<span class="built_in">clearTimeout</span>(timer) </span><br><span class="line">				timer = <span class="literal">null</span></span><br><span class="line">			&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">				timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">					callback(macValue)</span><br><span class="line">					<span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">					timer = <span class="literal">null</span></span><br><span class="line">				&#125;,<span class="number">1000</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">		timer1 = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">			<span class="built_in">this</span>.write()</span><br><span class="line">		&#125;,<span class="number">1000</span>)</span><br><span class="line">		</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="function"><span class="title">write</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;write&#x27;</span>)</span><br><span class="line">		<span class="built_in">clearTimeout</span>(timer1)</span><br><span class="line">		timer1 = <span class="literal">null</span></span><br><span class="line">		<span class="keyword">let</span> buffer = <span class="built_in">this</span>.str2ab(<span class="string">&#x27;Ed&#x27;</span>)</span><br><span class="line">		plus.bluetooth.writeBLECharacteristicValue(&#123;</span><br><span class="line">			deviceId: bluetoothInfo.deviceId,</span><br><span class="line">			serviceId: bluetoothInfo.serviceId,</span><br><span class="line">			characteristicId: bluetoothInfo.writeUUid, </span><br><span class="line">			writeType: <span class="string">&#x27;writeNoResponse&#x27;</span>,</span><br><span class="line">			value: buffer,</span><br><span class="line">			success: <span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="comment">//此时设备已接收到你写入的数据</span></span><br><span class="line">				<span class="built_in">console</span>.log(<span class="string">&quot;写入成功---&quot;</span> + bluetoothInfo.writeUUid)</span><br><span class="line">				macValue = <span class="string">&#x27;&#x27;</span></span><br><span class="line">			&#125;,</span><br><span class="line">			fail: <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">				<span class="built_in">console</span>.log(err)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">//arraybuffer 转字符串 参数为ArrayBuffer对象</span></span><br><span class="line">	<span class="function"><span class="title">ab2str</span>(<span class="params">str</span>)</span> &#123;</span><br><span class="line">		<span class="comment">// ArrayBuffer转16进度字符串示例</span></span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">ab2hex</span>(<span class="params">buffer</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">const</span> hexArr = <span class="built_in">Array</span>.prototype.map.call(</span><br><span class="line">				<span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buffer),</span><br><span class="line">				<span class="function"><span class="keyword">function</span>(<span class="params">bit</span>) </span>&#123;</span><br><span class="line">					<span class="keyword">return</span> (<span class="string">&#x27;00&#x27;</span> + bit.toString(<span class="number">16</span>)).slice(-<span class="number">2</span>)</span><br><span class="line">				&#125;</span><br><span class="line">			)</span><br><span class="line">			<span class="keyword">return</span> hexArr.join(<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//16进制</span></span><br><span class="line">		<span class="keyword">let</span> systemStr = ab2hex(str)</span><br><span class="line">		<span class="function"><span class="keyword">function</span> <span class="title">hexCharCodeToStr</span>(<span class="params">hexCharCodeStr</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">var</span> trimedStr = hexCharCodeStr.trim();</span><br><span class="line">			<span class="keyword">var</span> rawStr = trimedStr.substr(<span class="number">0</span>, <span class="number">2</span>).toLowerCase() === <span class="string">&quot;0x&quot;</span> ? trimedStr.substr(<span class="number">2</span>) : trimedStr;</span><br><span class="line">			<span class="keyword">var</span> len = rawStr.length;</span><br><span class="line">			<span class="keyword">if</span> (len % <span class="number">2</span> !== <span class="number">0</span>) &#123;</span><br><span class="line">				alert(<span class="string">&quot;Illegal Format ASCII Code!&quot;</span>);</span><br><span class="line">				<span class="keyword">return</span> <span class="string">&quot;&quot;</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">var</span> curCharCode;</span><br><span class="line">			<span class="keyword">var</span> resultStr = [];</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i = i + <span class="number">2</span>) &#123;</span><br><span class="line">				curCharCode = <span class="built_in">parseInt</span>(rawStr.substr(i, <span class="number">2</span>), <span class="number">16</span>); <span class="comment">// ASCII Code Value</span></span><br><span class="line">				<span class="keyword">let</span> str5 = <span class="built_in">String</span>.fromCharCode(curCharCode)</span><br><span class="line">				<span class="keyword">if</span> (str5.startsWith(<span class="string">&#x27;\n&#x27;</span>) == <span class="literal">false</span>) &#123;</span><br><span class="line">					resultStr.push(<span class="built_in">String</span>.fromCharCode(curCharCode));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">return</span> resultStr.join(<span class="string">&quot;&quot;</span>);</span><br><span class="line">	</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> hexCharCodeToStr(systemStr)</span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="comment">// 字符串转为ArrayBuffer对象，参数为字符串</span></span><br><span class="line">	<span class="function"><span class="title">str2ab</span>(<span class="params">str</span>)</span> &#123;</span><br><span class="line">		<span class="comment">// 创建一个固定长度的二进制缓冲区  二进制ArrayBuffer对象</span></span><br><span class="line">	    <span class="keyword">let</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(str.length*<span class="number">2</span>); <span class="comment">// 在Unicode编码方案中，一个英文字符或一个汉字字符都占用两个字节的空间</span></span><br><span class="line">		<span class="comment">// 操作二进制ArrayBuffer对象</span></span><br><span class="line">		<span class="keyword">let</span> dataView = <span class="keyword">new</span> <span class="built_in">DataView</span>(buffer)</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>, strLen = str.length; i&lt;strLen; i++) &#123;</span><br><span class="line">			<span class="comment">// 设置占8-bit的字节数组  一个字节  16进制数据</span></span><br><span class="line">			dataView.setUint8(i, <span class="built_in">parseInt</span>((str.charCodeAt(i)).toString(<span class="number">16</span>),<span class="number">16</span>) )</span><br><span class="line">			<span class="comment">// dataView.setUint8(i, &#x27;0X&#x27; + value.substring(i * 2, i * 2 + 2)); 错误写法  ：需要16进制数字类型 不能字符串</span></span><br><span class="line">		&#125;</span><br><span class="line">	    <span class="keyword">return</span> buffer;</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>store代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">	state: &#123;</span><br><span class="line">		bluetooth:&#123;&#125;,<span class="comment">//连接的蓝牙设备信息</span></span><br><span class="line">	&#125;,</span><br><span class="line">	mutations: &#123;</span><br><span class="line">		<span class="comment">// 设置蓝牙连接数据</span></span><br><span class="line">		<span class="function"><span class="title">SET_BLUETOOTH</span>(<span class="params">state,info</span>)</span>&#123;</span><br><span class="line">			state.bluetooth = <span class="built_in">Object</span>.assign(state.bluetooth,info)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	actions: &#123;</span><br><span class="line">		<span class="comment">// 设置蓝牙信息</span></span><br><span class="line">		<span class="function"><span class="title">setBluetoothInfo</span>(<span class="params">&#123;commit,state&#125;,&#123;data,callback&#125;</span>)</span>&#123;</span><br><span class="line">			commit(<span class="string">&#x27;SET_BLUETOOTH&#x27;</span>,data)</span><br><span class="line">			<span class="keyword">if</span>(callback)&#123;callback()&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	getters: &#123;</span><br><span class="line">		<span class="comment">// 获取蓝牙设备信息</span></span><br><span class="line">		getBluetoothInfo: <span class="function"><span class="params">state</span> =&gt;</span> state.bluetooth</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Mr.sun
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/Diamond.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/04/13/uniapp%E7%9A%84%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97/">unipush的蓝牙模块</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">unipush的消息推送</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/28/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">vue生命周期</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/15/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E9%97%AD%E5%8C%85%E9%80%92%E5%BD%92/">回调函数闭包递归</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/28/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">浅拷贝和深拷贝</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/20/%E5%87%BD%E6%95%B0%E5%86%85this%E6%8C%87%E5%90%91%E4%BB%A5%E5%8F%8A%E6%94%B9%E5%8F%98this%E6%8C%87%E5%90%91/">函数内this指向以及改变this指向</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/04/15/JS%E4%B8%AD%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E6%B3%95/">JS中简单的几种继承方法</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/27/%E5%8E%9F%E5%9E%8B/">原型</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/03/20/JS%E4%B8%AD%E7%9A%84%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1/">JS中的类和对象,new关键字</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2022/04/13/uniapp%E7%9A%84%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href="/2022/04/13/uniapp%E7%9A%84%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/H5/" style="font-size: 18.490773881230844px;" class="tag-cloud-link">H5</a>
+    
+    <a href="/tags/git/" style="font-size: 8.324340657019032px;" class="tag-cloud-link">git</a>
+    
+    <a href="/tags/javascript/" style="font-size: 16.892390336323018px;" class="tag-cloud-link">javascript</a>
+    
+    <a href="/tags/vue/" style="font-size: 14.991702339421128px;" class="tag-cloud-link">vue</a>
+    
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 9.177648820998108px;" class="tag-cloud-link">正则表达式</a>
+    
+    <a href="/tags/app/" style="font-size: 9.288861643257608px;" class="tag-cloud-link">app</a>
+    
+</div>
+                
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/Diamond-sjh" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://www.cnblogs.com/Diamond-sjh/" target="_blank">博客园</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Mr.sun Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '12'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
