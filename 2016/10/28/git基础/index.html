@@ -130,11 +130,11 @@
                         </li>
                         
                         <li>
-                            <a href="/categories/%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/">错误解决</a>
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
                         </li>
                         
                         <li>
-                            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+                            <a href="/categories/%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/">错误解决</a>
                         </li>
                         
                         <li>
@@ -164,10 +164,6 @@
                         </li>
                         
                         <li>
-                            <a href="/tags/git/">git</a>
-                        </li>
-                        
-                        <li>
                             <a href="/tags/javascript/">javascript</a>
                         </li>
                         
@@ -176,7 +172,11 @@
                         </li>
                         
                         <li>
-                            <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+                            <a href="/tags/git/">git</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/app/">app</a>
                         </li>
                         
                         
@@ -341,9 +341,9 @@
 <h4 id="拉取和更新："><a href="#拉取和更新：" class="headerlink" title="拉取和更新："></a>拉取和更新：</h4><p><strong>git pull</strong> —- 拉取远程代码到当前分支，并和本地分支合并</p>
 <p><strong>git pull [remote] [branch]</strong> —- 取回远程仓库的变化，并与本地指定分支合并</p>
 <p>需要注意的是，我们平时在实际工作中，是不允许对主分支的东西进行操作的，也千万不要对主分支进行合并、提交、更新等。我们需要创建另外一个分支（测试分支），然后在这个分支中去合并其他组员的分支，最终将测试分支中的代码放到服务器上去测试、运行</p>
-<h3 id="4-4-示例："><a href="#4-4-示例：" class="headerlink" title="4.4 示例："></a>4.4 示例：</h3><p>仓库地址示例：<a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a>:AIMIYue.git  /    <a target="_blank" rel="noopener" href="https://gitee.com/ityuer/test.git">https://gitee.com/ityuer/test.git</a></p>
+<h3 id="4-4-示例："><a href="#4-4-示例：" class="headerlink" title="4.4 示例："></a>4.4 示例：</h3><p>仓库地址示例：<a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;">&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;</a>:AIMIYue.git  /    <a target="_blank" rel="noopener" href="https://gitee.com/ityuer/test.git">https://gitee.com/ityuer/test.git</a></p>
 <p>组长和组员需要执行以下命令：</p>
-<p>1.git clone <a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a>:AIMIYue.git    —- 克隆项目（拉取代码，虽然没什么代码）</p>
+<p>1.git clone <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a>:AIMIYue.git    —- 克隆项目（拉取代码，虽然没什么代码）</p>
 <p>2.git branch  —  查看分支</p>
 <p>3.git  branch  zhangsan 、git branch  lisi 、 git branch  wangwu  — 创建以自己姓名命名的分支，好区分</p>
 <p>4.git branch   — 再次查看分支  看有没有创建成功。绿色的是当前的分支，白色的是未被选中的其他分支</p>
@@ -351,7 +351,7 @@
 <p>6.测试下看能不能在自己的分支上提交代码，在你的文件夹中新建一个文件，然后执行第七步</p>
 <p>7.git add .    — 将自己创建、修改、删除的文件添加到暂存区</p>
 <p>8.git commit -m ‘first comit’  —-  进行提交（提交到本地仓库），并写上提交信息</p>
-<p>9.git push  <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#109;">&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#109;</a>:AIMIYue.git   —  上传代码，上传完成后去github上刷新查看有没有自己的分支及自己的代码</p>
+<p>9.git push  <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;</a>:AIMIYue.git   —  上传代码，上传完成后去github上刷新查看有没有自己的分支及自己的代码</p>
 <p>10.如果成功的话，那么接下来就可以进行代码开发了，自己不断的写代码，写完了之后执行上述步骤（从第五步开始）</p>
 <p>11.项目开发完成后，组长需要新建分支，然后合并自己和其他组员的分支，命令见下一步</p>
 <ol start="12">
@@ -360,7 +360,7 @@
 <p>git merge origin/zhangsan 、 git merge origin/lisi 、 git merge origin/wangwu — 合并远程分支</p>
 <p>git add.     — 添加到暂存区</p>
 <p>git commit -m ‘测试分支提交’  —  提交测试分支</p>
-<p>git  push  <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;">&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;</a>:AIMIYue.git  —  将测试分支上传到仓库中</p>
+<p>git  push  <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#98;&#46;&#99;&#x6f;&#x6d;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#98;&#46;&#99;&#x6f;&#x6d;</a>:AIMIYue.git  —  将测试分支上传到仓库中</p>
 </li>
 <li><p>此时，项目已经完成，各组员可以各自从dev分支上拉取代码，然后运行就可以了</p>
 </li>
@@ -523,17 +523,17 @@
                 
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/H5/" style="font-size: 18.244836436887493px;" class="tag-cloud-link">H5</a>
+    <a href="/tags/H5/" style="font-size: 14.902856040625664px;" class="tag-cloud-link">H5</a>
     
-    <a href="/tags/git/" style="font-size: 19.72475268842193px;" class="tag-cloud-link">git</a>
+    <a href="/tags/javascript/" style="font-size: 12.552137375855272px;" class="tag-cloud-link">javascript</a>
     
-    <a href="/tags/javascript/" style="font-size: 16.978116924790562px;" class="tag-cloud-link">javascript</a>
+    <a href="/tags/vue/" style="font-size: 9.57713722427371px;" class="tag-cloud-link">vue</a>
     
-    <a href="/tags/vue/" style="font-size: 15.692809889305664px;" class="tag-cloud-link">vue</a>
+    <a href="/tags/git/" style="font-size: 18.736461611640884px;" class="tag-cloud-link">git</a>
     
-    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 17.16825894433966px;" class="tag-cloud-link">正则表达式</a>
+    <a href="/tags/app/" style="font-size: 14.3173207179658px;" class="tag-cloud-link">app</a>
     
-    <a href="/tags/app/" style="font-size: 19.538492885278004px;" class="tag-cloud-link">app</a>
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 11.00612708143731px;" class="tag-cloud-link">正则表达式</a>
     
 </div>
                 
