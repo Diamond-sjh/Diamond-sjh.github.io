@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Mr.sun">
+    
+    
+    
+    
+    
+    
+    <title>蓝牙开发基础 | Diamond</title>
+    <link href="https://diamond-sjh.github.io" rel="prefetch" />
+    <link href="/favicon.ico" rel="icon" type="image/x-ico">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/aos.css">
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<script src="/js/jquery.min.js"></script>
+
+    
+<script src="/js/bootstrap.min.js"></script>
+
+    
+<script src="/js/aos.js"></script>
+
+    
+<script src="/js/highslide/highslide-full.min.js"></script>
+
+    
+<link rel="stylesheet" href="/js/highslide/highslide.css">
+
+    <style type="text/css">
+        @media (max-width: 768px) {
+            body {
+                background-color: #f0f0f0;
+                background: url('/imgs/xsbg.gif');
+                background-attachment: fixed;
+            }
+        }
+    </style>
+    
+    <!--<script type="text/javascript">
+      if (document.images) {
+        var avatar = new Image();
+        avatar.src = '/imgs/Diamond.jpg'
+        var previews = 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/b85ccb79-f84d-4a23-af8d-a6563b5a1763.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/97d86e2d-16ce-44cd-b6a8-a026289760f7.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/6bd3d16b-54eb-4015-a80b-a0c9322c8407.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/d747a105-a552-4f95-a032-0c9660036317.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/530195d0-a84d-4176-a6c9-bea786ee65eb.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/77893ba4-83b4-48a0-a350-516ce50389e2.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/6717a878-7ef4-49c1-b0d4-9eb7bf3a6b96.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/3f1fbc6c-3a66-432d-b487-257ae23bf7a9.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/8846bb34-6028-48e2-b7ff-546bc98e886d.jpg,https://vkceyugu.cdn.bspapp.com/VKCEYUGU-ee7ea9e5-fad6-4763-8b50-eb42c2c0bed7/90c44d77-22d1-4357-b806-7d1a67c72bcf.jpg'.split(',')
+        var previewsPreLoad = []
+        for(var i = 0; i < length; i++) {
+          previewsPreLoad.push(new Image())
+          previewsPreLoad[previewsPreLoad.length - 1].src = '/imgs/preview' + previews[i]
+        }
+      }
+    </script>-->
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+    <!-- 背景轮播图功能 -->
+    <section class="hidden-xs">
+    <ul class="cb-slideshow">
+        <li><span>天若</span></li>
+        <li><span>有情</span></li>
+        <li><span>天亦老</span></li>
+        <li><span>我为</span></li>
+        <li><span>长者</span></li>
+        <li><span>续一秒</span></li>
+    </ul>
+</section>
+    <!-- 欧尼酱功能, 谁用谁知道 -->
+    
+    <header class="navbar navbar-inverse" id="gal-header">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target=".bs-navbar-collapse"
+                    aria-expanded="false">
+                <span class="fa fa-lg fa-reorder"></span>
+            </button>
+            <a href="https://diamond-sjh.github.io">
+                
+                <style>
+                    #gal-header .navbar-brand {
+                        height: 54px;
+                        line-height: 24px;
+                        font-size: 28px;
+                        opacity: 1;
+                        background-color: rgba(0,0,0,0);
+                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
+                    }
+                </style>
+                <!-- 这里使用文字(navbar_text or config.title) -->
+                <div class="navbar-brand">Diamond</div>
+                
+            </a>
+        </div>
+        <div class="collapse navbar-collapse bs-navbar-collapse">
+            <ul class="nav navbar-nav" id="menu-gal">
+                
+                
+                <li class="">
+                    <a href="/">
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+                
+                
+                
+                <li class="">
+                    <a href="/archives">
+                        <i class="fa fa-archive"></i>归档
+                    </a>
+                </li>
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-list"></i>分类
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93/">笔记总结</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3/">错误解决</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/categories/%E8%B8%A9%E5%9D%91%E7%BB%8F%E9%AA%8C/">踩坑经验</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                        <i class="fa fa-tags"></i>标签
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/H5/">H5</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/javascript/">javascript</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/vue/">vue</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/git/">git</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/app/">app</a>
+                        </li>
+                        
+                        
+                        <li>
+                            <a href="/tags">...</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </li>
+                
+                
+                
+                
+                <li class="">
+                    <a href="/about">
+                        <i class="fa fa-user"></i>关于我
+                    </a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</header>
+    <div id="gal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 gal-right" id="mainstay">
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://diamond-sjh.github.io">Diamond</a>
+        >
+        <span>蓝牙开发基础</span>
+    </div>
+    <!-- 大型设备详细文章 -->
+    <div class="hidden-xs">
+        <div class="title-article">
+            <h1>
+                <a href="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/">蓝牙开发基础</a>
+            </h1>
+        </div>
+        <div class="tag-article">
+            
+            <span class="label label-gal">
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/app/">app</a>
+                
+            </span>
+            
+            <span class="label label-gal">
+                <i class="fa fa-calendar"></i> 2022-07-21
+            </span>
+            
+        </div>
+    </div>
+    <!-- 小型设备详细文章 -->
+    <div class="visible-xs">
+        <center>
+            <div class="title-article">
+                <h4>
+                    <a href="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/">蓝牙开发基础</a>
+                </h4>
+            </div>
+            <p>
+                <i class="fa fa-calendar"></i> 2022-07-21
+            </p>
+            <p>
+                
+                <i class="fa fa-tags"></i>
+                
+                <a href="/tags/app/">app</a>
+                
+                
+                
+            </p>
+        </center>
+    </div>
+    <div class="content-article">
+        <meta name="referrer" content="no-referrer">
+
+<h1 id="蓝牙开发基础"><a href="#蓝牙开发基础" class="headerlink" title="蓝牙开发基础"></a>蓝牙开发基础</h1><h2 id="一、基本介绍"><a href="#一、基本介绍" class="headerlink" title="一、基本介绍"></a>一、基本介绍</h2><p>蓝牙发展至今经历了多个版本的更新，1.1、1.2、2.0、2.1、3.0、4.0、4.1、4.2、5.0等。其中，将1.x~3.0之间的版本称之为<strong>经典蓝牙</strong>，4.x开始的蓝牙称之为<strong>低功耗蓝牙</strong>，也就是蓝牙ble。根据应用、协议类型等，可以对蓝牙进行以下分类：</p>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/00.png" alt="00"></p>
+<ul>
+<li><strong>经典蓝牙：</strong>顾名思义就是旧版的蓝牙，是Android4.2(API17)版本及以下所使用的蓝牙。使用频率低、低功耗、输入数据量少、传输速度快等，但是有双模式，即普通模式和低功耗模式。普通模式和以前蓝牙（传统蓝牙）一样，可以快速传输较大数据，功耗大。</li>
+<li><strong>低功耗蓝牙：</strong>也称BLE，是Android4.3(API18)版本及以上所使用的蓝牙，据说相对于经典蓝牙有许多的优势，Google为其提供了新的API。传输大量数据、不考虑功耗、速度、耗电等</li>
+</ul>
+<h2 id="二、现在主流是4-0BLE蓝牙"><a href="#二、现在主流是4-0BLE蓝牙" class="headerlink" title="二、现在主流是4.0BLE蓝牙"></a>二、现在主流是4.0BLE蓝牙</h2><ul>
+<li>低功耗蓝牙比传统蓝牙，传输速度更快，覆盖范围更广，安全性更高，延迟更短，耗电极低等等优点。</li>
+<li>传统的一般通过socket方式，而低功耗蓝牙是通过Gatt协议来实现。</li>
+</ul>
+<h2 id="三、经典蓝牙API（ble蓝牙参考uniapp文档）"><a href="#三、经典蓝牙API（ble蓝牙参考uniapp文档）" class="headerlink" title="三、经典蓝牙API（ble蓝牙参考uniapp文档）"></a>三、经典蓝牙API（ble蓝牙参考uniapp文档）</h2><p><strong>一、建立蓝牙主要有四个步骤</strong></p>
+<ol>
+<li>打开蓝牙。</li>
+<li>查找附近已配对或可用的设备。</li>
+<li>连接设备。</li>
+<li>设备间数据交换。</li>
+</ol>
+<p><strong>二、配对和连接是一回事？</strong></p>
+<p><strong>配对</strong>是指两个设备之间首次建立连接后，系统会自动向用户显示的配对请求，当配对成功后，会自动存储已经配对的设备的信息。</p>
+<p><strong>连接</strong>就是使用设备存储的MAC地址，即客户端用向存储的MAC地址发起建立 RFCOMM通道的询问，服务端同意后两者的连接就建立起来了。而且利用远程设备的已知MAC地址可以随时向其发起连接(如果在范围内的话)，而无需执行发现操作。所以我们可以得到这几个结论:</p>
+<ul>
+<li>配对了不一定连接着。</li>
+<li>连接一定要知道对方的蓝牙的MAC地址。</li>
+<li>配对只是第一次连接系统为确认安全所做的准备，因此大多数情况下只有一次。</li>
+</ul>
+<p><strong>三、所有蓝牙API都在<a href>android.bluetooth</a> 包下。下面有一些类和接口的摘要，可能需要它们来建立蓝牙连接:</strong></p>
+<ul>
+<li><p><strong><a href>BluetoothAdapter类</a></strong></p>
+<blockquote>
+<p>代表本地蓝牙适配器（蓝牙无线电）。<a href>BluetoothAdapter</a>是所有蓝牙交互的入口。使用这个你可以发现其他蓝牙设备，查询已配对的设备列表，使用一个已知的MAC地址来实例化一个<a href>BluetoothDevice</a>，以及创建一个<a href>BluetoothServerSocket</a>来为监听与其他设备的通信。</p>
+</blockquote>
+<p><strong>常用的方法有以下几个</strong>    </p>
+<ul>
+<li><p><a href><em><strong>getDefaultAdapter</strong></em></a>() —— 获取默认<a href>BluetoothAdapter</a>，实际上，也只有这一种方法获取<a href>BluetoothAdapter</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、获取默认本地蓝牙适配器的句柄。目前Android仅支持一个蓝牙适配器，但该API可以扩展为支持更多。</span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong><a href>enable</a>()</strong></em> —— 打开蓝牙，这个方法打开蓝牙不会弹出提示，更多的时候我们需要问下用户是否打开，以下这两行代码同样是打开蓝牙，不过会提示用户：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent=<span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);</span><br><span class="line">startActivityForResult(intent,reCode);<span class="comment">//同startActivity(intent); reCode定义的请求码</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要 BLUETOOTH_ADMIN权限。</span><br><span class="line">2、该方法将不经过用户同意，直接启用底层蓝牙硬件，并启动所有蓝牙系统服务。由于不同Android设备系统的实现不同，所以部分Android系统在调用该方法时也会弹框请求用户同意。</span><br><span class="line">3、打开蓝牙，还可以通过调用startActivityForResult方法，使用ACTION_REQUEST_ENABLE意图来实现，此方法将弹出对话框，请求允许打开蓝牙。可以在Activity中的onActivityResult()方法中处理操作结果。</span><br><span class="line">4、该方法是一个异步调用：它将立即返回结果。如果此调用返回true，则适配器状态将立即从STATE_OFF转换为STATE_TURNING_ON，并且稍后过渡到STATE_OFF或STATE_ON 。如果此调用返回false，则说明出现问题阻止适配器开启，例如设备处于飞行模式，或者蓝牙已打开。因此还应当监听ACTION_STATE_CHANGED广播，以跟踪后续蓝牙状态更改。</span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong><a href>disable</a>()</strong></em> —— 关闭蓝牙</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要 BLUETOOTH_ADMIN权限。</span><br><span class="line">2、该方法将不经过用户同意，关闭所有蓝牙连接，停止蓝牙系统服务并关闭底层蓝牙硬件。由于不同Android设备系统的实现不同，所以部分Android系统在调用该方法时也会弹框请求用户同意。</span><br><span class="line">3、该方法是一个异步调用：它将立即返回结果。如果此调用返回true，则适配器状态将立即从STATE_ON转换为STATE_TURNING_OFF，并且稍后过渡到STATE_OFF或STATE_ON 。如果此调用返回false，则说明出现问题阻止适配器关闭，例如适配器已关闭。因此还应当监听ACTION_STATE_CHANGED广播，以跟踪后续蓝牙状态更改。</span><br></pre></td></tr></table></figure></li>
+<li><p><em><strong><a href>checkBluetoothAddress</a>(String address)</strong></em> —— 验证蓝牙MAC地址</p>
+</li>
+<li><p><a href><em><strong>getAddress</strong></em></a>() —— 获取本地蓝牙地址</p>
+</li>
+<li><p><a href><em><strong>getBondedDevices</strong></em></a>() —— 获取与本机蓝牙所有绑定的远程蓝牙信息</p>
+</li>
+<li><p><a href><em><strong>getName</strong></em></a>() —— 获取本地蓝牙适配器的蓝牙名称</p>
+</li>
+<li><p><a href><em><strong>setName</strong></em></a>(String name) —— 设置本地蓝牙适配器的蓝牙名称</p>
+</li>
+<li><p><a href><em><strong>getScanMode</strong></em></a>() —— 获取本地蓝牙适配器的当前蓝牙扫描模式</p>
+<p>蓝牙扫描模式：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>值(int)</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SCAN_MODE_NONE</td>
+<td>20</td>
+<td>该设备不能扫描以及被扫描</td>
+</tr>
+<tr>
+<td>SCAN_MODE_CONNECTABLE</td>
+<td>21</td>
+<td>该设备可以扫描其他蓝牙设备</td>
+</tr>
+<tr>
+<td>SCAN_MODE_CONNECTABLE_DISCOVERABLE</td>
+<td>23</td>
+<td>该设备既可以扫描其他设备，也可以被其他设备扫描发现</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><a href><em><strong>getState</strong></em></a>()获取本地蓝牙适配器当前状态（感觉可能调试的时候更需要）</p>
+<p>蓝牙适配器状态：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>值(int)</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>STATE_OFF</td>
+<td>10</td>
+<td>表示本地蓝牙适配器已关闭</td>
+</tr>
+<tr>
+<td>STATE_TURNING_ON</td>
+<td>11</td>
+<td>表示本地蓝牙适配器正在打开</td>
+</tr>
+<tr>
+<td>STATE_ON</td>
+<td>12</td>
+<td>表示本地蓝牙适配器已开启，并可供使用</td>
+</tr>
+<tr>
+<td>STATE_TURNING_OFF</td>
+<td>13</td>
+<td>表示本地蓝牙适配器正在关闭</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><a href><em><strong>isEnabled</strong></em></a>() —— 判断蓝牙是否打开，已打开返回true，否则，返回false。<a href>getState</a>()==STATE_ON 等价。</p>
+</li>
+<li><p><a href><em><strong>isDiscovering</strong></em></a>() —— 判断当前是否正在查找设备，是返回true，否则返回false。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要 BLUETOOTH权限。</span><br><span class="line">2、若蓝牙未打开，该方法将返回false。</span><br><span class="line">3、扫描设备是一个重量级过程，不应在扫描时尝试建立连接，而此时已存在的蓝牙连接将获得有限制的带宽以及高延迟。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>startDiscovery</strong></em></a>() —— 开始扫描周边蓝牙设备。若启动成功，返回true；否则返回false。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要 BLUETOOTH_ADMIN权限。</span><br><span class="line">2、通常为12秒左右的查询扫描过程。</span><br><span class="line">3、这是一个异步调用，它会立即返回。注册ACTION_DISCOVERY_STARTED和ACTION_DISCOVERY_FINISHED广播以确定发现何时开始和完成的确切时间。注册ACTION_FOUND以便在发现远程蓝牙设备时收到通知。</span><br><span class="line">4、若蓝牙未打开，该方法将返回false。</span><br><span class="line">5、扫描设备是一个重量级过程，不应在扫描时尝试建立连接，而此时已存在的蓝牙连接将获得有限制的带宽以及高延迟。可以使用cancelDiscovery()取消扫描操作。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>cancelDiscovery</strong></em></a>() —— 取消发现，也就是说当我们正在搜索设备的时候调用这个方法将不再继续搜索。取消成功, 则返回true; 如果取消失败, 返回false。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要 BLUETOOTH_ADMIN权限。</span><br><span class="line">2、若蓝牙未打开，该方法将返回false。</span><br><span class="line">3、因为蓝牙搜索是一个重量级过程，会耗费大量资源，所以在连接远程蓝牙设备前，必须调用这个方法，取消搜索。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>getRemoteDevice</strong></em></a>(String address) —— 根据蓝牙地址获取远程蓝牙设备。如果MAC无效无效，将抛出<a href>IllegalArgumentException</a>异常</p>
+</li>
+<li><p><a href><em><strong>listenUsingInsecureRfcommWithServiceRecord</strong></em></a>(String name,UUID uuid) —— 根据名称，UUID创建一个正在监听的<strong>不安全的</strong>带有服务记录的无线射频通信（RFCOMM）蓝牙端口并返回<a href>BluetoothServerSocket</a>对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要 BLUETOOTH权限。</span><br><span class="line">2、系统将分配一个未使用的RFCOMM通道进行侦听。</span><br><span class="line">3、当发生错误时，例如蓝牙不可用、权限不足、通道被占用等，将抛出IOException异常。</span><br><span class="line">4、通过此方式创建的蓝牙服务套接字是不安全的，连接时不需要进行配对。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>listenUsingRfcommWithServiceRecord</strong></em></a>(String name, UUID uuid) —— 根据名称，UUID创建一个正在监听的<strong>安全的</strong>带有服务记录的无线射频通信（RFCOMM）蓝牙端口并返回<a href>BluetoothServerSocket</a>对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要 BLUETOOTH权限。</span><br><span class="line">2、系统将分配一个未使用的RFCOMM通道进行侦听。</span><br><span class="line">3、当发生错误时，例如蓝牙不可用、权限不足、通道被占用等，将抛出IOException异常。</span><br><span class="line">4、通过此方式创建的蓝牙服务套接字是安全的，连接时需要进行配对。</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><a href><strong>BluetoothDevice</strong>类</a></p>
+<blockquote>
+<p>代表一个远程蓝牙设备，使用这个来请求一个与远程设备的<a href>BluetoothSocket</a>连接，或者查询关于设备名称、地址、类和连接状态等设备信息。</p>
+</blockquote>
+<ul>
+<li><p><a href><em><strong>getName</strong></em></a>() —— 获取远程蓝牙设备的蓝牙名称。成功则返回蓝牙名称，若出现问题则返回null。</p>
+</li>
+<li><p><a href><em><strong>getAddress</strong></em></a>() —— 获取远程蓝牙设备的硬件地址</p>
+</li>
+<li><p><a href><em><strong>getBondState</strong></em></a>() —— 获取远程蓝牙设备的绑定状态</p>
+<p>蓝牙绑定状态：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>值(int)</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>BOND_NONE</td>
+<td>10</td>
+<td>远程设备未绑定。</td>
+</tr>
+<tr>
+<td>BOND_BONDING</td>
+<td>11</td>
+<td>正在与远程设备进行绑定。</td>
+</tr>
+<tr>
+<td>BOND_BONDED</td>
+<td>12</td>
+<td>远程设备已绑定。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p><a href><em><strong>createBond</strong></em></a>() —— 开始与远程蓝牙设备的绑定过程。若成功开始绑定则返回true，否则返回false。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要BLUETOOTH_ADMIN权限。</span><br><span class="line">2、这是一个异步调用，它会立即返回。注册监听ACTION_BOND_STATE_CHANGED广播，当绑定过程完成时及时获取其结果通知。</span><br><span class="line">3、Android系统服务将处理必要的用户交互以确认并完成绑定过程。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>createInsecureRfcommSocketToServiceRecord</strong></em></a>(UUID uuid) —— 根据UUID创建安全的蓝牙套接字并返回一个<a href>BluetoothSocket</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要BLUETOOTH权限。</span><br><span class="line">2、通信渠道将不会有认证的链接密钥，即它将受到中间人攻击。</span><br><span class="line">3、对于蓝牙 2.1 设备，链接将被加密，因为加密是强制性的。对于旧设备（蓝牙 2.1 之前的设备），链接不会被加密。</span><br><span class="line">4、它旨在与listenUsingInsecureRfcommWithServiceRecord(String, UUID)用于对等蓝牙应用。</span><br><span class="line">5、出现错误时，例如蓝牙不可用、权限不足，将抛出IOException异常。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>createRfcommSocketToServiceRecord</strong></em></a>(UUID uuid) —— 根据UUID创建安全的蓝牙套接字并返回一个<a href>BluetoothSocket</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、需要BLUETOOTH权限。</span><br><span class="line">2、只有经过身份验证的套接字链接才可以使用此套接字。认证是指认证链路密钥，以防止中间人攻击。</span><br><span class="line">3、此套接字上的通信将被加密。</span><br><span class="line">4、这是为与对等蓝牙应用程序 listenUsingRfcommWithServiceRecord(String, UUID)配合使用而设计的。</span><br><span class="line">5、出现错误时，例如蓝牙不可用、权限不足，将抛出IOException异常。</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><a href>BluetoothServerSocket类</a></strong></p>
+<blockquote>
+<p>代表一个开放的服务器socket，它监听接受的请求（与TCP <a href>ServerSocket</a>类似）。为了连接两台Android设备，一个设备必须使用这个类开启一个服务器socket。当一个远程蓝牙设备开始一个和该设备的连接请求，<a href>BluetoothServerSocket</a>将会返回一个已连接的<a href>BluetoothSocket</a>，接受该连接。</p>
+</blockquote>
+<ul>
+<li><a href><em><strong>accept</strong></em></a>() —— 阻塞直到建立连接（无超时）。成功连接时连接的<a href>BluetoothSocket</a>对象。</li>
+<li><a href><em><strong>accept</strong></em></a>(int timeout) —— 阻塞直到建立连接或超时。成功连接时连接的<a href>BluetoothSocket</a>对象</li>
+<li><a href><em><strong>close</strong></em></a>() —— 关闭该监听服务端口，并释放所有关联的资源。关闭这个端口不会关闭accept()方法返回的<a href>BluetoothSocket</a>对象。</li>
+</ul>
+</li>
+<li><p><a href><strong>BluetoothSocket</strong>类</a></p>
+<blockquote>
+<p>代表一个蓝牙socket的接口（和TCP Socket类似）。这是一个连接点，它允许一个应用与其他蓝牙设备通过<a href>InputStream</a>和<a href>OutputStream</a>交换数据。</p>
+<p><strong>跟<a href>BluetoothServerSocket</a>相对，客户端一共5个方法，不出意外，都会用到:</strong></p>
+</blockquote>
+<ul>
+<li><p><a href><em><strong>connect</strong></em></a>() —— 尝试连接到远程蓝牙服务器。</p>
+</li>
+<li><p><a href><em><strong>isConnected</strong></em></a>() —— 获取此套接字的连接状态，即是否与远程蓝牙服务连接。若连接则返回true，否则返回false。</p>
+</li>
+<li><p><a href><em><strong>getRemoteDevice</strong></em></a>() —— 获取此套接字连接的远程蓝牙设备返回连接的远程蓝牙设备<a href>BluetoothDevice</a>对象。</p>
+</li>
+<li><p><a href><em><strong>getInputStream</strong></em></a>() —— 获取与此套接字关联的输入流返回输入流对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、即使套接字尚未连接，输入流也会返回，但对该流的操作将抛出IOException异常，直到关联的套接字连接。</span><br><span class="line">2、该方法调用出错时，将抛出IOException异常。</span><br><span class="line">3、通过此方法获取的输入流对象，可以读取对端发送的数据。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>getOutputStream</strong></em></a>() —— 获取与此套接字关联的输出流返回输出流对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用说明：</span><br><span class="line">1、即使套接字尚未连接，输出流也会返回，但对该流的操作将抛出IOException异常，直到关联的套接字连接。</span><br><span class="line">2、该方法调用出错时，将抛出IOException异常。</span><br><span class="line">3、通过此方法获取的输出流对象，可以发送数据给对端。</span><br></pre></td></tr></table></figure></li>
+<li><p><a href><em><strong>close</strong></em></a>() —— 关闭此流并释放与其关联的所有系统资源。如果流已经关闭，则调用此方法不起作用。该方法调用出现问题，将抛出IOException异常。</p>
+</li>
+</ul>
+</li>
+<li><p><a href><strong>BluetoothClass</strong></a></p>
+<blockquote>
+<p>描述一个蓝牙设备的基本特性和性能。这是一个只读的属性集合，它定义了设备的主要和次要的设备类以及它的服务。但是，它没有描述所有的蓝牙配置和设备支持的服务，它只是暗示了设备的类型。</p>
+</blockquote>
+</li>
+<li><p><a href><strong>BluetoothProfile</strong></a></p>
+<blockquote>
+<p>一个表示蓝牙配置文件的接口。一个Bluetooth profile是一个基于蓝牙的通信无线接口定义。一个例子是Hands-Free profile。更多的讨论请见Working with Profiles。</p>
+</blockquote>
+</li>
+<li><p><a href><strong>BluetoothHeadset</strong></a></p>
+<blockquote>
+<p>提供对移动手机使用的蓝牙耳机的支持。它包含了Headset and Hands-Free (v1.5)配置文件。</p>
+</blockquote>
+</li>
+<li><p><a href><strong>BluetoothA2dp</strong></a></p>
+<blockquote>
+<p>定义高品质的音频如何通过蓝牙连接从一个设备传输到另一个设备。”A2DP“是Advanced Audio Distribution Profile的缩写。</p>
+</blockquote>
+</li>
+<li><p><a href><strong>BluetoothHealth</strong></a></p>
+<blockquote>
+<p>表示一个Health Device Profile代理，它控制蓝牙服务。</p>
+</blockquote>
+</li>
+<li><p><a href><strong>BluetoothHealthCallback</strong></a></p>
+<blockquote>
+<p>一个抽象类，你可以使用它来实现<a href>BluetoothHealth</a>的回调函数。你必须扩展这个类并实现回调函数方法来接收应用程序的注册状态改变以及蓝牙串口状态的更新。</p>
+</blockquote>
+</li>
+<li><p><a href><strong>BluetoothHealthAppConfiguration</strong></a></p>
+<blockquote>
+<p>表示一个应用程序配置，Bluetooth Health第三方应用程序注册和一个远程Bluetooth Health设备通信。</p>
+</blockquote>
+</li>
+<li><p><strong><a href>BluetoothProfile.ServiceListener</a></strong></p>
+<blockquote>
+<p>一个接口，当<a href>BluetoothProfile</a> IPC客户端从服务器上建立连接或断开连接时，它负责通知它们（也就是，运行在特性配置的内部服务）。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="四、连接设备"><a href="#四、连接设备" class="headerlink" title="四、连接设备"></a>四、连接设备</h2><ul>
+<li>蓝牙通讯机制建立在socket上；</li>
+<li>要在两台设备上创建连接，需要实现**<code>服务器端</code><strong>和</strong><code>客户端</code>**机制 一般通讯过程： 在<code>服务端</code>等待<code>客户端</code>的<code>连接请求</code>， 有<code>连接请求</code>后<code>连接</code>， 连接成功后有一个<code>socket（也即套接字）</code>， 通过<code>socket套接字</code>得到<code>IO流</code>， 往<code>输入流</code>中<code>读</code>数据， 或者往<code>输出流</code>中<code>写</code>数据， 即可以实现<code>两台设备之间的通讯</code>；</li>
+<li><code>服务器设备</code>和<code>客户端设备</code>分别<code>获得</code>需要的<code>BluetoothSocket</code>； 上面说过， 要在两台设备上创建连接， 需要实现<code>服务器端</code>和<code>客户端</code>机制，  其中有一台需要开放<code>服务端的套接字</code>， 另外一台作为<code>客户端</code>， 需要通过<code>蓝牙</code>的<code>Mac地址</code>向<code>服务端</code>发送<code>连接请求</code>； 当我们的<code>服务端</code>和<code>客户端</code>在同一个<code>频道</code>上的话， 就可以进行<code>连接</code>； 之后<code>服务端</code>会接收一个<code>套接字</code>， 这个<code>套接字</code>会作为<code>服务端</code>和<code>客户端</code> <code>进行通信的接口</code>；</li>
+</ul>
+<h3 id="1、设置服务器端"><a href="#1、设置服务器端" class="headerlink" title="1、设置服务器端"></a>1、设置服务器端</h3><p>设置服务器套接字并接受连接的基本过程： </p>
+<ul>
+<li>通过调用<code>listenUsingRfcommWithServiceRecord(String, UUID)</code>获取<code>BluetoothServerSocket</code>；</li>
+<li>通过调用<code>accept()</code>开始侦听连接请求</li>
+<li>除非要接受更多连接，否则调用<code>close()</code>结束该次通信；</li>
+</ul>
+<h3 id="2、设置客户端"><a href="#2、设置客户端" class="headerlink" title="2、设置客户端"></a>2、设置客户端</h3><p>发起与远程设备（保持开放的服务器套接字的设备）的连接； </p>
+<ul>
+<li>首先要获取<code>表示该远程设备</code>的<code>BluetoothDevice</code>对象， 这个对象是通过<code>蓝牙的Mac地址</code>构造的； <code>Mac地址</code>是一个设备的全世界唯一的标识；</li>
+<li>通过<a href>BluetoothDevice</a>对象 获取<a href>BluetoothSocket</a>并发起连接—— <ul>
+<li>使用<code>BluetoothDevice</code>对象 调用<code>createRfcommSocketToServiceRecord(UUID)</code> 获取<code>BluetoothSocket</code> </li>
+<li>通过<code>connect()</code>发起连接；</li>
+</ul>
+</li>
+</ul>
+<h3 id="3、关于BluetoothChatService"><a href="#3、关于BluetoothChatService" class="headerlink" title="3、关于BluetoothChatService"></a>3、关于BluetoothChatService</h3><p>Service中包括了三个线程，三个线程分别控制了通信的流程 <strong>（左边是Accept Thread，右边是Connect Thread）</strong>：    </p>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/01.png" alt="01"></p>
+<p>​     <strong><code>AcceptThread</code>函数接收的是一个布尔值<code>secure</code>；</strong> </p>
+<ul>
+<li> 服务端，通过创建ServerSocket来等待客户端的连接， 首先是获取<code>BluetoothSocket</code>：    </li>
+</ul>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/02.png" alt="02"></p>
+<p>​     接着在线程的<code>run()</code>方法中会调用<code>accept()</code>函数，等待客户端的连接：   </p>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/03.png" alt="03"></p>
+<p>​     <strong>如果客户端连接成功，<code>if (socket != null)</code>，</strong> <strong>则会调用<code>connect()</code>函数，创建一个<code>Connected Thread</code></strong> <strong>（注意这里是Connected，不是Connect）</strong>， </p>
+<ul>
+<li> <strong><code>ConnectThread</code>函数接收的是一个布尔值<code>secure</code>，以及一个<code>BluetoothDevice</code>；</strong>    </li>
+</ul>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/04.png" alt="04"></p>
+<ul>
+<li><strong>通过调用<code>device.createRfcommSocketToServiceRecord()</code>来创建<code>BluetoothSocket</code>；</strong></li>
+<li> <strong>通过<code>BluetoothSocket</code>的<code>connect()</code>方法</strong>就可以连接到服务端：    </li>
+</ul>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/05.png" alt="05"></p>
+<ul>
+<li>连接成功后，同样是创建一个<code>Connected Thread</code>；</li>
+<li> 这个<code>Connected Thread</code>是<code>客户端</code>和<code>服务端</code>共用的； 也即<code>客户端</code>调用<code>connect()</code>之后， 会激活<code>服务端</code>的<code>accept()</code>函数：    </li>
+</ul>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/06.png" alt="06"></p>
+<p>​    激活之后服务端就往下走，   </p>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/07.png" alt="07"></p>
+<ul>
+<li> Connected Thread 这里， 首先会通过上图中左上（服务端）和右上（客户端）两个构造出来的Socket的传入， 得到两个Stream——input/output Steam；（用于 读/写数据）； 调用<code>write()</code>时会往<code>outputSteam</code>中写东西； 读数据时则处理<code>input stream</code>；    </li>
+</ul>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/08.png" alt="08"></p>
+<p>​     源码：   </p>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/09.png" alt="09"></p>
+<p>​     write()：   </p>
+<p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/10.png" alt="10"></p>
+<h2 id="五、经典蓝牙开发流程"><a href="#五、经典蓝牙开发流程" class="headerlink" title="五、经典蓝牙开发流程"></a>五、经典蓝牙开发流程</h2><h3 id="1、经典蓝牙开发流程分析"><a href="#1、经典蓝牙开发流程分析" class="headerlink" title="1、经典蓝牙开发流程分析"></a>1、经典蓝牙开发流程分析</h3><p><img src="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/11.png" alt="11"></p>
+<h3 id="2、蓝牙服务端实现"><a href="#2、蓝牙服务端实现" class="headerlink" title="2、蓝牙服务端实现"></a>2、蓝牙服务端实现</h3><h5 id="1-在工程清单文件AndroidManifest-xml中添加权限："><a href="#1-在工程清单文件AndroidManifest-xml中添加权限：" class="headerlink" title="(1)在工程清单文件AndroidManifest.xml中添加权限："></a>(1)在工程清单文件AndroidManifest.xml中添加权限：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--如果使用了BLUETOOTH_ADMIN权限，那么必须使用BLUETOOTH权限--&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.BLUETOOTH&quot;</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.BLUETOOTH_ADMIN&quot;</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.READ_EXTERNAL_STORAGE&quot;</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;</span>/&gt;</span><br><span class="line">    </span><br><span class="line">&lt;!--android6<span class="number">.0</span>后需要搜索周边蓝牙设备，需要添加以下两个权限--&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span>/&gt;</span><br><span class="line">&lt;uses-permission android:name=<span class="string">&quot;android.permission.ACCESS_COARSE_LOCATION&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--设备硬件必须支持蓝牙--&gt;</span><br><span class="line">&lt;uses-feature android:name=<span class="string">&quot;android.hardware.bluetooth&quot;</span> android:required=<span class="string">&quot;true&quot;</span>/&gt;</span><br></pre></td></tr></table></figure>
+
+<h5 id="2-获取本地蓝牙适配器："><a href="#2-获取本地蓝牙适配器：" class="headerlink" title="(2)获取本地蓝牙适配器："></a>(2)获取本地蓝牙适配器：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mBluetoothAdapter= BluetoothAdapter.getDefaultAdapter();</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-打开蓝牙："><a href="#3-打开蓝牙：" class="headerlink" title="(3)打开蓝牙："></a>(3)打开蓝牙：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 打开蓝牙</span></span><br><span class="line"><span class="comment"> * 方式一：通过Intent来向用户弹框请求打开蓝牙，可以重写onActivityResult来监听打开蓝牙的请求结果</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">openBluetooth</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(mBluetoothAdapter==<span class="keyword">null</span>)&#123;</span><br><span class="line">        showTip(<span class="string">&quot;当前设备不支持蓝牙功能！&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(mBluetoothAdapter.isEnabled())&#123;</span><br><span class="line">        showTip(<span class="string">&quot;蓝牙已打开&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Intent intent=<span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);</span><br><span class="line">    startActivityForResult(intent,GlobalDef.REQ_CODE_OPEN_BT);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);</span><br><span class="line">    <span class="keyword">if</span>(requestCode==GlobalDef.REQ_CODE_OPEN_BT)&#123;</span><br><span class="line">        <span class="keyword">if</span>(resultCode == Activity.RESULT_OK)&#123;</span><br><span class="line">            showTip(<span class="string">&quot;蓝牙打开成功&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            showTip(<span class="string">&quot;蓝牙打开失败&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 打开蓝牙</span></span><br><span class="line"><span class="comment"> * 方式二：通过enable方法静默打开蓝牙，无需用户同意（部分Android系统使用该方法依然会弹框提示，向用户请求打开蓝牙）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">mBluetoothAdapter.enable();</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-关闭蓝牙"><a href="#4-关闭蓝牙" class="headerlink" title="(4)关闭蓝牙"></a>(4)关闭蓝牙</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 关闭蓝牙</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">closeBluetooth</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(mBluetoothAdapter==<span class="keyword">null</span>)&#123;</span><br><span class="line">        showTip(<span class="string">&quot;当前设备不支持蓝牙功能！&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!mBluetoothAdapter.isEnabled())&#123;</span><br><span class="line">        showTip(<span class="string">&quot;当前蓝牙未打开&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//关闭蓝牙，无需用户同意（部分Android系统使用该方法依然会弹框提示）</span></span><br><span class="line">    mBluetoothAdapter.disable();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-允许蓝牙可见："><a href="#5-允许蓝牙可见：" class="headerlink" title="(5)允许蓝牙可见："></a>(5)允许蓝牙可见：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方式一：通过Intent方式向用户请求允许蓝牙被搜索</span></span><br><span class="line"><span class="comment">//注：如果蓝牙没有开启，用户点击确定后，会首先开启蓝牙，继而设置蓝牙能被扫描</span></span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);</span><br><span class="line"><span class="comment">//设置蓝牙可见性的时间，默认持续时间为120秒，每个请求的最长持续时间上限为300秒</span></span><br><span class="line">intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, <span class="number">120</span>);</span><br><span class="line">startActivity(intent);</span><br><span class="line"></span><br><span class="line"><span class="comment">//方式二：通过反射的方式来设置蓝牙可见性，且不会出现弹框</span></span><br><span class="line"><span class="comment">//注：如果蓝牙没有开启，通过此方式并不会直接打开蓝牙</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 设置蓝牙可见</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> adapter</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> timeout 超时为0时，永久可见</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setDiscoverableTimeout</span><span class="params">(BluetoothAdapter adapter, <span class="keyword">int</span> timeout)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//BluetoothAdapter adapter=BluetoothAdapter.getDefaultAdapter();</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Method setDiscoverableTimeout = BluetoothAdapter.class.getMethod(<span class="string">&quot;setDiscoverableTimeout&quot;</span>, <span class="keyword">int</span>.class);</span><br><span class="line">        setDiscoverableTimeout.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        Method setScanMode =BluetoothAdapter.class.getMethod(<span class="string">&quot;setScanMode&quot;</span>, <span class="keyword">int</span>.class,<span class="keyword">int</span>.class);</span><br><span class="line">        setScanMode.setAccessible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        setDiscoverableTimeout.invoke(adapter, timeout);</span><br><span class="line">        setScanMode.invoke(adapter, BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE,timeout);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 关闭蓝牙可见</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> adapter</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">closeDiscoverableTimeout</span><span class="params">(BluetoothAdapter adapter)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Method setDiscoverableTimeout = BluetoothAdapter.class.getMethod(<span class="string">&quot;setDiscoverableTimeout&quot;</span>, <span class="keyword">int</span>.class);</span><br><span class="line">        setDiscoverableTimeout.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        Method setScanMode =BluetoothAdapter.class.getMethod(<span class="string">&quot;setScanMode&quot;</span>, <span class="keyword">int</span>.class,<span class="keyword">int</span>.class);</span><br><span class="line">        setScanMode.setAccessible(<span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">        setDiscoverableTimeout.invoke(adapter, <span class="number">1</span>);</span><br><span class="line">        setScanMode.invoke(adapter, BluetoothAdapter.SCAN_MODE_CONNECTABLE,<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="6-创建蓝牙服务套接字，等待其他蓝牙客户端连接："><a href="#6-创建蓝牙服务套接字，等待其他蓝牙客户端连接：" class="headerlink" title="(6)创建蓝牙服务套接字，等待其他蓝牙客户端连接："></a>(6)创建蓝牙服务套接字，等待其他蓝牙客户端连接：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运行服务端</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runServer</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(mServerRunningFlag)&#123;</span><br><span class="line">        showTip(<span class="string">&quot;服务端正在运行，请勿重复启动!&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        mSocketList=<span class="keyword">new</span> LinkedList&lt;BluetoothSocket&gt;();</span><br><span class="line">        mExecutorService= Executors.newCachedThreadPool();</span><br><span class="line"></span><br><span class="line">        mServerSocket=mBluetoothAdapter.listenUsingRfcommWithServiceRecord(<span class="string">&quot;BluetoothTool&quot;</span>, GlobalDef.BT_UUID);</span><br><span class="line">        mServerSocket=mBluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord(<span class="string">&quot;BluetoothTool&quot;</span>, GlobalDef.BT_UUID);</span><br><span class="line">        mServerRunningFlag=<span class="keyword">true</span>;</span><br><span class="line">        btnServerControl.setText(<span class="string">&quot;关闭服务端&quot;</span>);</span><br><span class="line"></span><br><span class="line">        showTip(<span class="string">&quot;蓝牙服务端成功启动&quot;</span>);</span><br><span class="line">        <span class="keyword">new</span> Thread()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    BluetoothSocket socket=<span class="keyword">null</span>;</span><br><span class="line">                    <span class="keyword">while</span>(mServerRunningFlag)&#123;</span><br><span class="line">                        socket=mServerSocket.accept();</span><br><span class="line">                        mSocketList.add(socket);</span><br><span class="line">                        mExecutorService.execute(<span class="keyword">new</span> SocketThread(socket));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;<span class="keyword">catch</span>(IOException e)&#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">        showTip(<span class="string">&quot;服务端启动出现异常&quot;</span>);</span><br><span class="line">        Log.e(TAG,<span class="string">&quot;runServer IOException&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-连接成功之后，就通过获取BluetoothSocket的输入输出流进行数据传输："><a href="#7-连接成功之后，就通过获取BluetoothSocket的输入输出流进行数据传输：" class="headerlink" title="(7)连接成功之后，就通过获取BluetoothSocket的输入输出流进行数据传输："></a>(7)连接成功之后，就通过获取BluetoothSocket的输入输出流进行数据传输：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取流</span></span><br><span class="line">InputStream inputStream = socket.getInputStream();</span><br><span class="line">OutputStream outputStream = socket.getOutputStream();</span><br><span class="line"><span class="comment">// 写出、读入</span></span><br><span class="line"><span class="keyword">byte</span>[] temp=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">inputStream.read(temp);<span class="comment">//当无数据时将阻塞等待</span></span><br><span class="line">outputStream.write(temp);</span><br></pre></td></tr></table></figure>
+
+<h5 id="8-以下为用于操作BluetoothSocket的SocketThread的简单实现"><a href="#8-以下为用于操作BluetoothSocket的SocketThread的简单实现" class="headerlink" title="(8)以下为用于操作BluetoothSocket的SocketThread的简单实现"></a>(8)以下为用于操作BluetoothSocket的SocketThread的简单实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SocketThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> BluetoothSocket mSocket;</span><br><span class="line">    <span class="keyword">private</span> BluetoothDevice mDevice;</span><br><span class="line">    <span class="keyword">private</span> InputStream mIn;</span><br><span class="line">    <span class="keyword">private</span> OutputStream mOut;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isOpen = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] mRecBuffer=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>*<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mRecPos=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mFilePos=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SocketThread</span><span class="params">(BluetoothSocket socket)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.mSocket = socket;</span><br><span class="line">            mDevice=socket.getRemoteDevice();</span><br><span class="line">            mIn = socket.getInputStream();</span><br><span class="line">            mOut = socket.getOutputStream();</span><br><span class="line">            isOpen = <span class="keyword">true</span>;</span><br><span class="line">            showTip(getDevInfo(mDevice)+<span class="string">&quot;成功连接&quot;</span>);</span><br><span class="line">            Log.d(TAG, <span class="string">&quot;a socket thread create&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            Log.e(TAG, <span class="string">&quot;create SocketThread fail&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDevInfo</span><span class="params">(BluetoothDevice bluetoothDevice)</span></span>&#123;</span><br><span class="line">        String strName=<span class="string">&quot;unknown&quot;</span>;</span><br><span class="line">        String strMac=<span class="string">&quot;unknown&quot;</span>;</span><br><span class="line">        <span class="keyword">if</span>(bluetoothDevice!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            strName=bluetoothDevice.getName();</span><br><span class="line">            strMac=bluetoothDevice.getAddress();</span><br><span class="line">        &#125;</span><br><span class="line">        String info=<span class="string">&quot;[&quot;</span>+strName+<span class="string">&quot;,&quot;</span>+strMac+<span class="string">&quot;]&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> readLen=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">byte</span>[] buffer=<span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">while</span>(isOpen)&#123;</span><br><span class="line">                readLen=mIn.read(buffer);</span><br><span class="line">                <span class="keyword">if</span>(readLen&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                    System.arraycopy(buffer,<span class="number">0</span>,mRecBuffer,mRecPos,readLen);</span><br><span class="line">                    mRecPos+=readLen;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">                        <span class="keyword">if</span>(mIn.available()&gt;<span class="number">0</span>)&#123;<span class="comment">//若流中有数据，则读取</span></span><br><span class="line">                            readLen=mIn.read(buffer);</span><br><span class="line">                            <span class="keyword">if</span>((mRecPos+readLen)&gt;mRecBuffer.length)&#123;<span class="comment">//超出缓冲区</span></span><br><span class="line">                                showTip(<span class="string">&quot;读取数据超出缓冲区，将已读取的数据输出：&quot;</span>);</span><br><span class="line">                                showTip(<span class="string">&quot;Receive hex data = &quot;</span>+ StringUtil.bytesToHexString(mRecBuffer,<span class="number">0</span>,mRecPos));</span><br><span class="line">                                showTip(<span class="string">&quot;Receive string data = &quot;</span>+<span class="keyword">new</span> String(mRecBuffer,<span class="number">0</span>,mRecPos).trim());</span><br><span class="line">                                mRecPos=<span class="number">0</span>;</span><br><span class="line">                                Arrays.fill(mRecBuffer,(<span class="keyword">byte</span>)<span class="number">0x00</span>);</span><br><span class="line">                            &#125;</span><br><span class="line"></span><br><span class="line">                            System.arraycopy(buffer,<span class="number">0</span>,mRecBuffer,mRecPos,readLen);</span><br><span class="line">                            mRecPos+=readLen;</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">else</span>&#123;<span class="comment">//若流中无数据</span></span><br><span class="line">                            <span class="keyword">if</span>(mRecPos&gt;<span class="number">0</span>)&#123;<span class="comment">//说明此时数据读取完毕，将内容输出</span></span><br><span class="line">                                showTip(<span class="string">&quot;Receive hex data = &quot;</span>+StringUtil.bytesToHexString(mRecBuffer,<span class="number">0</span>,mRecPos));</span><br><span class="line">                                showTip(<span class="string">&quot;Receive string data = &quot;</span>+<span class="keyword">new</span> String(mRecBuffer,<span class="number">0</span>,mRecPos).trim());</span><br><span class="line"></span><br><span class="line">                                <span class="comment">//收到请求文件传输指令</span></span><br><span class="line">                                <span class="keyword">if</span>(mRecBuffer[<span class="number">0</span>]==<span class="number">0x01</span> &amp;&amp; mRecBuffer[mRecPos-<span class="number">1</span>]==<span class="number">0x04</span>)&#123;</span><br><span class="line">                                    String strInfoJson=<span class="keyword">new</span> String(mRecBuffer,<span class="number">1</span>,mRecPos-<span class="number">2</span>);</span><br><span class="line">                                    JSONObject infoJson=<span class="keyword">new</span> JSONObject(strInfoJson);</span><br><span class="line">                                    String fileName=infoJson.getString(<span class="string">&quot;FileName&quot;</span>);</span><br><span class="line">                                    <span class="keyword">long</span> totalSize=infoJson.getLong(<span class="string">&quot;FileSize&quot;</span>);<span class="comment">//文件总大小</span></span><br><span class="line">                                    String fileMD5=infoJson.getString(<span class="string">&quot;MD5&quot;</span>);</span><br><span class="line"></span><br><span class="line">                                    mFilePos=<span class="number">0</span>;<span class="comment">//已传输大小</span></span><br><span class="line">                                    <span class="keyword">int</span> nRate=<span class="number">0</span>;<span class="comment">//已传输的百分比</span></span><br><span class="line"></span><br><span class="line">                                    File recFile=<span class="keyword">new</span> File(RECEIVE_FILE_PATH+fileName);</span><br><span class="line">                                    <span class="keyword">if</span>(recFile.exists())&#123;</span><br><span class="line">                                        recFile.delete();</span><br><span class="line">                                    &#125;</span><br><span class="line"></span><br><span class="line">                                    showLoadingDialog(<span class="string">&quot;正在接收文件数据...&quot;</span>+nRate+<span class="string">&quot;%&quot;</span>);</span><br><span class="line">                                    <span class="comment">//循环接收文件数据并写入文件</span></span><br><span class="line">                                    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">                                        readLen=mIn.read(buffer);</span><br><span class="line">                                        <span class="keyword">if</span>(readLen&gt;<span class="number">0</span>)&#123;</span><br><span class="line">                                            writeFile(fileName,buffer,<span class="number">0</span>,readLen);</span><br><span class="line">                                            mFilePos+=readLen;</span><br><span class="line">                                            <span class="comment">//获得当前百分比</span></span><br><span class="line">                                            <span class="keyword">int</span> tmpRate=getPercent(mFilePos,totalSize);</span><br><span class="line">                                            <span class="keyword">if</span>(tmpRate!=nRate)&#123;</span><br><span class="line">                                                nRate=tmpRate;</span><br><span class="line">                                                showLoadingDialog(<span class="string">&quot;正在接收文件数据...&quot;</span>+nRate+<span class="string">&quot;%&quot;</span>);</span><br><span class="line">                                            &#125;</span><br><span class="line">                                            <span class="keyword">if</span>(mFilePos&gt;=totalSize)&#123;</span><br><span class="line">                                                <span class="keyword">break</span>;</span><br><span class="line">                                            &#125;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        <span class="keyword">else</span>&#123;</span><br><span class="line">                                            <span class="keyword">break</span>;</span><br><span class="line">                                        &#125;</span><br><span class="line">                                    &#125;</span><br><span class="line"></span><br><span class="line">                                    <span class="keyword">if</span>(!recFile.exists())&#123;</span><br><span class="line">                                        showTip(<span class="string">&quot;接收文件失败&quot;</span>);</span><br><span class="line">                                        <span class="keyword">byte</span>[] retData=<span class="string">&quot;Receive file fail!&quot;</span>.getBytes();</span><br><span class="line">                                        writeData(mSocket,retData,<span class="number">0</span>,retData.length);</span><br><span class="line">                                    &#125;</span><br><span class="line">                                    <span class="keyword">else</span>&#123;</span><br><span class="line">                                        String nMD5= FileDigest.getFileMD5(recFile);</span><br><span class="line">                                        <span class="keyword">if</span>(fileMD5.equals(nMD5))&#123;</span><br><span class="line">                                            showTip(<span class="string">&quot;文件接收成功&quot;</span>);</span><br><span class="line">                                            <span class="keyword">byte</span>[] retData=<span class="string">&quot;Server receive file success!&quot;</span>.getBytes();</span><br><span class="line">                                            writeData(mSocket,retData,<span class="number">0</span>,retData.length);</span><br><span class="line">                                        &#125;</span><br><span class="line">                                        <span class="keyword">else</span>&#123;</span><br><span class="line">                                            showTip(<span class="string">&quot;文件校验失败&quot;</span>);</span><br><span class="line">                                            <span class="keyword">byte</span>[] retData=<span class="string">&quot;File check fail!&quot;</span>.getBytes();</span><br><span class="line">                                            writeData(mSocket,retData,<span class="number">0</span>,retData.length);</span><br><span class="line">                                        &#125;</span><br><span class="line">                                    &#125;</span><br><span class="line">                                    dismissLoadingDialog();</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                mRecPos=<span class="number">0</span>;</span><br><span class="line">                                Arrays.fill(mRecBuffer,(<span class="keyword">byte</span>)<span class="number">0x00</span>);</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">break</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            dismissLoadingDialog();</span><br><span class="line">            release();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">release</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Log.d(TAG,<span class="string">&quot;A socketThread release&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(isOpen)&#123;</span><br><span class="line">                showTip(getDevInfo(mDevice)+<span class="string">&quot;断开连接&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            isOpen=<span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">if</span>(mOut!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    mOut.close();</span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                mOut=<span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(mIn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    mIn.close();</span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                mIn=<span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(mSocket!=<span class="keyword">null</span>)&#123;</span><br><span class="line">                mSocketList.remove(mSocket);</span><br><span class="line">                <span class="keyword">try</span>&#123;</span><br><span class="line">                    mSocket.close();</span><br><span class="line">                &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                mSocket=<span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、蓝牙客户端实现"><a href="#3、蓝牙客户端实现" class="headerlink" title="3、蓝牙客户端实现"></a>3、蓝牙客户端实现</h3><h5 id="1-添加权限，同蓝牙服务端。"><a href="#1-添加权限，同蓝牙服务端。" class="headerlink" title="(1)添加权限，同蓝牙服务端。"></a>(1)添加权限，同蓝牙服务端。</h5><h5 id="2-获取本地蓝牙适配器，同蓝牙服务端。"><a href="#2-获取本地蓝牙适配器，同蓝牙服务端。" class="headerlink" title="(2)获取本地蓝牙适配器，同蓝牙服务端。"></a>(2)获取本地蓝牙适配器，同蓝牙服务端。</h5><h5 id="3-打开蓝牙，同蓝牙服务端。"><a href="#3-打开蓝牙，同蓝牙服务端。" class="headerlink" title="(3)打开蓝牙，同蓝牙服务端。"></a>(3)打开蓝牙，同蓝牙服务端。</h5><h5 id="4-关闭蓝牙，同蓝牙服务端。"><a href="#4-关闭蓝牙，同蓝牙服务端。" class="headerlink" title="(4)关闭蓝牙，同蓝牙服务端。"></a>(4)关闭蓝牙，同蓝牙服务端。</h5><h5 id="5-允许蓝牙可见，同蓝牙服务端。"><a href="#5-允许蓝牙可见，同蓝牙服务端。" class="headerlink" title="(5)允许蓝牙可见，同蓝牙服务端。"></a>(5)允许蓝牙可见，同蓝牙服务端。</h5><h5 id="6-定义蓝牙广播接收器，用于接收蓝牙搜索、连接状态改变等的广播："><a href="#6-定义蓝牙广播接收器，用于接收蓝牙搜索、连接状态改变等的广播：" class="headerlink" title="(6)定义蓝牙广播接收器，用于接收蓝牙搜索、连接状态改变等的广播："></a>(6)定义蓝牙广播接收器，用于接收蓝牙搜索、连接状态改变等的广播：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BluetoothBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span></span>&#123;</span><br><span class="line">        String action=intent.getAction();</span><br><span class="line">        Log.d(TAG,<span class="string">&quot;Action received is &quot;</span>+action);</span><br><span class="line">        <span class="comment">//蓝牙搜索</span></span><br><span class="line">        <span class="keyword">if</span>(BluetoothDevice.ACTION_FOUND.equals(action))&#123;</span><br><span class="line">            BluetoothDevice scanDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            <span class="keyword">if</span>(scanDevice == <span class="keyword">null</span> || scanDevice.getName() == <span class="keyword">null</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span> btType=scanDevice.getType();</span><br><span class="line">            <span class="keyword">if</span>(btType==BluetoothDevice.DEVICE_TYPE_LE || btType==BluetoothDevice.DEVICE_TYPE_UNKNOWN)&#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            Log.d(TAG, <span class="string">&quot;bt name=&quot;</span>+scanDevice.getName()+<span class="string">&quot; address=&quot;</span>+scanDevice.getAddress());</span><br><span class="line">            deviceList.add(scanDevice);</span><br><span class="line">            <span class="keyword">short</span> rssi=intent.getExtras().getShort(BluetoothDevice.EXTRA_RSSI);</span><br><span class="line">            rssiList.add(rssi);</span><br><span class="line">            listAdapter.notifyDataSetChanged();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//蓝牙配对</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action))&#123;</span><br><span class="line">            BluetoothDevice btDevice = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);</span><br><span class="line">            <span class="keyword">if</span>(mCurDevice!=<span class="keyword">null</span> &amp;&amp; btDevice.getAddress().equals(mCurDevice.getAddress()))&#123;</span><br><span class="line">                <span class="keyword">int</span> state = intent.getIntExtra(BluetoothDevice.EXTRA_BOND_STATE, -<span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span>(state==BluetoothDevice.BOND_NONE)&#123;</span><br><span class="line">                    showTip(<span class="string">&quot;已取消与设备&quot;</span> + btDevice.getName() + <span class="string">&quot;的配对&quot;</span>);</span><br><span class="line">                    mFlag=-<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(state==BluetoothDevice.BOND_BONDED)&#123;</span><br><span class="line">                    showTip(<span class="string">&quot;与设备&quot;</span> + btDevice.getName() + <span class="string">&quot;配对成功&quot;</span>);</span><br><span class="line">                    mFlag=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(BluetoothAdapter.ACTION_STATE_CHANGED.equals(action))&#123;</span><br><span class="line">            <span class="keyword">int</span> blueState = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">switch</span> (blueState) &#123;</span><br><span class="line">                <span class="keyword">case</span> BluetoothAdapter.STATE_TURNING_ON:</span><br><span class="line">                    Log.i(TAG,<span class="string">&quot;onReceive---------STATE_TURNING_ON&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> BluetoothAdapter.STATE_ON:</span><br><span class="line">                    Log.i(TAG,<span class="string">&quot;onReceive---------STATE_ON&quot;</span>);</span><br><span class="line">                    showTip(<span class="string">&quot;蓝牙当前状态：ON&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> BluetoothAdapter.STATE_TURNING_OFF:</span><br><span class="line">                    Log.i(TAG,<span class="string">&quot;onReceive---------STATE_TURNING_OFF&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> BluetoothAdapter.STATE_OFF:</span><br><span class="line">                    Log.i(TAG,<span class="string">&quot;onReceive---------STATE_OFF&quot;</span>);</span><br><span class="line">                    showTip(<span class="string">&quot;蓝牙当前状态：OFF&quot;</span>);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-注册广播："><a href="#7-注册广播：" class="headerlink" title="(7)注册广播："></a>(7)注册广播：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_client);</span><br><span class="line"></span><br><span class="line">    mContext=<span class="keyword">this</span>;</span><br><span class="line">    mBluetoothAdapter= BluetoothAdapter.getDefaultAdapter();</span><br><span class="line">    initView();</span><br><span class="line">    loadingDialog=<span class="keyword">new</span> LoadingDialog(mContext);</span><br><span class="line">    <span class="comment">//注册广播</span></span><br><span class="line">    mBluetoothBroadcastReceiver=<span class="keyword">new</span> BluetoothBroadcastReceiver();</span><br><span class="line">    IntentFilter filter=<span class="keyword">new</span> IntentFilter();</span><br><span class="line">    filter.addAction(BluetoothDevice.ACTION_FOUND);</span><br><span class="line">    filter.addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED);</span><br><span class="line">    filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);</span><br><span class="line">    mContext.registerReceiver(mBluetoothBroadcastReceiver,filter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="8-搜索周边蓝牙设备："><a href="#8-搜索周边蓝牙设备：" class="headerlink" title="(8)搜索周边蓝牙设备："></a>(8)搜索周边蓝牙设备：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(mBluetoothAdapter.isDiscovering())&#123;</span><br><span class="line">    mBluetoothAdapter.cancelDiscovery();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//搜索到的蓝牙设备通过广播接收</span></span><br><span class="line">mBluetoothAdapter.startDiscovery();</span><br></pre></td></tr></table></figure>
+
+<h5 id="9-建立与蓝牙服务器的连接："><a href="#9-建立与蓝牙服务器的连接：" class="headerlink" title="(9)建立与蓝牙服务器的连接："></a>(9)建立与蓝牙服务器的连接：</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 蓝牙配对并连接</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bondAndConnect</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//取消搜索</span></span><br><span class="line">    <span class="keyword">if</span>(mBluetoothAdapter.isDiscovering())&#123;</span><br><span class="line">        mBluetoothAdapter.cancelDiscovery();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(mCurDevice==<span class="keyword">null</span>)&#123;</span><br><span class="line">        showTip(<span class="string">&quot;远程蓝牙设备为空！&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当前蓝牙设备未配对，则先进行配对</span></span><br><span class="line">    <span class="keyword">if</span>(mCurDevice.getBondState()==BluetoothDevice.BOND_NONE)&#123;</span><br><span class="line">        Log.d(TAG,<span class="string">&quot;create bond to &quot;</span>+mCurDevice.getName());</span><br><span class="line">        <span class="keyword">boolean</span> nRet= BluetoothUtil.createBond(mCurDevice);</span><br><span class="line">        <span class="keyword">if</span>(!nRet)&#123;</span><br><span class="line">            showTip(<span class="string">&quot;createBond fail！&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        showLoadingDialog(<span class="string">&quot;正在与【&quot;</span>+mCurDevice.getName()+<span class="string">&quot;】进行配对...&quot;</span>);</span><br><span class="line">        mFlag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(mFlag==<span class="number">0</span>)&#123;</span><br><span class="line">            SystemClock.sleep(<span class="number">250</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(mFlag==-<span class="number">1</span>)&#123;</span><br><span class="line">            showTip(<span class="string">&quot;与【&quot;</span>+mCurDevice.getName()+<span class="string">&quot;】的蓝牙配对失败&quot;</span>);</span><br><span class="line">            dismissLoadingDialog();</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(mCurDevice.getBondState()==BluetoothDevice.BOND_BONDED)&#123;</span><br><span class="line">        showLoadingDialog(<span class="string">&quot;正在与【&quot;</span>+mCurDevice.getName()+<span class="string">&quot;】进行连接...&quot;</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">//创建Socket</span></span><br><span class="line">            BluetoothSocket socket = mCurDevice.createRfcommSocketToServiceRecord(GlobalDef.BT_UUID);</span><br><span class="line">            <span class="comment">//启动连接线程</span></span><br><span class="line">            socket.connect();</span><br><span class="line">            mThread=<span class="keyword">new</span> SocketThread(socket);</span><br><span class="line">            mThread.start();</span><br><span class="line">            showTip((<span class="string">&quot;成功与【&quot;</span>+mCurDevice.getName()+<span class="string">&quot;】建立连接&quot;</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            Log.d(TAG,<span class="string">&quot;socket connect fail&quot;</span>);</span><br><span class="line">            showTip((<span class="string">&quot;连接【&quot;</span>+mCurDevice.getName()+<span class="string">&quot;】失败&quot;</span>));</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dismissLoadingDialog();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="10-连接成功之后，就通过输入输出流进行数据传输，同蓝牙服务端。"><a href="#10-连接成功之后，就通过输入输出流进行数据传输，同蓝牙服务端。" class="headerlink" title="(10)连接成功之后，就通过输入输出流进行数据传输，同蓝牙服务端。"></a>(10)连接成功之后，就通过输入输出流进行数据传输，同蓝牙服务端。</h5><p>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/Diamond-sjh/Bluetooth">https://github.com/Diamond-sjh/Bluetooth</a></p>
+
+    </div>
+</article>
+
+
+                </div>
+                <aside class="col-md-4 gal-left" id="sidebar">
+    <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
+<aside id="sidebar-search">
+    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <form class="form-inline clearfix" id="search-form" method="get"
+              action="/search/index.html">
+            <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~" autocomplete="off">
+            <button class="btn btn-danger btn-gal" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </form>
+    </div>
+</aside>
+    <aside id="sidebar-author">
+    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+        <div class="panel-heading" style="text-align: center">
+            <i class="fa fa-quote-left"></i>
+            Mr.sun
+            <i class="fa fa-quote-right"></i>
+        </div>
+        <div class="author-panel text-center">
+            <img src="/imgs/Diamond.jpg" width="140" height="140"
+                 alt="个人头像" class="author-image">
+            <p class="author-description"></p>
+        </div>
+    </div>
+</aside>
+    
+    <aside id="sidebar-recent_comments">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-comments"></i>
+            最新评论
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
+    
+    <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    
+    <aside id="sidebar-recent_posts">
+    <div class="panel panel-gal recent hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-refresh"></i>
+            近期文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush">
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/07/21/uniapp%E7%9A%84%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%972/">unipush的蓝牙模块2</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/">蓝牙开发基础</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2022/04/13/uniapp%E7%9A%84%E8%93%9D%E7%89%99%E6%A8%A1%E5%9D%97/">unipush的蓝牙模块</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2021/04/21/unipush%E6%B6%88%E6%81%AF%E6%8E%A8%E9%80%81/">unipush的消息推送</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/12/15/Vue-Router/">Vue Router</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2018/11/28/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">vue生命周期</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/06/15/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E9%97%AD%E5%8C%85%E9%80%92%E5%BD%92/">回调函数闭包递归</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/28/%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D/">浅拷贝和深拷贝</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/05/20/%E5%87%BD%E6%95%B0%E5%86%85this%E6%8C%87%E5%90%91%E4%BB%A5%E5%8F%8A%E6%94%B9%E5%8F%98this%E6%8C%87%E5%90%91/">函数内this指向以及改变this指向</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
+                    <a href="/2017/04/15/JS%E4%B8%AD%E7%AE%80%E5%8D%95%E7%9A%84%E5%87%A0%E7%A7%8D%E7%BB%A7%E6%89%BF%E6%96%B9%E6%B3%95/">JS中简单的几种继承方法</a>
+                </span>
+            </li>
+            
+        </ul>
+    </div>
+</aside>
+    
+    
+    
+    <aside id="gal-sets">
+        <div class="panel panel-gal hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+            <ul class="nav nav-pills pills-gal">
+
+                
+                <li>
+                    <a href="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                </li>
+                
+                
+                
+                <li>
+                    <a href="/2022/07/21/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                </li>
+                
+            </ul>
+            <div class="tab-content">
+                
+                <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/H5/" style="font-size: 8.799726700063827px;" class="tag-cloud-link">H5</a>
+    
+    <a href="/tags/javascript/" style="font-size: 17.96274846056304px;" class="tag-cloud-link">javascript</a>
+    
+    <a href="/tags/vue/" style="font-size: 17.41504152135331px;" class="tag-cloud-link">vue</a>
+    
+    <a href="/tags/git/" style="font-size: 18.144936704534505px;" class="tag-cloud-link">git</a>
+    
+    <a href="/tags/app/" style="font-size: 17.066464166318525px;" class="tag-cloud-link">app</a>
+    
+    <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" style="font-size: 18.640798058511514px;" class="tag-cloud-link">正则表达式</a>
+    
+</div>
+                
+                
+                
+                <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
+    
+    <li>
+        <a href="https://github.com/Diamond-sjh" target="_blank">Github</a>
+    </li>
+    
+    <li>
+        <a href="https://www.cnblogs.com/Diamond-sjh/" target="_blank">博客园</a>
+    </li>
+    
+</div>
+                
+            </div>
+        </div>
+    </aside>
+    
+</aside>
+            </div>
+        </div>
+    </div>
+    <footer id="gal-footer">
+    <div class="container">
+        Copyright © 2018 Mr.sun Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>.&nbsp;Theme by <a href="https://github.com/ZEROKISEKI" target="_blank">AONOSORA</a>
+    </div>
+</footer>
+
+<!-- 回到顶端 -->
+<div id="gal-gotop">
+    <i class="fa fa-angle-up"></i>
+</div>
+</body>
+
+<script src="/js/activate-power-mode.js"></script>
+
+<script>
+
+    // 配置highslide
+	hs.graphicsDir = '/js/highslide/graphics/'
+    hs.outlineType = "rounded-white";
+    hs.dimmingOpacity = 0.8;
+    hs.outlineWhileAnimating = true;
+    hs.showCredits = false;
+    hs.captionEval = "this.thumb.alt";
+    hs.numberPosition = "caption";
+    hs.align = "center";
+    hs.transitions = ["expand", "crossfade"];
+    hs.lang.number = '共%2张图, 当前是第%1张';
+    hs.addSlideshow({
+      interval: 5000,
+      repeat: true,
+      useControls: true,
+      fixedControls: "fit",
+      overlayOptions: {
+        opacity: 0.75,
+        position: "bottom center",
+        hideOnMouseOut: true
+      }
+    })
+
+    // 初始化aos
+    AOS.init({
+      duration: 1000,
+      delay: 0,
+      easing: 'ease-out-back'
+    });
+
+</script>
+<script>
+	POWERMODE.colorful = 'true';    // make power mode colorful
+	POWERMODE.shake = 'true';       // turn off shake
+	// TODO 这里根据具体情况修改
+	document.body.addEventListener('input', POWERMODE);
+</script>
+<script>
+    window.slideConfig = {
+      prefix: '/imgs/slide/background',
+      ext: 'jpg',
+      maxCount: '12'
+    }
+</script>
+
+<script src="/js/hs.js"></script>
+<script src="/js/blog.js"></script>
+
+
+
+
+</html>
